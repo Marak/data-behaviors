@@ -4,10 +4,13 @@
     <script src = "lib/debug.js"></script>
     <script src = "mustache.js"></script>
     <script src = "mustache-rides.js"></script>
+    <script src = "sampleData.js"></script>    
     
     <script>
       $(document).ready(function(){
         debug.log('document ready');
+        $('body').html(MR.com.lists.simple({"data":sampleData}));
+        
       });
     </script>
     
