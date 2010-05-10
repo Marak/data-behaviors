@@ -1,23 +1,21 @@
-
 // enumerate through folders to generate actual mustache-rides.js file 
-
 
 var fs = require('fs');
 var sys = require('sys');
+var mustache = require('./lib/mustache');
 
 sys.puts('building');
 
+// initialize variables that will store our generated code
 var docs = '';
-
-
 var code = {};
 
-code.base += 'var MR = {};';
-code.bootstrap = 'MR.bootstrap = {};';
+
+// load main.js 
+code.main = fs.readFileSync('./main.js', encoding='utf8');
 
 code.com = '';
 code.behave = '';
-
 
 function fileFilter(txt){
 
@@ -31,7 +29,6 @@ function fileFilter(txt){
     
   return txt;
 }
-
 
 // read through com (components) directory and get all coms
 
@@ -50,21 +47,21 @@ for(var com in coms){
   //sys.puts(coms[com]);
   
   if(coms[com].search('.js') > 0){ // if this is a file
-  
     var fileContents = fs.readFileSync(coms[com], encoding='utf8');
-
     docs += "<li>"+fileFilter(coms[com])+"</li>";
+
     // read file contents and inject in the code 
     code.com += 'MR' + '.' + fileFilter(coms[com]) + ' = function(options){' + fileContents + '};' + '\n\n';
-    
   }
   else{
+
+    docs += "<li>"+fileFilter(coms[com])+"</li>";
+    code.com += 'MR' + '.' + fileFilter(coms[com]) + ' = {};' + '\n\n';
     
   }
 
 }
 docs += "</ul>";
-
 
 docs += "<h1>behaviors</h1>";
 
@@ -81,17 +78,26 @@ for(var behave in behaves){
     docs += "<li>"+fileFilter(behaves[behave])+"</li>";
     // read file contents and inject in the code 
     code.behave += 'MR' + '.' + fileFilter(behaves[behave]) + ' = function(options){' + fileContents + '};' + '\n\n';
-  
+
   }
   else{
-  
-  }
 
+    docs += "<li>"+fileFilter(behaves[behave])+"</li>";
+    code.behave += 'MR' + '.' + fileFilter(behaves[behave]) + ' = {};' + '\n\n';
+
+
+  }
 
 }
 docs += "</ul>";
 
-var output = code.com + code.behave;
+var output = code.main;
+// perform a mustache replace on main to insert in sub components
+
+//output = mustache.to_html(code, {});
+output = mustache.Mustache.to_html(output, {"coms":code.com, "behaves":code.behave});
+
+//code.com + code.behave;
 sys.puts(output);
 
 fs.writeFile('../mustache-rides.js', output, function() {

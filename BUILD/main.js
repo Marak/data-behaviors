@@ -3,12 +3,9 @@ var MR = {};
 
 MR.version = "0.0.1";
 
+MR.com = {};
+MR.behave = {}
 
-MR.load = function(resource){
-  
-};
+{{{coms}}}
 
-
-{{coms}}
-
-{{behaves}}
+{{{behaves}}}
