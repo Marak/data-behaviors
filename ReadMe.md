@@ -1,7 +1,1 @@
-forms
-signup/login
-viewing/editing resources
-modal dialogs
-search
-and ajax
-cool yea, mustache
+<h1>components</h1><ul><li>com.forms.login</li><li>com.forms.resource</li><li>com.forms.search</li><li>com.forms.signup</li><li>com.grids.complex</li><li>com.grids.simple</li><li>com.inputs.checkbox</li><li>com.inputs.date</li><li>com.inputs.dropdown</li><li>com.inputs.range</li><li>com.inputs.text</li><li>com.lists</li><li>com.modals.alert</li><li>com.modals.box</li><li>com.modals.confirmation</li></ul><h1>behaviors</h1>
