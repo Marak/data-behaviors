@@ -70,13 +70,28 @@ docs += "<h1>behaviors</h1>";
 
 var behaves = paths('../behave');
 
+docs += "<ul>";
+
 for(var behave in behaves){
-  code.behave += behaves[behave]; 
-//  sys.puts();
+
+  if(behaves[behave].search('.js') > 0){ // if this is a file
+
+    var fileContents = fs.readFileSync(behaves[behave], encoding='utf8');
+
+    docs += "<li>"+fileFilter(behaves[behave])+"</li>";
+    // read file contents and inject in the code 
+    code.behave += 'MR' + '.' + fileFilter(behaves[behave]) + ' = function(options){' + fileContents + '};' + '\n\n';
+  
+  }
+  else{
+  
+  }
+
+
 }
+docs += "</ul>";
 
-
-var output = code.com + code.base;
+var output = code.com + code.behave;
 sys.puts(output);
 
 fs.writeFile('../mustache-rides.js', output, function() {

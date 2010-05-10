@@ -28,4 +28,25 @@ MR.com.modals.box = function(options){};
 
 MR.com.modals.confirmation = function(options){};
 
-undefinedvar MR = {};
+MR.behave.autocomplete = function(options){};
+
+MR.behave.dirty = function(options){};
+
+MR.behave.dragAndDrop = function(options){};
+
+MR.behave.focusIn.keyboard = function(options){};
+
+MR.behave.focusIn.mouse = function(options){};
+
+MR.behave.focusOut.keyboard = function(options){};
+
+MR.behave.focusOut.mouse = function(options){};
+
+MR.behave.hover = function(options){};
+
+MR.behave.killed = function(options){};
+
+MR.behave.ready = function(options){};
+
+MR.behave.sortable = function(options){};
+
