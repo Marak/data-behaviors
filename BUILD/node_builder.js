@@ -10,12 +10,12 @@ sys.puts('building');
 var docs = '';
 var code = {};
 
-
 // load main.js 
 code.main = fs.readFileSync('./main.js', encoding='utf8');
 
 code.com = '';
 code.behave = '';
+code.views = '';
 
 function fileFilter(txt){
 
@@ -30,21 +30,20 @@ function fileFilter(txt){
   return txt;
 }
 
-// read through com (components) directory and get all coms
+function mamlFilter(maml){
+  
+  maml = maml.replace(/\n/, '');
+  
+  return maml;
+}
 
+// read through com (components) directory and get all coms
 docs += "<h1>components</h1>";
 docs += "<ul>";
 
 var coms = paths('../com');
 
 for(var com in coms){
-  
-  // if we were going to use asyc loading we would start everything as null
-    //code.com += 'MR' + '.' + filter(coms[com]) + ' = null;' + '\n\n';
-  
-  // include all the code in the first request, bundled together
-  
-  //sys.puts(coms[com]);
   
   if(coms[com].search('.js') > 0){ // if this is a file
     var fileContents = fs.readFileSync(coms[com], encoding='utf8');
@@ -62,6 +61,37 @@ for(var com in coms){
 
 }
 docs += "</ul>";
+
+
+// read through views and get all views
+var views = paths('../views');
+
+docs += "<h1>views</h1>";
+
+docs += "<ul>";
+
+for(var view in views){
+    docs += "<li>"+fileFilter(views[view])+"</li>";
+    code.views += 'MR' + '.' + fileFilter(views[view]) + ' = {};' + '\n\n';
+
+    if(views[view].search('.js') > 0){ // if this is a file
+      var fileContents = fs.readFileSync(views[view], encoding='utf8');
+      docs += "<li>"+fileFilter(views[view])+"</li>";
+
+      // read file contents and inject in the code 
+      code.views += 'MR' + '.' + fileFilter(views[view]) + ' = \'' + mamlFilter(fileContents) + '\';' + '\n\n';
+    }
+    else{
+
+      docs += "<li>"+fileFilter(views[view])+"</li>";
+      code.views += 'MR' + '.' + fileFilter(views[view]) + ' = {};' + '\n\n';
+
+    }
+
+}
+
+docs += "</ul>";
+
 
 docs += "<h1>behaviors</h1>";
 
@@ -95,7 +125,7 @@ var output = code.main;
 // perform a mustache replace on main to insert in sub components
 
 //output = mustache.to_html(code, {});
-output = mustache.Mustache.to_html(output, {"coms":code.com, "behaves":code.behave});
+output = mustache.Mustache.to_html(output, {"coms":code.com, "behaves":code.behave, "views":code.views});
 
 //code.com + code.behave;
 sys.puts(output);

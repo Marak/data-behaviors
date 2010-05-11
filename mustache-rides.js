@@ -1,8 +1,14 @@
 // this is just boilerplate code for generating the actual mustache-rides.js file, do not use this outside of node_builder.js
 var MR = {};
 MR.version = "0.0.1";
+MR.views = {};
 MR.com = {};
 MR.behave = {}
+MR.views.explorer = {};
+
+MR.views.explorer = '<h3>hello i am a simple list</h3><ul data-resource = "users" data-action = "get"><ul>';
+
+
 MR.com.forms = {};
 
 MR.com.forms.login = {};
@@ -57,35 +63,20 @@ MR.com.lists = {};
 
 MR.com.lists.simple = {};
 
-MR.com.lists.simple = function(options){// an argument call "options" is sent to every component by default
-// any data you want to pass to a component, must be done through the options has
-
-// options are all optional by default (perhaps build a way to verify / require options for each component to verify this)
-/*
-  options.data => contains the data model which will be used to generated this component.
-  options.behaviors => contains behaviors which we will want to add to this component after its created
-
-*/
-
-this.render = function(values){
-  var str = '<ul>';
-  for(var key in values){
-    if(typeof values[key]=='object' && values[key] != null){
-      str+='<li>'+key+this.render(values[key])+'</li>';
-    }
-    else{
-      str+='<li>'+key;
-      if(values[key]!=''){
-        str+= ' : ' + values[key];
-      }
-     str+='</li>';
-   }
-  }
-  str+='</ul>';
-  return str;
+MR.com.lists.simple = function(options){
+/* 
+this.foo = function(yarg){
+  return 'bary';
 };
 
-return this.render(options.data);};
+
+{{#list}}
+  {{>listItem}}
+{{/list}}
+
+return this.render(options.data);
+
+*/};
 
 MR.com.modals = {};
 
@@ -106,9 +97,9 @@ MR.behave.autocomplete = {};
 
 MR.behave.autocomplete = function(options){};
 
-MR.behave.clickable = {};
+MR.behave.click = {};
 
-MR.behave.clickable = function(options){debug.log('apply the behavior!');};
+MR.behave.click = function(options){debug.log('apply click behavior!');};
 
 MR.behave.dirty = {};
 
@@ -120,27 +111,15 @@ MR.behave.dragAndDrop = function(options){};
 
 MR.behave.focusIn = {};
 
-MR.behave.focusIn.keyboard = {};
-
-MR.behave.focusIn.keyboard = function(options){};
-
-MR.behave.focusIn.mouse = {};
-
-MR.behave.focusIn.mouse = function(options){};
+MR.behave.focusIn = function(options){debug.log('apply focusIn behavior!');};
 
 MR.behave.focusOut = {};
 
-MR.behave.focusOut.keyboard = {};
-
-MR.behave.focusOut.keyboard = function(options){};
-
-MR.behave.focusOut.mouse = {};
-
-MR.behave.focusOut.mouse = function(options){};
+MR.behave.focusOut = function(options){debug.log('apply focus out behavior!');};
 
 MR.behave.hover = {};
 
-MR.behave.hover = function(options){};
+MR.behave.hover = function(options){debug.log('apply hover behavior!');};
 
 MR.behave.is_valid = {};
 

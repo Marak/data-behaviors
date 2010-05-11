@@ -9,14 +9,27 @@
     <script>
       $(document).ready(function(){
         debug.log('document ready');
-        $('body').html(MR.com.lists.simple({"data":sampleData}));
-        
+        attachBehaviors($("[data-behaviors]"));
       });
+      
+      function attachBehaviors(selector){
+        var behaviors = $(selector).attr('data-behaviors').split(' ');
+        for(var behavior in behaviors){
+          var b = behaviors[behavior];
+          MR.behave[b](selector);
+        }
+      }
+      
     </script>
     
   </head>
   <body>
-    <h1>this be the mustache-rides explorer, who wants a mustache ride?</h1>
+    <h1>this is the mustache-rides explorer</h1>
+    
+    text input with all DOM event behaviors attached 
+    <p>
+      <input data-behaviors = "focusIn focusOut hover click" type = "text">
+    </p>
   <body>
     
 </html>
