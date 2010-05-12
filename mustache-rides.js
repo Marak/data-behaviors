@@ -97,14 +97,6 @@ MR.behave.autocomplete = {};
 
 MR.behave.autocomplete = function(options){};
 
-MR.behave.click = {};
-
-MR.behave.click = function(options){debug.log('apply click behavior!');
-
-$(options.selector).click(function(e){
-  debug.log(this, 'got clicked!')
-});};
-
 MR.behave.dirty = {};
 
 MR.behave.dirty = function(options){};
@@ -113,21 +105,12 @@ MR.behave.dragAndDrop = {};
 
 MR.behave.dragAndDrop = function(options){};
 
-MR.behave.focusIn = {};
+MR.behave.highlightable = {};
 
-MR.behave.focusIn = function(options){debug.log('apply focusIn behavior!');
+MR.behave.highlightable = function(options){debug.log('apply hover behavior!');
 
-$(options.selector).focus(function(e){
-  debug.log(this, 'got focus!')
-});};
-
-MR.behave.focusOut = {};
-
-MR.behave.focusOut = function(options){debug.log('apply focus out behavior!');
-
-
-$(options.selector).blur(function(e){
-  debug.log(this, 'lost focus!')
+$(options.selector).mouseover(function(e){
+  debug.log(this, 'hover')
 });};
 
 MR.behave.hover = {};
@@ -137,10 +120,6 @@ MR.behave.hover = function(options){debug.log('apply hover behavior!');
 $(options.selector).mouseover(function(e){
   debug.log(this, 'hover')
 });};
-
-MR.behave.is_valid = {};
-
-MR.behave.keyboard = {};
 
 MR.behave.killed = {};
 
@@ -153,4 +132,8 @@ MR.behave.ready = function(options){};
 MR.behave.sortable = {};
 
 MR.behave.sortable = function(options){};
+
+MR.behave.tokenize = {};
+
+MR.behave.tokenize = function(options){};
 
