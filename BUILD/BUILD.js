@@ -39,7 +39,7 @@ docs.views = '';
   docs.com += "<ul>";
 
   // read com directory and get all components
-  var coms = paths('../com');
+  var coms = paths('./com');
 
   for(var com in coms){
     if(coms[com].search('.js') > 0){ // if this is a file
@@ -65,7 +65,7 @@ docs.views = '';
   docs.behave += "<ul>";
 
   // read behave directory and grab all behaviors
-  var behaves = paths('../behave');
+  var behaves = paths('./behave');
 
   for(var behave in behaves){
 
@@ -87,7 +87,7 @@ docs.views = '';
 /************************ GENERATE VIEWS ***************************/
   sys.puts('generating views.....');
   // read through views directory and get all views
-  var views = paths('../views');
+  var views = paths('./views');
 
   docs.views += "<h1>views</h1>";
   docs.views += "<ul>";
@@ -159,7 +159,7 @@ docs.views = '';
   }
 
   function docFilter(txt){
-    txt = txt.replace(/\.\.\//g, '');
+    txt = txt.replace(/\.\//g, '');
     txt = txt.replace(/\//g, '.');
     txt = txt.replace(/\.js/, '');
     txt = txt.replace(/\.index/, '');
@@ -170,7 +170,7 @@ docs.views = '';
 
 
   function fileFilter(txt){
-    txt = txt.replace(/\.\.\//g, '');
+    txt = txt.replace(/\.\//g, '');
     txt = txt.replace(/\//g, '.');
     txt = txt.replace(/\.js/, '');
     txt = txt.replace(/\.index/, '');
