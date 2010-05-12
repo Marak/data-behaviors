@@ -13,11 +13,16 @@
       });
       
       function attachBehaviors(selector){
-        var behaviors = $(selector).attr('data-behaviors').split(' ');
-        for(var behavior in behaviors){
-          var b = behaviors[behavior];
-          MR.behave[b](selector);
-        }
+        
+        $(selector).each(function(i,e){
+          
+          var behaviors = $(e).attr('data-behaviors').split(' ');
+          for(var behavior in behaviors){
+            var b = behaviors[behavior];
+            MR.behave[b]({"selector":e});
+          }
+          
+        });
       }
       
     </script>
@@ -28,10 +33,16 @@
     
     text input with all DOM event behaviors attached 
     <p>
-      <input data-behaviors = "focusIn focusOut hover click" type = "text">
+      <input data-behaviors = "dirty" type = "text">
+      <input data-behaviors = "dirty" type = "checkbox">
+      <select data-behaviors = "dirty">
+        <option>Select an option...</option>
+        <option value = "1">One</option>
+        <option value = "2">Two</option>
+        <option value = "3">Three</option>                
+      </select>
+      
     </p>
-
-    <div data-behaviors = "focusIn focusOut hover click" >test test test <br/> test</div>
 
   <body>
     

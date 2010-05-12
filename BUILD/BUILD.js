@@ -36,6 +36,9 @@ docs.views = '';
   sys.puts('generating components.....');
 
   docs.com += "<h1>components</h1>";
+
+
+  
   docs.com += "<ul>";
 
   // read com directory and get all components
@@ -55,7 +58,11 @@ docs.views = '';
     }
   }
 
+
   docs.com += "</ul>";
+
+
+
   sys.puts('generated components successfully!');
 /************************ END GENERATE COMPONENTS ***********************/
 
@@ -165,6 +172,11 @@ docs.views = '';
     txt = txt.replace(/\.index/, '');
     txt = txt.replace(/com\./, '');
     txt = txt.replace(/behave\./, '');  
+    txt = txt.replace(/views\./, '');
+    
+    // make link
+    //txt = '<a href = "coms/' + txt + '">' + txt + '</a>';
+      
     return txt;
   }
 
