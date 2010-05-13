@@ -2,16 +2,16 @@ debug.log('dirty binded');
 
 debug.log(options.selector);
 
-
-var is_dirty = function(){
+$(options.selector).behavior('dirty').bind('got_dirty', function(){
   debug.log('is dirty!', $(options.selector));
   $(options.selector).data('is_dirty', true);
-};
+});
 
-var is_clean = function(){
+$(options.selector).behavior('dirty').bind('is_clean', function(){
   debug.log('is clean!', $(options.selector));
-  $(options.selector).data('is_dirty', false);  
-};
+  $(options.selector).data('is_clean', true);
+});
+
 
 // custom dirty behaviors for diffirents types of data binding
 var bindType = options.selector.nodeName;

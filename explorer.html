@@ -25,17 +25,30 @@
         });
       }
       
+     $.fn.behavior = function(settings) {
+       var config = {'foo': 'bar'};
+
+       if (settings) $.extend(config, settings);
+
+       this.each(function() {
+         // element-specific code here
+       });
+
+       return this;
+
+     };
+      
     </script>
     
   </head>
   <body>
-    <h1>this is the mustache-rides explorer</h1>
+    <h1>this is the MAML explorer</h1>
     
     text input with all DOM event behaviors attached 
     <p>
-      <input data-behaviors = "dirty" type = "text">
-      <input data-behaviors = "dirty" type = "checkbox">
-      <select data-behaviors = "dirty">
+      <input id = "one" data-behaviors = "dirty" type = "text">
+      <input id = "two" data-behaviors = "dirty" type = "checkbox">
+      <select id = "three" data-behaviors = "dirty">
         <option>Select an option...</option>
         <option value = "1">One</option>
         <option value = "2">Two</option>
