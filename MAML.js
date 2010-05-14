@@ -9,6 +9,16 @@ MR.views.explorer = {};
 MR.views.explorer = '<h3>hello i am a simple list</h3><ul data-resource = "users" data-action = "get"><ul>';
 
 
+MR.com.charting = {};
+
+MR.com.charting.bar = {};
+
+MR.com.charting.gauge = {};
+
+MR.com.charting.pie = {};
+
+MR.com.charting.sparkline = {};
+
 MR.com.forms = {};
 
 MR.com.forms.login = {};
@@ -55,11 +65,17 @@ MR.com.inputs.range = {};
 
 MR.com.inputs.range = function(options){};
 
+MR.com.inputs.rating = {};
+
+MR.com.inputs.slider = {};
+
 MR.com.inputs.text = {};
 
 MR.com.inputs.text = function(options){};
 
 MR.com.lists = {};
+
+MR.com.lists.combobox = {};
 
 MR.com.lists.simple = {};
 
@@ -78,19 +94,39 @@ return this.render(options.data);
 
 */};
 
+MR.com.misc = {};
+
+MR.com.misc.zoom = {};
+
 MR.com.modals = {};
 
 MR.com.modals.alert = {};
 
 MR.com.modals.alert = function(options){};
 
-MR.com.modals.box = {};
-
-MR.com.modals.box = function(options){};
-
 MR.com.modals.confirmation = {};
 
 MR.com.modals.confirmation = function(options){};
+
+MR.com.modals.tooltip = {};
+
+MR.com.modals.window = {};
+
+MR.com.modals.window = function(options){};
+
+MR.com.navigation = {};
+
+MR.com.navigation.accordion = {};
+
+MR.com.navigation.carousel = {};
+
+MR.com.navigation.tabs = {};
+
+MR.com.notification = {};
+
+MR.com.notification.flash = {};
+
+MR.com.notification.progress = {};
 
 
 MR.behave.autocomplete = {};
@@ -103,16 +139,16 @@ MR.behave.dirty = function(options){debug.log('dirty binded');
 
 debug.log(options.selector);
 
-
-var is_dirty = function(){
+$(options.selector).behavior('dirty').bind('got_dirty', function(){
   debug.log('is dirty!', $(options.selector));
   $(options.selector).data('is_dirty', true);
-};
+});
 
-var is_clean = function(){
+$(options.selector).behavior('dirty').bind('is_clean', function(){
   debug.log('is clean!', $(options.selector));
-  $(options.selector).data('is_dirty', false);  
-};
+  $(options.selector).data('is_clean', true);
+});
+
 
 // custom dirty behaviors for diffirents types of data binding
 var bindType = options.selector.nodeName;
@@ -195,10 +231,6 @@ MR.behave.hover = function(options){debug.log('apply hover behavior!');
 $(options.selector).mouseover(function(e){
   debug.log(this, 'hover')
 });};
-
-MR.behave.killed = {};
-
-MR.behave.killed = function(options){};
 
 MR.behave.ready = {};
 
