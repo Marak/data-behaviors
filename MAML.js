@@ -13,11 +13,19 @@ MR.com.charting = {};
 
 MR.com.charting.bar = {};
 
+MR.com.charting.bar = function(options){};
+
 MR.com.charting.gauge = {};
+
+MR.com.charting.gauge = function(options){};
 
 MR.com.charting.pie = {};
 
+MR.com.charting.pie = function(options){};
+
 MR.com.charting.sparkline = {};
+
+MR.com.charting.sparkline = function(options){};
 
 MR.com.forms = {};
 
@@ -67,7 +75,11 @@ MR.com.inputs.range = function(options){};
 
 MR.com.inputs.rating = {};
 
+MR.com.inputs.rating = function(options){};
+
 MR.com.inputs.slider = {};
+
+MR.com.inputs.slider = function(options){};
 
 MR.com.inputs.text = {};
 
@@ -98,6 +110,8 @@ MR.com.misc = {};
 
 MR.com.misc.zoom = {};
 
+MR.com.misc.zoom = function(options){};
+
 MR.com.modals = {};
 
 MR.com.modals.alert = {};
@@ -118,15 +132,25 @@ MR.com.navigation = {};
 
 MR.com.navigation.accordion = {};
 
+MR.com.navigation.accordion = function(options){};
+
 MR.com.navigation.carousel = {};
 
+MR.com.navigation.carousel = function(options){};
+
 MR.com.navigation.tabs = {};
+
+MR.com.navigation.tabs = function(options){};
 
 MR.com.notification = {};
 
 MR.com.notification.flash = {};
 
+MR.com.notification.flash = function(options){};
+
 MR.com.notification.progress = {};
+
+MR.com.notification.progress = function(options){};
 
 
 MR.behave.autocomplete = {};
