@@ -8,29 +8,40 @@
 
     <script src="lib/SlickGrid/lib/jquery.rule-1.0.1.1-min.js"></script>
     <script src="lib/SlickGrid/lib/jquery.event.drag.custom.js"></script>
-    <script language="JavaScript" src="lib/SlickGrid/lib/jquery-ui-1.7.2.custom.min.js"></script>
 
+		<!--[if IE]>
+			<script type="text/javascript" src="lib/Highcharts/js/excanvas.compiled.js"></script>
+		<![endif]-->
+		
+    <!-- highchart requires -->
+    <script type="text/javascript" src="http://www.highcharts.com/highslide/highslide-full.min.js"></script>
+    <script type="text/javascript" src="http://www.highcharts.com/highslide/highslide.config.js" charset="utf-8"></script>
+    <link rel="stylesheet" type="text/css" href="http://www.highcharts.com/highslide/highslide.css" />
+    <!-- end highchart requires -->
+
+    <!-- slick grid requires -->
 		<link rel="stylesheet" href="lib/SlickGrid/slick.grid.css" type="text/css" media="screen" charset="utf-8" />
 		<link rel="stylesheet" href="lib/SlickGrid/slick.pager.css" type="text/css" media="screen" charset="utf-8" />
 		<link rel="stylesheet" href="lib/SlickGrid/css/custom-theme/jquery-ui-1.7.2.custom.css" type="text/css" media="screen" charset="utf-8" />
 		<link rel="stylesheet" href="lib/SlickGrid/examples.css" type="text/css" media="screen" charset="utf-8" />
 		<link rel="stylesheet" href="lib/SlickGrid/slick.columnpicker.css" type="text/css" media="screen" charset="utf-8" />
-
-
-
-    <!-- slick grid requires -->
     <script src="lib/SlickGrid/slick.grid.js"></script>
 		<script language="JavaScript" src="lib/SlickGrid/slick.editors.js"></script>
 		<script language="JavaScript" src="lib/SlickGrid/slick.grid.js"></script>
 		<script language="JavaScript" src="lib/SlickGrid/slick.model.js"></script>
 		<script language="JavaScript" src="lib/SlickGrid/slick.pager.js"></script>
 		<script language="JavaScript" src="lib/SlickGrid/slick.columnpicker.js"></script>  
+    <script language="JavaScript" src="lib/SlickGrid/lib/jquery-ui-1.7.2.custom.min.js"></script>
+		<script type="text/javascript" src="lib/Highcharts/js/highcharts.js"></script>
+
 		<!-- end slick grid requires -->
 
     <script>
       $(document).ready(function(){
         debug.log('document ready');
         attachBehaviors($("[data-behaviors]"));
+    
+        
       });
       
       function attachBehaviors(selector){
@@ -46,7 +57,7 @@
             b = b.replace(/\-/, '.');
             debug.log(e);
             // evil eval is evil, but benign 
-            eval('MR.behave.'+b+'({"selector":e,"data":grid_data_1})')
+            eval('MR.behave.'+b+'({"selector":e})')
             
           }
           
@@ -118,6 +129,21 @@
                 };
     	}
 		
+		  var chart_data_1 = 
+		  [
+				['Firefox',   44.2],
+				['IE7',       26.6],
+				{
+					name: 'IE6',
+					y: 20,
+					sliced: true,
+					selected: true
+				},
+				['Chrome',    3.1],
+				['Safari',    2.7],
+				['Opera',     2.3],
+				['Mozilla',   0.4]
+			]
 		
 		</script>
     
@@ -140,9 +166,10 @@
     
     <hr/>
     
-    <h3>simple grid example using slick grid</h3>
+    <h3>grid-simple</h3>
     <div data-behaviors = "grid-simple" data-resource = "grid_data_1"></div>
     <div data-behaviors = "grid-simple" data-resource = "grid_data_2"></div>
+
 
     <!--
     <div data-behaviors = "grid-simple" style="width:400px;height:200px;"></div>
@@ -150,8 +177,13 @@
     <div data-behaviors = "grid-simple" style="width:400px;height:200px;"></div>
     -->
     <hr/>
+    <h3>chart-pie</h3>
+    <div data-behaviors = "chart-pie" data-resource = "chart_data_1" style="width: 800px; height: 400px; margin: 0 auto"></div>
+    <div data-behaviors = "chart-pie" data-resource = "chart_data_1" style="width: 800px; height: 400px; margin: 0 auto"></div>
+
 
     <!--
+    <hr/>
     <h3>complex grid example using slick grid</h3>
 		<div style="width:600px;float:left;">
 			<div class="grid-header" style="width:100%">
