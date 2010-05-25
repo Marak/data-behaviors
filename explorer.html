@@ -44,8 +44,9 @@
             // the labeling approach of behaviors on DOM elements is as follows
             // fooBehavior-sub-sub2 turns into =>  behaviors.fooBehavior.sub.sub2()
             b = b.replace(/\-/, '.');
+            debug.log(e);
             // evil eval is evil, but benign 
-            eval('MR.behave.'+b+'({"selector":e})')
+            eval('MR.behave.'+b+'({"selector":e,"data":grid_data_1})')
             
           }
           
@@ -67,7 +68,58 @@
       
     </script>
     
+		<script type = "text/javascript">
 		
+		  // lets define some test data
+      var grid_data_1 = {};
+      grid_data_1.columns = [
+      	{id:"title", name:"Title", field:"title"},
+      	{id:"duration", name:"Duration", field:"duration"},
+      	{id:"%", name:"% Complete", field:"percentComplete"},
+      	{id:"start", name:"Start", field:"start"},
+      	{id:"finish", name:"Finish", field:"finish"},
+      	{id:"effort-driven", name:"Effort Driven", field:"effortDriven"}
+      ];
+
+      grid_data_1.data = [];
+      for (var i = 0; i < 500; i++) {
+    		grid_data_1.data[i] = {
+                    title: "Task " + i,
+                    duration: "5 days",
+                    percentComplete: Math.round(Math.random() * 100),
+                    start: "01/01/2009",
+                    finish: "01/05/2009",
+                    effortDriven: (i % 5 == 0)
+                };
+    	}
+
+    
+      
+
+      var grid_data_2 = {};
+      grid_data_2.columns = [
+      	{id:"title", name:"Title", field:"title"},
+      	{id:"duration", name:"Duration", field:"duration"},
+      	{id:"%", name:"% Complete", field:"percentComplete"},
+      	{id:"start", name:"Start", field:"start"},
+      	{id:"finish", name:"Finish", field:"finish"},
+      	{id:"effort-driven", name:"Effort Driven", field:"effortDriven"}
+      ];
+
+      grid_data_2.data = [];
+      for (var i = 0; i < 500; i++) {
+    		grid_data_2.data[i] = {
+                    title: "Mask " + i,
+                    duration: "3 minutes",
+                    percentComplete: Math.round(Math.random() * 100),
+                    start: "03/04/2010",
+                    finish: "02/09/2010",
+                    effortDriven: (i % 5 == 0)
+                };
+    	}
+		
+		
+		</script>
     
     
   </head>
@@ -89,10 +141,17 @@
     <hr/>
     
     <h3>simple grid example using slick grid</h3>
-    <div id="myGrid" data-behaviors = "grid-simple" style="width:800px;height:300px;"></div>
-    
+    <div data-behaviors = "grid-simple" data-resource = "grid_data_1"></div>
+    <div data-behaviors = "grid-simple" data-resource = "grid_data_2"></div>
+
+    <!--
+    <div data-behaviors = "grid-simple" style="width:400px;height:200px;"></div>
+    <div data-behaviors = "grid-simple" style="width:400px;height:200px;"></div>
+    <div data-behaviors = "grid-simple" style="width:400px;height:200px;"></div>
+    -->
     <hr/>
 
+    <!--
     <h3>complex grid example using slick grid</h3>
 		<div style="width:600px;float:left;">
 			<div class="grid-header" style="width:100%">
@@ -118,7 +177,7 @@
 				<button id="btnSelectRows">Select first 10 rows</button>
 			</div>
 		</div>
-
+		-->
 
   <body>
     
