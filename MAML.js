@@ -651,6 +651,36 @@ $(options.selector).mouseover(function(e){
   debug.log(this, 'hover')
 });};
 
+MR.behave.inputs = {};
+
+MR.behave.inputs.checkbox = {};
+
+MR.behave.inputs.checkbox = function(options){};
+
+MR.behave.inputs.date = {};
+
+MR.behave.inputs.date = function(options){};
+
+MR.behave.inputs.dropdown = {};
+
+MR.behave.inputs.dropdown = function(options){};
+
+MR.behave.inputs.range = {};
+
+MR.behave.inputs.range = function(options){};
+
+MR.behave.inputs.rating = {};
+
+MR.behave.inputs.rating = function(options){};
+
+MR.behave.inputs.slider = {};
+
+MR.behave.inputs.slider = function(options){};
+
+MR.behave.inputs.text = {};
+
+MR.behave.inputs.text = function(options){};
+
 MR.behave.ready = {};
 
 MR.behave.ready = function(options){};
