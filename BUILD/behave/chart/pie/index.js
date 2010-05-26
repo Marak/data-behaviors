@@ -1,4 +1,8 @@
- options.data = eval($(options.selector).attr('data-resource'));
+ options.data = eval($(options.selector).attr('data-resource')).data;
+ options.title = eval($(options.selector).attr('data-resource')).title;
+ 
+
+ 
  
    var chart;
 			chart = new Highcharts.Chart({
@@ -7,7 +11,7 @@
 					margin: [50, 200, 60, 170]
 				},
 				title: {
-					text: 'Browser market shares at a specific website, 2008'
+					text: options.title
 				},
 				plotArea: {
 					shadow: null,

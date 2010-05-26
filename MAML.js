@@ -143,7 +143,66 @@ MR.behave.chart = {};
 
 MR.behave.chart.bar = {};
 
-MR.behave.chart.bar = function(options){};
+MR.behave.chart.bar = function(options){
+ options.series = eval($(options.selector).attr('data-resource')).series;
+
+chart = new Highcharts.Chart({
+				chart: {
+					renderTo: options.selector,
+					defaultSeriesType: 'column'
+				},
+				title: {
+					text: 'Monthly Average Rainfall'
+				},
+				subtitle: {
+					text: 'Source: WorldClimate.com'
+				},
+				xAxis: {
+					categories: [
+						'Jan', 
+						'Feb', 
+						'Mar', 
+						'Apr', 
+						'May', 
+						'Jun', 
+						'Jul', 
+						'Aug', 
+						'Sep', 
+						'Oct', 
+						'Nov', 
+						'Dec'
+					]
+				},
+				yAxis: {
+					min: 0,
+					title: {
+						text: 'Rainfall (mm)'
+					}
+				},
+				legend: {
+					layout: 'vertical',
+					backgroundColor: '#FFFFFF',
+					style: {
+						left: '100px',
+						top: '70px',
+						bottom: 'auto'
+					}
+				},
+				tooltip: {
+					formatter: function() {
+						return '<b>'+ this.series.name +'</b><br/>'+
+							this.x +': '+ this.y +' mm';
+					}
+				},
+				plotOptions: {
+					column: {
+						pointPadding: 0.2,
+						borderWidth: 0
+					}
+				},
+			        series: options.series
+			});
+};
 
 MR.behave.chart.gauge = {};
 
@@ -151,7 +210,11 @@ MR.behave.chart.gauge = function(options){};
 
 MR.behave.chart.pie = {};
 
-MR.behave.chart.pie = function(options){ options.data = eval($(options.selector).attr('data-resource'));
+MR.behave.chart.pie = function(options){ options.data = eval($(options.selector).attr('data-resource')).data;
+ options.title = eval($(options.selector).attr('data-resource')).title;
+ 
+
+ 
  
    var chart;
 			chart = new Highcharts.Chart({
@@ -160,7 +223,7 @@ MR.behave.chart.pie = function(options){ options.data = eval($(options.selector)
 					margin: [50, 200, 60, 170]
 				},
 				title: {
-					text: 'Browser market shares at a specific website, 2008'
+					text: options.title
 				},
 				plotArea: {
 					shadow: null,
@@ -566,6 +629,7 @@ var columns = eval($(options.selector).attr('data-resource')).columns;
 
 // define grid data
 var data = eval($(options.selector).attr('data-resource')).data;
+
 
 // create new grid instance
 new Slick.Grid($(options.selector), data, columns, opts);
