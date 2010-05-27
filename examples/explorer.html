@@ -61,8 +61,14 @@
             // fooBehavior-sub-sub2 turns into =>  behaviors.fooBehavior.sub.sub2()
             b = b.replace(/\-/, '.');
             debug.log(e);
-            // evil eval is evil, but benign 
-            eval('MR.behave.'+b+'({"selector":e})')
+            
+            try{
+              // evil eval is evil, but benign here
+              eval('MR.behave.'+b+'({"selector":e})')
+            }
+            catch(err){
+              debug.log('error occurred trying to render behavior: ', b, ' ', err);
+            }
             
           }
           
@@ -91,7 +97,6 @@
   <body>
     <h1>this is the data-behavior explorer</h1>
     
-    
     <h2>form inputs</h2>
     input-checkbox - <input type = "checkbox" data-behavior = "input-checkbox dirty" /> <br/>
     input-date - <input id = "dd" type = "text" data-behavior = "input-date dirty" /> <br/>
@@ -115,7 +120,9 @@
     
     <h3>grid-simple</h3>
     <div data-behaviors = "grid-simple" data-resource = "grid_data_1" style="width:400px;height:200px;"></div>
-    <div data-behaviors = "grid-simple" data-resource = "grid_data_2" style="width:400px;height:200px;"></div> 
+
+    <h3>grid-custom</h3>
+    <div data-behaviors = "grid-custom" data-resource = "grid_data_1" style="width:400px;height:200px;"></div> 
 
 
     <!--

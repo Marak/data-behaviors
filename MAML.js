@@ -69,8 +69,6 @@ MR.com.inputs.text = function(options){};
 
 MR.com.lists = {};
 
-MR.com.lists.combobox = {};
-
 MR.com.lists.simple = {};
 
 MR.com.lists.simple = function(options){
@@ -103,8 +101,6 @@ MR.com.modals.alert = function(options){};
 MR.com.modals.confirmation = {};
 
 MR.com.modals.confirmation = function(options){};
-
-MR.com.modals.tooltip = {};
 
 MR.com.modals.window = {};
 

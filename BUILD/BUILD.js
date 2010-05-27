@@ -129,6 +129,10 @@ docs.views = '';
     sys.puts("MAML.js generated successfully!");
   });
 
+  fs.writeFile('../examples/js/MAML.js', mamlLibrary, function() {
+    sys.puts("MAML.js generated successfully!");
+  });
+
   fs.writeFile('../ReadMe.md', documentation, function() {
     sys.puts("documentation generated successfully!");
   });
