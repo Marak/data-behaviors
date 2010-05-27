@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+	<head>
+		<title>JUP - a Javascript HTML/XML generator </title>
+		<style type="text/css" media="screen">
+			/* not at all important, just for testing */
+			html * { font-family: Arial; color: #666; }
+			h1 { color: #b55337; }
+			h3 { font-weight: bold; color: #000; }
+			hr { height: 14px; border: 1px #ddd solid; }
+
+			.heading { font-size: 18px; color: #b55337; font-weight: bold; }
+			.website { font-size: 18px; color: #666; }
+			
+			#code{ width:500px; height:400px;}
+			#output{ width:500px; height:400px;}
+		</style>
+		
+		<!-- JUP.js is included from the root directory js folder, not the /examples/js folder -->
+		<script src="../js/jup.js" type="text/javascript" charset="utf-8"></script>
+
+    <!-- include jQuery to help with the example page   ^_^   -->
+    <script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+		
+		<!-- include debug.log library for easy and safe console debugging -->
+    <script src="js/debug.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script type="text/javascript" charset="utf-8">
+
+      // jquery document ready event
+      $(document).ready(function(){
+        
+        // bind to the click event of the parseJUP button
+        $('#parseJUP').click(function(){
+          
+          // we could make this a bit easier to read
+          debug.log(JUP.html(eval($('#code').val()))); 
+          
+          // parse the JSON from the textarea with JUP and output results to DIV
+          $('#output').html(JUP.html(eval($('#code').val())));
+
+        });
+        
+      });
+
+		</script>
+	</head>
+	<body>
+	  
+	  <table>
+	    <tr valign = "top">
+	     <td>
+        <h3>html</h3>
+        <textarea id = "code"></textarea>
+      </td>
+       <td>
+         <h3>output</h3>
+         <div id = "output">
+         </div>
+       </td>
+     </tr>
+     <tr>
+      <td colspan = "2"><input id = "parseJUP" type = "button" value = "render"></td>
+     </tr>
+    </table>
+  </body>
+</html>
