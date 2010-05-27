@@ -62,9 +62,12 @@
             b = b.replace(/\-/, '.');
             debug.log(e);
             
+             // evil eval is evil, but benign here
+            var d = eval($(e).attr('data-resource'));
+            
             try{
               // evil eval is evil, but benign here
-              eval('MR.behave.'+b+'({"selector":e})')
+              eval('MR.behave.'+b+'({"selector":e,"data":d})')
             }
             catch(err){
        
@@ -124,7 +127,12 @@
     <div data-behaviors = "grid-simple" data-resource = "grid_data_1" style="width:400px;height:200px;"></div>
 
     <h3>grid-custom</h3>
-    <div data-behaviors = "grid-custom" data-resource = "grid_data_1" style="width:400px;height:200px;"></div> 
+    
+    <!-- TODO: move this boilerplate code to behavior controller for custom grid -->
+    <table data-behaviors = "grid-custom" data-resource = "grid_custom_data_1" style="width:400px;height:200px;">
+      <th></th>
+      <tbody></tbody>
+    </table> 
 
 
     <!--

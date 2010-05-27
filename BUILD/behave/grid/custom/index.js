@@ -1,3 +1,8 @@
+  // boilerplate code for a custom grid implementation, designed to be easily hackable
+  // you probaly should be using grid-simple or grid-complex or slickgrid, not this one
+  
+  var grid = {};
+  var data = options.data;
   
   //init default sorter metadata for each column (this could be embedded via metadata plugin)
   $($('#currentActions th')[0]).data('sorter', {"field":"medium_name","order":"DESC","type":"string"});
@@ -6,7 +11,7 @@
   $($('#currentActions th')[3]).data('sorter', {"field":"estimated_points","order":"DESC","type":"numeric"});
 
 
-  dashboard.grid.render('#currentActions', dashboard.available_commitments_data, selection);
+  
 
 
     
@@ -15,7 +20,7 @@
       "type" : "GET",
       "data" : {},
       "dataType":"json",
-      "url" : "/dashboard.js",
+      "url" : "/js",
       beforeSend: function(xhrObj){
         $('#currentActions tbody').html("<tr><td class='loading' colspan='5'>\
           <img src='/images/ajax-loader.gif' alt='loading...' />\
@@ -32,15 +37,15 @@
 
         debug.log(rsp);
 
-        dashboard.available_commitments_data = rsp.result.available_commitments_data;
-        dashboard.committed_commitments_data = rsp.result.committed_commitments_data;
-        dashboard.goals.actual_points              = parseInt(rsp.result.actual_points);
-        dashboard.goals.actual_electricity_savings = parseInt(rsp.result.actual_electricity_savings);
-        dashboard.goals.projection_adjustment      = parseFloat(rsp.result.projection_adjustment);
+        data = rsp.result.data;
+        committed_commitments_data = rsp.result.committed_commitments_data;
+        goals.actual_points              = parseInt(rsp.result.actual_points);
+        goals.actual_electricity_savings = parseInt(rsp.result.actual_electricity_savings);
+        goals.projection_adjustment      = parseFloat(rsp.result.projection_adjustment);
         
         // render grids 
-        dashboard.grid.render('#currentActions', dashboard.available_commitments_data);
-        dashboard.committedGrid.render('#committedActions', dashboard.committed_commitments_data);
+        grid.render('#currentActions', data);
+        committedGrid.render('#committedActions', committed_commitments_data);
         
         var c1 =  $($('#currentActions th')[1]);
         var c2 =  $($('#committedActions th')[1]);
@@ -60,21 +65,20 @@
     });
   }
 
-this.output_options = {};
+grid.output_options = {};
 
-this.render = function(selector, data, featuredColumn){
+grid.render = function(selector, data){
  
-  debug.log('dashboard.grid.render()');
-  var data = dashboard.sortColumn(selector, $($('#currentActions th')[1]));  
-  
+  debug.log('grid.render()', selector, data);
+  //var data = sortColumn(selector, $($('#currentActions th')[1]));  
+
   // clear table body of old results
   $(selector + ' tbody').html('');
   // rebind data to table
   $(selector).data('records', data);    
   
   // update table header if we are changing up the featureColumn
-  var tableHeader = $('#currentActions' + ' th')[1];
-  $(tableHeader).html( dashboard.output_options[featuredColumn] + '<span class="png_bg"></span>');
+//  var tableHeader = $('#currentActions' + ' th')[1];
   
   for(var i = 0 ; i<data.length; i++){
     //debug.log(data[i].short_name);
@@ -82,49 +86,10 @@ this.render = function(selector, data, featuredColumn){
     // rows might be hidden based on the two checkboxes "Purchases" and "No Cost"
     var trClass = "hide";
     
-    // another hack to for cohersing strings into values
-    var check_upfront_cost = data[i].upfront_cost.replace(/\,/g,''); // replace all commas - $1,923 becomes $1923
-
-    if($('#available_show_purchases').attr('checked')){
-      if(check_upfront_cost > 0){
-        trClass = "show";
-      }
-    }
-    if($('#available_show_no_cost').attr('checked')){
-      if(check_upfront_cost <= 0){
-        trClass = "show";
-      }
-    }
  
     // slight hack for displaying labels on cell items, ideally they should be metadata on the JSON object are already recieving to populate the tables
     var cellContent = '';
-    if(featuredColumn == 'upfront_cost'){
-      cellContent = '<span class = "action_table_savings_value">$'+data[i][featuredColumn]+'</span>';
-    }
-    else if (featuredColumn == 'payback_period_in_months'){
-      
-      // set custom sort order for payback_period
-      $($('#committedActions th')[1]).data('sorter', {"field":"payback_period_in_months","order":"ASC","type":"numeric"});        
-      
-      // custom formatting logic as specified by Zeke, https://efficiency20.lighthouseapp.com/projects/11631/tickets/4969-payback-period-sorting
-      if( data[i]['payback_period_in_months'] == 0 || data[i]['payback_period_in_months'] == 9999999){
-        if( data[i]['upfront_cost'] == 0 ){
-          cellContent = "free";
-        }
-        else{
-          cellContent = "never";
-        }
-      }
-      else{
-        var formattedPayback = dashboard.monthsFormatter(data[i][featuredColumn]);
-        cellContent = formattedPayback;
-      }
-      
-    }
-    else{
-      cellContent = '<span class = "action_table_savings_value">'+data[i][featuredColumn]+'</span>&nbsp;'+dashboard.unit_lookup_table[featuredColumn];
-    }
-    // end cell rendering hack
+    cellContent = '<span class = "action_table_savings_value">'+data[i]+'</span>&nbsp;';
     
     // insert table row into table body
     var newRow = '<tr class = '+trClass+'>\
@@ -175,20 +140,20 @@ this.render = function(selector, data, featuredColumn){
   }
 
   // apply row highlighting
-  dashboard.highlightGridRows(selector);
+  highlightGridRows(selector);
 
   // after render, apply behaviors
-  dashboard.grid.behave(selector);
+  grid.behave(selector);
 };
 
-this.behaves = function(selector){
-  dashboard.sorter(selector);
+grid.behave = function(selector){
+  sorter(selector);
 };
 
 
 
 // this lookup table shouldnt be here, we should be getting properly returned objects from the server with the information we want 
-dashboard.unit_lookup_table = {
+unit_lookup_table = {
   "formatted_electricity":"kWh"
   ,"upfront_cost":""
   ,"payback_period":""
@@ -200,7 +165,7 @@ dashboard.unit_lookup_table = {
   ,"formatted_paper":"lbs"
 };
 
-dashboard.savings_lookup_table = {
+savings_lookup_table = {
   "carbon":"lbs. CO<sub>2</sub>"
   ,"natural_gas":"therms Natural Gas"
   ,"fuel_oil":"gal. Fuel Oil"
@@ -209,12 +174,12 @@ dashboard.savings_lookup_table = {
   ,"paper":"lbs. Paper"
 };
 
-dashboard.highlightGridRows = function(selector){
+highlightGridRows = function(selector){
   $('tbody tr', $(selector)).removeClass('even');
   $('tbody tr:even', $(selector)).addClass('even');
 };
 
-dashboard.monthsFormatter = function(months){
+monthsFormatter = function(months){
   
   // custom formatting for months and years based on Zeke's input
   // two years or less should be diplayed as months
@@ -235,7 +200,7 @@ dashboard.monthsFormatter = function(months){
 
 // meta-tablesorter - inspirired by the original jQuery tableSorter (www.tablesorter.com) but sorts on bound data, not actual column values
 
-dashboard.sort = function(options){
+sort = function(options){
 
   debug.log('sorting options: ', options);
   var records = options.data;
@@ -276,20 +241,20 @@ dashboard.sort = function(options){
   
 };
 
-dashboard.thClickHandler = function(selector, column){
+thClickHandler = function(selector, column){
 
-  var sortedData = dashboard.sortColumn(selector, $(column));
+  var sortedData = sortColumn(selector, $(column));
   
   // refactor this block
   if($(selector).attr('id') == 'currentActions'){
-    dashboard.grid.render(selector, sortedData);
+    grid.render(selector, sortedData);
     $('#currentActions th').removeClass('selected');  
     $('#currentActions td').removeClass('selected');  
     $(column).addClass('selected');
     $('#currentActions td:nth-child( ' + ($(column).index() + 1) + ')').addClass('selected');
   }
   else if($(selector).attr('id') == 'savingsPlan'){
-      dashboard.savingsPlan.render(selector, sortedData);
+      savingsPlan.render(selector, sortedData);
       $('#savingsPlan th').removeClass('selected');  
       $('#savingsPlan td').removeClass('selected');  
       $(column).addClass('selected');
@@ -297,8 +262,8 @@ dashboard.thClickHandler = function(selector, column){
 
       var c =  $(column).index();
       c =  $($('#availablePlan th')[c]);
-      sortedData = dashboard.sortColumn($('#availablePlan'), c); // cheating since the second table has no headers or sorter defined
-      dashboard.savingsPlan.render('#availablePlan', sortedData);
+      sortedData = sortColumn($('#availablePlan'), c); // cheating since the second table has no headers or sorter defined
+      savingsPlan.render('#availablePlan', sortedData);
       $('#availablePlan th').removeClass('selected');  
       $('#availablePlan td').removeClass('selected');  
       c.addClass('selected');
@@ -306,7 +271,7 @@ dashboard.thClickHandler = function(selector, column){
       
   }
   else{
-    dashboard.committedGrid.render(selector, sortedData);
+    committedGrid.render(selector, sortedData);
     $('#committedActions th').removeClass('selected');  
     $('#committedActions td').removeClass('selected');  
     $(column).addClass('selected');
@@ -319,13 +284,13 @@ dashboard.thClickHandler = function(selector, column){
       $('th', $(selector)).click(function(){
         debug.log('table header row got clicked');      
         $('th', $(selector)).unbind('click');
-        dashboard.thClickHandler(selector, $(this));
+        thClickHandler(selector, $(this));
       });
     }, 400);
 
 };
 
-dashboard.sorter = function(selector, options){
+sorter = function(selector, options){
 
   // determine if this selector has had the sorter behavior applied to it
 
@@ -336,7 +301,7 @@ dashboard.sorter = function(selector, options){
       $('th', $(selector)).click(function(){
         debug.log('table header row got clicked');
         $('th', $(selector)).unbind('click');
-        dashboard.thClickHandler(selector, $(this));
+        thClickHandler(selector, $(this));
       });
     }
     else{ // sort behavior is already bound, but we are being asked to bind it again, this means we trigger a sort update
@@ -344,7 +309,7 @@ dashboard.sorter = function(selector, options){
 
   };
 
-  dashboard.sortColumn = function(selector, column){
+  sortColumn = function(selector, column){
     
     debug.log('sortColumn ', selector, ' ' ,column)
     
@@ -360,7 +325,7 @@ dashboard.sorter = function(selector, options){
   
     debug.log('found a sorter ', sorter)
   
-    var sortedData = dashboard.sort({
+    var sortedData = sort({
       "data":$(selector).data('records'),
       "field":sorter.field,
       "type":sorter.type,
@@ -473,3 +438,8 @@ function formatPayback(data){
   
   return data;
 }
+
+
+
+// start
+grid.render(options.selector, data);
