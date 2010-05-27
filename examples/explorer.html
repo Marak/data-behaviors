@@ -67,7 +67,9 @@
               eval('MR.behave.'+b+'({"selector":e})')
             }
             catch(err){
+       
               debug.log('error occurred trying to render behavior: ', b, ' ', err);
+              $(selector).html('<span class = "error">error occurred trying to render behavior: ' + b + ' ' + err.message + '</span>');
             }
             
           }
