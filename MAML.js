@@ -123,7 +123,9 @@ MR.com.notification.progress = function(options){};
 
 MR.behave.autocomplete = {};
 
-MR.behave.autocomplete = function(options){};
+MR.behave.autocomplete = function(options){$(options.selector).autocomplete({
+  source: ["c++", "java", "php", "coldfusion", "javascript", "asp", "ruby"]
+});};
 
 MR.behave.chart = {};
 
@@ -1091,35 +1093,35 @@ $(options.selector).mouseover(function(e){
   debug.log(this, 'hover')
 });};
 
-MR.behave.inputs = {};
+MR.behave.input = {};
 
-MR.behave.inputs.checkbox = {};
+MR.behave.input.checkbox = {};
 
-MR.behave.inputs.checkbox = function(options){};
+MR.behave.input.checkbox = function(options){};
 
-MR.behave.inputs.date = {};
+MR.behave.input.date = {};
 
-MR.behave.inputs.date = function(options){ $(options.selector).datepicker();};
+MR.behave.input.date = function(options){ $(options.selector).datepicker();};
 
-MR.behave.inputs.dropdown = {};
+MR.behave.input.dropdown = {};
 
-MR.behave.inputs.dropdown = function(options){};
+MR.behave.input.dropdown = function(options){};
 
-MR.behave.inputs.range = {};
+MR.behave.input.range = {};
 
-MR.behave.inputs.range = function(options){};
+MR.behave.input.range = function(options){};
 
-MR.behave.inputs.rating = {};
+MR.behave.input.rating = {};
 
-MR.behave.inputs.rating = function(options){};
+MR.behave.input.rating = function(options){};
 
-MR.behave.inputs.slider = {};
+MR.behave.input.slider = {};
 
-MR.behave.inputs.slider = function(options){};
+MR.behave.input.slider = function(options){};
 
-MR.behave.inputs.text = {};
+MR.behave.input.text = {};
 
-MR.behave.inputs.text = function(options){};
+MR.behave.input.text = function(options){};
 
 MR.behave.ready = {};
 
