@@ -67,6 +67,10 @@
 
 grid.output_options = {};
 
+grid.renderBody = function(){};
+grid.renderHeader = function(){};
+
+
 grid.render = function(selector, data){
  
   debug.log('grid.render()', selector, data);
@@ -79,8 +83,10 @@ grid.render = function(selector, data){
   
   // update table header if we are changing up the featureColumn
 //  var tableHeader = $('#currentActions' + ' th')[1];
-  
+  debug.log(data);
   for(var i = 0 ; i<data.length; i++){
+    
+    debug.log(data[i]);
     //debug.log(data[i].short_name);
     // while rendering the table rows we need to determine if a row is suppose to be hidden or not
     // rows might be hidden based on the two checkboxes "Purchases" and "No Cost"
