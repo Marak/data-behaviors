@@ -80,6 +80,11 @@ input.date{
   width: 495px;
 }
 
+.body .grid .slick-header-column{
+  font-weight: bold;
+  text-shadow: 1px 1px 1px #FFF;
+}
+
 .body .chart{
   width: 600px;
   height: 350px;
