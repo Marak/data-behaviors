@@ -43,6 +43,7 @@
     <script>
       $(document).ready(function(){
         debug.log('document ready');
+        $('#dd').datepicker();
         attachBehaviors($("[data-behaviors]"));
       });
       
@@ -100,11 +101,11 @@
     <h1>this is the data-behavior explorer</h1>
     
     <h2>form inputs</h2>
-    <!-- <input type = "checkbox" data-behaviors = "input-checkbox" /> -->
-    <input type = "text" data-behaviors = "input-date" />
-    <!-- <select data-behaviors = "input-select" /> -->
+    <input type = "checkbox" data-behavior = "input-checkbox dirty" />
+    <input id = "dd" type = "text" data-behavior = "input-date dirty" />
+    <select data-behavior = "input-select dirty" /> 
     <!-- input-rating - <input type = "text" data-behavior = "input-rating" /> <br/> -->
-    <input type = "text" data-behaviors = "input-text autocomplete" /> <br/>
+    <input type = "text" data-behavior = "input-text dirty" /> <br/>
     
     <!--
     <h2>databinding test with form inputs (dirty behavior)</h2>
