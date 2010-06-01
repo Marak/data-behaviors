@@ -114,13 +114,45 @@
       
       <!--BODY-->
       <div class="body span-24">
-        <h2>Forms</h2>
-        <input class="checkbox" type = "checkbox" data-behavior = "input-checkbox dirty" />
-        <input class ="text" id = "dd" type = "text" data-behavior = "input-date dirty" />
-        <select data-behavior = "input-select dirty">
-        </select>
-        <!-- input-rating - <input type = "text" data-behavior = "input-rating" /> <br/> -->
-        <input type = "text" class ="text" data-behavior = "input-text dirty" /> <br/>
+        <h2>Form Elements</h2>
+        <dl>
+          <dt>
+            <label>Checkbox</label>
+          </dt>
+          <dd>
+            <input class="checkbox" type = "checkbox" data-behavior = "input-checkbox dirty" />
+          </dd>
+          
+          <dt>
+            <label>Date</label>
+          </dt>
+          <dd>
+            <input class ="text date" id = "dd" type = "text" data-behavior = "input-date dirty" />
+          </dd>
+          <dt>
+            <label>Select</label>
+          </dt>
+          <dd>
+            <select data-behavior = "input-select dirty">
+              <option>Example option</option>
+              <option>Sample option</option>
+              <option>Available option</option>
+            </select>
+          </dd>
+          <dt>
+            <label>Dirty Text</label>
+          </dt>
+          <dd>
+            <!-- input-rating - <input type = "text" data-behavior = "input-rating" /> <br/> -->
+            <input type = "text" class ="text" data-behavior = "input-text dirty" /> <br/>
+          </dd>
+          <dt>
+            <label>Textarea</label>
+          </dt>
+          <dd>
+            <textarea></textarea>
+          </dd>
+        </dl>
     
         <!--
         <h2>databinding test with form inputs (dirty behavior)</h2>
@@ -135,7 +167,7 @@
           </select>
         </p>
         -->
-        <hr/>
+
         <h2>Grids</h2>
         <h3>Simple</h3>
         <div class="grid" data-behaviors = "grid-simple" data-resource = "grid_data_1"></div>
@@ -156,17 +188,15 @@
         <div data-behaviors = "grid-simple" style="width:400px;height:200px;"></div>
         -->
     
-        <hr/>
         <h2>Charts</h2>
         <h3>Pie</h3>
-        <div data-behaviors = "chart-pie" data-resource = "chart_data_2" style="width: 800px; height: 400px; margin: 0 auto"></div>
+        <div class="chart" data-behaviors = "chart-pie" data-resource = "chart_data_2" ></div>
 
         <h3>Bar</h3>
-        <div data-behaviors = "chart-bar" data-resource = "chart_bar_data_1" style="width: 800px; height: 400px; margin: 0 auto"></div>
+        <div class="chart" data-behaviors = "chart-bar" data-resource = "chart_bar_data_1" ></div>
     
     
         <!--
-        <hr/>
         <h3>complex grid example using slick grid</h3>
     		<div style="width:600px;float:left;">
     			<div class="grid-header" style="width:100%">

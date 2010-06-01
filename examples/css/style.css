@@ -1,6 +1,21 @@
 body{
   background-color: #eee;
+  color: #333;
   font-family: 'helvetica neue', helvetica, arial, sans-serif !important;
+}
+
+input{
+  vertical-align: middle;
+  height: 25px;
+}
+
+select{
+  vertical-align: middle;
+  height: 20px;
+}
+
+input.date{
+  width: 100px;
 }
 
 .container{
@@ -10,13 +25,44 @@ body{
   padding: 15px;
 }
 .header h1{
-  margin: 10px 0 25px 0;
-  font-size: 2.5em;
+  color: #444;
+  margin: 10px 0 45px 0;
+  font-size: 2.3em;
 }
 
-.body hr{
-  margin-top: 20px;
+.body>h2{
+  -moz-border-radius-topleft:       7px;
+  -webkit-border-top-left-radius:   7px;
+  -moz-border-radius-topright:      7px;
+  -webkit-border-top-right-radius:  7px;
+  background-color: #efefef;
+  border: 1px solid #ddd;
+  border-bottom: 1px solid #aaa;
+  border-right: 1px solid #bfbfbf;
+  color: #333;
+  font-size: 1.6em;
+  padding: 3px 6px;
+  text-shadow: 1px 1px 1px #FFF;
 }
+
+.body>h3{
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-left: 7px;
+}
+
+.body dl dt{
+  float: left;
+  width: 85px;
+}
+
+.body dl dt label{
+  width: 75px;
+  display:block;
+  height: 20px;
+  padding-top: 7px;
+}
+
 
 .body .grid{
   border: 1px solid #ccc;
@@ -24,4 +70,9 @@ body{
   height: 200px;
   margin-bottom: 20px;
   width: 495px;
+}
+
+.body .chart{
+  width: 600px;
+  height: 350px;
 }
