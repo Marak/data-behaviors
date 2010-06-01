@@ -25,9 +25,10 @@ input.date{
   padding: 15px;
 }
 .header h1{
-  color: #444;
+  color: #333;
   margin: 10px 0 45px 0;
   font-size: 2.3em;
+  text-shadow: 1px 1px 1px #ddd;
 }
 
 .body>h2{
@@ -35,7 +36,10 @@ input.date{
   -webkit-border-top-left-radius:   7px;
   -moz-border-radius-topright:      7px;
   -webkit-border-top-right-radius:  7px;
-  background-color: #efefef;
+  background-color: #E6E6E6;
+  background-image: url(../js/SlickGrid/css/custom-theme/images/ui-bg_glass_75_e6e6e6_1x400.png);
+  background-repeat: repeat-x;
+  background-position: 50% 50%;
   border: 1px solid #ddd;
   border-bottom: 1px solid #aaa;
   border-right: 1px solid #bfbfbf;
@@ -49,6 +53,10 @@ input.date{
   font-size: 1.2em;
   font-weight: bold;
   margin-left: 7px;
+}
+
+.body>h3 button{
+  float: right;
 }
 
 .body dl dt{
