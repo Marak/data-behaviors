@@ -1,0 +1,27 @@
+body{
+  background-color: #eee;
+  font-family: 'helvetica neue', helvetica, arial, sans-serif !important;
+}
+
+.container{
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-width: 0 1px; 
+  padding: 15px;
+}
+.header h1{
+  margin: 10px 0 25px 0;
+  font-size: 2.5em;
+}
+
+.body hr{
+  margin-top: 20px;
+}
+
+.body .grid{
+  border: 1px solid #ccc;
+  border-width: 0 1px 1px 1px;
+  height: 200px;
+  margin-bottom: 20px;
+  width: 495px;
+}
