@@ -44,7 +44,7 @@
     <script>
       $(document).ready(function(){
         debug.log('document ready');
-        $('#dd').datepicker();
+        // parse the dom looking for tags that have a date-behaviors attribute
         behave.attach($("[data-behaviors]"));
       });
       
