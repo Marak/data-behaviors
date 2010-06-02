@@ -21,7 +21,10 @@
 
     <!-- include jQuery to help with the example page   ^_^   -->
     <script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
-		
+
+    <!-- include the behaviors library  -->
+    <script src="js/MAML.js" type="text/javascript" charset="utf-8"></script>
+
 		<!-- include debug.log library for easy and safe console debugging -->
     <script src="js/debug.js" type="text/javascript" charset="utf-8"></script>
 		
@@ -47,7 +50,7 @@
           
           // we could make this a bit easier to read
           debug.log('applying behaviors'); 
-          
+          behave.attach($("[data-behaviors]"));
           // parse the JSON from the textarea with JUP and output results to DIV
           //$('#output').html($('#code').val());
 
