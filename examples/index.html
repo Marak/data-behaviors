@@ -48,25 +48,17 @@
         behave.attach($("[data-behaviors]"));
       });
       
-   
+    /* comment out jquery plugin for now, should bring it back for sugar syntax
      $.fn.behavior = function(settings) {
        var config = {'foo': 'bar'};
-
        if (settings) $.extend(config, settings);
-
        this.each(function() {
          // element-specific code here
        });
-
        return this;
-
      };
-      
+    */  
     </script>
-    
-	
-    
-    
   </head>
   <body>
     <div class="container">
