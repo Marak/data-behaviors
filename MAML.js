@@ -8,117 +8,41 @@ MR.views.explorer = {};
 
 MR.views.explorer = '<h3>hello i am a simple list</h3><ul data-resource = "users" data-action = "get"><ul>';
 
+MR.views.forms = {};
 
-MR.com.forms = {};
+MR.forms = {};
 
-MR.com.forms.login = {};
+MR.views.forms.login = {};
 
-MR.com.forms.login = function(options){};
+MR.forms.login = {};
 
-MR.com.forms.resource = {};
+MR.views.forms.login = {};
 
-MR.com.forms.resource = function(options){};
+MR.views.forms.login = '';
 
-MR.com.forms.search = {};
+MR.views.forms.resource = {};
 
-MR.com.forms.search = function(options){};
+MR.forms.resource = {};
 
-MR.com.forms.signup = {};
+MR.views.forms.resource = {};
 
-MR.com.forms.signup = function(options){};
+MR.views.forms.resource = '';
 
-MR.com.inputs = {};
+MR.views.forms.search = {};
 
-MR.com.inputs.checkbox = {};
+MR.forms.search = {};
 
-MR.com.inputs.checkbox = function(options){};
+MR.views.forms.search = {};
 
-MR.com.inputs.date = {};
+MR.views.forms.search = '';
 
-MR.com.inputs.date = function(options){};
+MR.views.forms.signup = {};
 
-MR.com.inputs.dropdown = {};
+MR.forms.signup = {};
 
-MR.com.inputs.dropdown = function(options){};
+MR.views.forms.signup = {};
 
-MR.com.inputs.range = {};
-
-MR.com.inputs.range = function(options){};
-
-MR.com.inputs.rating = {};
-
-MR.com.inputs.rating = function(options){};
-
-MR.com.inputs.slider = {};
-
-MR.com.inputs.slider = function(options){};
-
-MR.com.inputs.text = {};
-
-MR.com.inputs.text = function(options){};
-
-MR.com.lists = {};
-
-MR.com.lists.simple = {};
-
-MR.com.lists.simple = function(options){
-/* 
-this.foo = function(yarg){
-  return 'bary';
-};
-
-
-{{#list}}
-  {{>listItem}}
-{{/list}}
-
-return this.render(options.data);
-
-*/};
-
-MR.com.misc = {};
-
-MR.com.misc.zoom = {};
-
-MR.com.misc.zoom = function(options){};
-
-MR.com.modals = {};
-
-MR.com.modals.alert = {};
-
-MR.com.modals.alert = function(options){};
-
-MR.com.modals.confirmation = {};
-
-MR.com.modals.confirmation = function(options){};
-
-MR.com.modals.window = {};
-
-MR.com.modals.window = function(options){};
-
-MR.com.navigation = {};
-
-MR.com.navigation.accordion = {};
-
-MR.com.navigation.accordion = function(options){};
-
-MR.com.navigation.carousel = {};
-
-MR.com.navigation.carousel = function(options){};
-
-MR.com.navigation.tabs = {};
-
-MR.com.navigation.tabs = function(options){};
-
-MR.com.notification = {};
-
-MR.com.notification.flash = {};
-
-MR.com.notification.flash = function(options){};
-
-MR.com.notification.progress = {};
-
-MR.com.notification.progress = function(options){};
+MR.views.forms.signup = '';
 
 
 MR.behave.autocomplete = {};
@@ -1123,6 +1047,18 @@ MR.behave.input.text = {};
 
 MR.behave.input.text = function(options){};
 
+MR.behave.list = {};
+
+MR.behave.list.simple = {};
+
+MR.behave.list.simple = function(options){};
+
+MR.behave.misc = {};
+
+MR.behave.misc.zoom = {};
+
+MR.behave.misc.zoom = function(options){};
+
 MR.behave.modal = {};
 
 MR.behave.modal.alert = {};
@@ -1191,6 +1127,30 @@ MR.behave.modal.custom = function(options){/*
 $(options.selector).hide();
 
 /* $(options.selector).dialog(); */};
+
+MR.behave.navigation = {};
+
+MR.behave.navigation.accordion = {};
+
+MR.behave.navigation.accordion = function(options){};
+
+MR.behave.navigation.carousel = {};
+
+MR.behave.navigation.carousel = function(options){};
+
+MR.behave.navigation.tabs = {};
+
+MR.behave.navigation.tabs = function(options){};
+
+MR.behave.notification = {};
+
+MR.behave.notification.flash = {};
+
+MR.behave.notification.flash = function(options){};
+
+MR.behave.notification.progress = {};
+
+MR.behave.notification.progress = function(options){};
 
 MR.behave.ready = {};
 
