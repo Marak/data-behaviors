@@ -43,11 +43,11 @@ docs.views = '';
     if(behaves[behave].search('.js') > 0){ // if this is a file
       var fileContents = fs.readFileSync(behaves[behave], encoding='utf8');
       //docs.behave += "<li>"+docFilter(behaves[behave])+"</li>";
-      code.behave += 'MR' + '.' + fileFilter(behaves[behave]) + ' = function(options){' + fileContents + '};' + '\n\n';
+      code.behave += (fileFilter(behaves[behave]) + ' = function(options){' + fileContents + '};' + '\n\n');
     }
     else{
       docs.behave += "<li>"+docFilter(behaves[behave])+"</li>";
-      code.behave += 'MR' + '.' + fileFilter(behaves[behave]) + ' = {};' + '\n\n';
+      code.behave += (fileFilter(behaves[behave]) + ' = {};' + '\n\n');
     }
 
   }

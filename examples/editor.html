@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
 <html>
 	<head>
-		<title>JUP - a Javascript HTML/XML generator </title>
+		<title>data-behaviors playground</title>
 		<style type="text/css" media="screen">
 			/* not at all important, just for testing */
 			html * { font-family: Arial; color: #666; }
@@ -31,15 +31,28 @@
       $(document).ready(function(){
         
         // bind to the click event of the parseJUP button
-        $('#parseJUP').click(function(){
+        $('#parseHTML').click(function(){
           
           // we could make this a bit easier to read
-          debug.log(JUP.html(eval($('#code').val()))); 
+          //debug.log(JUP.html(eval($('#code').val()))); 
           
           // parse the JSON from the textarea with JUP and output results to DIV
-          $('#output').html(JUP.html(eval($('#code').val())));
+          $('#output').html($('#code').val());
 
         });
+
+
+        // bind to the click event of the parseJUP button
+        $('#applyBehaviors').click(function(){
+          
+          // we could make this a bit easier to read
+          debug.log('applying behaviors'); 
+          
+          // parse the JSON from the textarea with JUP and output results to DIV
+          //$('#output').html($('#code').val());
+
+        });
+
         
       });
 
@@ -51,7 +64,53 @@
 	    <tr valign = "top">
 	     <td>
         <h3>html</h3>
-        <textarea id = "code"></textarea>
+        <textarea id = "code">
+          <div class="body span-24">
+            <h2>form elements</h2>
+            <dl>
+              <dt>
+                <label>checkbox</label>
+              </dt>
+              <dd>
+                <input class="checkbox" type = "checkbox" data-behavior = "input-checkbox dirty" />
+              </dd>
+
+              <dt>
+                <label>date</label>
+              </dt>
+              <dd>
+                <input class ="text date" id = "dd" type = "text" data-behavior = "input-date dirty" />
+              </dd>
+              <dt>
+                <label>select</label>
+              </dt>
+              <dd>
+                <select data-behavior = "input-select dirty">
+                  <option>Example option</option>
+                  <option>Sample option</option>
+                  <option>Available option</option>
+                </select>
+              </dd>
+              <dt>
+                <label>text</label>
+              </dt>
+              <dd>
+                <!-- input-rating - <input type = "text" data-behavior = "input-rating" /> <br/> -->
+                <input type = "text" class ="text" data-behavior = "input-text dirty" /> <br/>
+              </dd>
+              <dt>
+                <label>Textarea</label>
+              </dt>
+              <dd>
+                <textarea></textarea>
+              </dd>
+            </dl>
+          
+          
+          
+          
+          
+        </textarea>
       </td>
        <td>
          <h3>output</h3>
@@ -60,7 +119,9 @@
        </td>
      </tr>
      <tr>
-      <td colspan = "2"><input id = "parseJUP" type = "button" value = "render"></td>
+      <td colspan = "2">
+        <input id = "parseHTML" type = "button" value = "render html">
+        <input id = "applyBehaviors" type = "button" value = "apply behaviors"></td>
      </tr>
     </table>
   </body>

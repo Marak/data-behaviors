@@ -10,17 +10,12 @@
     <script src="js/SlickGrid/lib/jquery.rule-1.0.1.1-min.js"></script>
     <script src="js/SlickGrid/lib/jquery.event.drag.custom.js"></script>
 
-		<!--[if IE]>
-			<script type="text/javascript" src="js/Highcharts/js/excanvas.compiled.js"></script>
-		<![endif]-->
-		
-    <!-- highchart requires -->
-    <!--
-    <script type="text/javascript" src="http://www.highcharts.com/highslide/highslide-full.min.js"></script>
-    <script type="text/javascript" src="http://www.highcharts.com/highslide/highslide.config.js" charset="utf-8"></script>
-    <link rel="stylesheet" type="text/css" href="http://www.highcharts.com/highslide/highslide.css" />
-    -->
-    <!-- end highchart requires -->
+    <!-- ad ie conditional for excanvas -->
+    
+    <!--[if IE]>
+      <script type="text/javascript" src="js/Highcharts/js/excanvas.compiled.js"></script>
+    <![endif]-->
+    
 
     <!-- slick grid requires -->
 		<link rel="stylesheet" href="js/SlickGrid/slick.grid.css" type="text/css" media="screen" charset="utf-8" />
@@ -42,7 +37,6 @@
 		<script language="JavaScript" src="js/SlickGrid/slick.model.js"></script>
 		<script language="JavaScript" src="js/SlickGrid/slick.pager.js"></script>
 		<script language="JavaScript" src="js/SlickGrid/slick.columnpicker.js"></script>  
-
 		<script type="text/javascript" src="js/Highcharts/js/highcharts.js"></script>
 
 		<!-- end slick grid requires -->
@@ -51,40 +45,10 @@
       $(document).ready(function(){
         debug.log('document ready');
         $('#dd').datepicker();
-        attachBehaviors($("[data-behaviors]"));
+        behave.attach($("[data-behaviors]"));
       });
       
-      function attachBehaviors(selector){
-        
-        $(selector).each(function(i,e){
-          
-          var behaviors = $(e).attr('data-behaviors').split(' ');
-          for(var behavior in behaviors){
-            var b = behaviors[behavior];
-            // parse behavior name for sub-behaviors
-            // the labeling approach of behaviors on DOM elements is as follows
-            // fooBehavior-sub-sub2 turns into =>  behaviors.fooBehavior.sub.sub2()
-            b = b.replace(/\-/, '.');
-            debug.log(e);
-            
-             // evil eval is evil, but benign here
-            var d = eval($(e).attr('data-resource'));
-            
-            try{
-              // evil eval is evil, but benign here
-              eval('MR.behave.'+b+'({"selector":e,"data":d})')
-            }
-            catch(err){
-       
-              debug.log('error occurred trying to render behavior: ', b, ' ', err);
-              $(selector).html('<span class = "error">error occurred trying to render behavior: ' + b + ' ' + err.message + '</span>');
-            }
-            
-          }
-          
-        });
-      }
-      
+   
      $.fn.behavior = function(settings) {
        var config = {'foo': 'bar'};
 

@@ -1,20 +1,52 @@
 // this is just boilerplate code for generating the actual mustache-rides.js file, do not use this outside of node_builder.js
-var MR = {};
-MR.version = "0.0.1";
-MR.views = {};
-MR.com = {};
-MR.behave = {}
-MR.behave.autocomplete = {};
+var behave = {};
+behave.version = "0.0.1";
+behave = {};
+behave.attach = function( selector ){
+  
+        
+        $(selector).each(function(i,e){
+          
+          var behaviors = $(e).attr('data-behaviors').split(' ');
+          for(var behavior in behaviors){
+            var b = behaviors[behavior];
+            // parse behavior name for sub-behaviors
+            // the labeling approach of behaviors on DOM elements is as follows
+            // fooBehavior-sub-sub2 turns into =>  behaviors.fooBehavior.sub.sub2()
+            b = b.replace(/\-/, '.');
+            debug.log(e);
+            
+             // evil eval is evil, but benign here
+            var d = eval($(e).attr('data-resource'));
+            
+            try{
+              // evil eval is evil, but benign here
+              eval('behave.'+b+'({"selector":e,"data":d})')
+            }
+            catch(err){
+       
+              debug.log('error occurred trying to render behavior: ', b, ' ', err);
+              $(selector).html('<span class = "error">error occurred trying to render behavior: ' + b + ' ' + err.message + '</span>');
+            }
+            
+          }
+          
+        });
+  
+  
+  
+};
+behave.autocomplete = {};
 
-MR.behave.autocomplete = function(options){$(options.selector).autocomplete({
+behave.autocomplete = function(options){$(options.selector).autocomplete({
   source: ["c++", "java", "php", "coldfusion", "javascript", "asp", "ruby"]
 });};
 
-MR.behave.chart = {};
+behave.chart = {};
 
-MR.behave.chart.bar = {};
+behave.chart.bar = {};
 
-MR.behave.chart.bar = function(options){
+behave.chart.bar = function(options){
  options.series = eval($(options.selector).attr('data-resource')).series;
 
 chart = new Highcharts.Chart({
@@ -75,13 +107,13 @@ chart = new Highcharts.Chart({
 			});
 };
 
-MR.behave.chart.gauge = {};
+behave.chart.gauge = {};
 
-MR.behave.chart.gauge = function(options){};
+behave.chart.gauge = function(options){};
 
-MR.behave.chart.pie = {};
+behave.chart.pie = {};
 
-MR.behave.chart.pie = function(options){ options.data = eval($(options.selector).attr('data-resource')).data;
+behave.chart.pie = function(options){ options.data = eval($(options.selector).attr('data-resource')).data;
  options.title = eval($(options.selector).attr('data-resource')).title;
  
 
@@ -140,13 +172,13 @@ MR.behave.chart.pie = function(options){ options.data = eval($(options.selector)
 
 };
 
-MR.behave.chart.sparkline = {};
+behave.chart.sparkline = {};
 
-MR.behave.chart.sparkline = function(options){};
+behave.chart.sparkline = function(options){};
 
-MR.behave.dirty = {};
+behave.dirty = {};
 
-MR.behave.dirty = function(options){//debug.log('dirty binded');
+behave.dirty = function(options){//debug.log('dirty binded');
 
 //debug.log(options.selector);
 
@@ -223,15 +255,15 @@ switch(bindType){
 
 };
 
-MR.behave.dragAndDrop = {};
+behave.dragAndDrop = {};
 
-MR.behave.dragAndDrop = function(options){};
+behave.dragAndDrop = function(options){};
 
-MR.behave.grid = {};
+behave.grid = {};
 
-MR.behave.grid.complex = {};
+behave.grid.complex = {};
 
-MR.behave.grid.complex = function(options){var dataView;
+behave.grid.complex = function(options){var dataView;
 var grid;
 var data = [];
 var selectedRowIds = [];
@@ -487,9 +519,9 @@ $(function()
 
 };
 
-MR.behave.grid.custom = {};
+behave.grid.custom = {};
 
-MR.behave.grid.custom = function(options){  // boilerplate code for a custom grid implementation, designed to be easily hackable
+behave.grid.custom = function(options){  // boilerplate code for a custom grid implementation, designed to be easily hackable
   // you probaly should be using grid-simple or grid-complex or slickgrid, not this one
   
   var grid = {};
@@ -941,9 +973,9 @@ function formatPayback(data){
 // start
 grid.render(options.selector, data);};
 
-MR.behave.grid.simple = {};
+behave.grid.simple = {};
 
-MR.behave.grid.simple = function(options){// define grid options
+behave.grid.simple = function(options){// define grid options
 var opts = {
 	enableCellNavigation: false,
   enableColumnReorder: false
@@ -960,69 +992,69 @@ var data = eval($(options.selector).attr('data-resource')).data;
 new Slick.Grid($(options.selector), data, columns, opts);
 };
 
-MR.behave.highlightable = {};
+behave.highlightable = {};
 
-MR.behave.highlightable = function(options){debug.log('apply hover behavior!');
-
-$(options.selector).mouseover(function(e){
-  debug.log(this, 'hover')
-});};
-
-MR.behave.hover = {};
-
-MR.behave.hover = function(options){debug.log('apply hover behavior!');
+behave.highlightable = function(options){debug.log('apply hover behavior!');
 
 $(options.selector).mouseover(function(e){
   debug.log(this, 'hover')
 });};
 
-MR.behave.input = {};
+behave.hover = {};
 
-MR.behave.input.checkbox = {};
+behave.hover = function(options){debug.log('apply hover behavior!');
 
-MR.behave.input.checkbox = function(options){};
+$(options.selector).mouseover(function(e){
+  debug.log(this, 'hover')
+});};
 
-MR.behave.input.date = {};
+behave.input = {};
 
-MR.behave.input.date = function(options){ $(options.selector).datepicker();};
+behave.input.checkbox = {};
 
-MR.behave.input.dropdown = {};
+behave.input.checkbox = function(options){};
 
-MR.behave.input.dropdown = function(options){};
+behave.input.date = {};
 
-MR.behave.input.range = {};
+behave.input.date = function(options){ $(options.selector).datepicker();};
 
-MR.behave.input.range = function(options){};
+behave.input.dropdown = {};
 
-MR.behave.input.rating = {};
+behave.input.dropdown = function(options){};
 
-MR.behave.input.rating = function(options){};
+behave.input.range = {};
 
-MR.behave.input.slider = {};
+behave.input.range = function(options){};
 
-MR.behave.input.slider = function(options){};
+behave.input.rating = {};
 
-MR.behave.input.text = {};
+behave.input.rating = function(options){};
 
-MR.behave.input.text = function(options){};
+behave.input.slider = {};
 
-MR.behave.list = {};
+behave.input.slider = function(options){};
 
-MR.behave.list.simple = {};
+behave.input.text = {};
 
-MR.behave.list.simple = function(options){};
+behave.input.text = function(options){};
 
-MR.behave.misc = {};
+behave.list = {};
 
-MR.behave.misc.zoom = {};
+behave.list.simple = {};
 
-MR.behave.misc.zoom = function(options){};
+behave.list.simple = function(options){};
 
-MR.behave.modal = {};
+behave.misc = {};
 
-MR.behave.modal.alert = {};
+behave.misc.zoom = {};
 
-MR.behave.modal.alert = function(options){/* 
+behave.misc.zoom = function(options){};
+
+behave.modal = {};
+
+behave.modal.alert = {};
+
+behave.modal.alert = function(options){/* 
 
  an alert modal is a modal window that only has one option, "OK". there shouldn't be any custom logic in an alert modal
  aside from a message and an "OK" button. the modal-alert behavior is suppose to emulate the browser's "alert" method
@@ -1060,9 +1092,9 @@ $('.' + theId).click(function(e){
 
 /* */};
 
-MR.behave.modal.confirm = {};
+behave.modal.confirm = {};
 
-MR.behave.modal.confirm = function(options){/* 
+behave.modal.confirm = function(options){/* 
 
  a confirm modal is a modal window that has two options, "OK" and "Cancel". 
  if you need a custom modal you should be using modal-custom
@@ -1074,9 +1106,9 @@ $(options.selector).hide();
 
 /* $(options.selector).dialog(); */};
 
-MR.behave.modal.custom = {};
+behave.modal.custom = {};
 
-MR.behave.modal.custom = function(options){/* 
+behave.modal.custom = function(options){/* 
 
  a custom modal is a modal window that can be completely customizable 
 
@@ -1087,39 +1119,39 @@ $(options.selector).hide();
 
 /* $(options.selector).dialog(); */};
 
-MR.behave.navigation = {};
+behave.navigation = {};
 
-MR.behave.navigation.accordion = {};
+behave.navigation.accordion = {};
 
-MR.behave.navigation.accordion = function(options){};
+behave.navigation.accordion = function(options){};
 
-MR.behave.navigation.carousel = {};
+behave.navigation.carousel = {};
 
-MR.behave.navigation.carousel = function(options){};
+behave.navigation.carousel = function(options){};
 
-MR.behave.navigation.tabs = {};
+behave.navigation.tabs = {};
 
-MR.behave.navigation.tabs = function(options){};
+behave.navigation.tabs = function(options){};
 
-MR.behave.notification = {};
+behave.notification = {};
 
-MR.behave.notification.flash = {};
+behave.notification.flash = {};
 
-MR.behave.notification.flash = function(options){};
+behave.notification.flash = function(options){};
 
-MR.behave.notification.progress = {};
+behave.notification.progress = {};
 
-MR.behave.notification.progress = function(options){};
+behave.notification.progress = function(options){};
 
-MR.behave.ready = {};
+behave.ready = {};
 
-MR.behave.ready = function(options){};
+behave.ready = function(options){};
 
-MR.behave.sortable = {};
+behave.sortable = {};
 
-MR.behave.sortable = function(options){};
+behave.sortable = function(options){};
 
-MR.behave.tokenize = {};
+behave.tokenize = {};
 
-MR.behave.tokenize = function(options){};
+behave.tokenize = function(options){};
 
