@@ -7,8 +7,4 @@ MR.views = {};
 MR.com = {};
 MR.behave = {}
 
-{{{views}}}
-
-{{{coms}}}
-
 {{{behaves}}}

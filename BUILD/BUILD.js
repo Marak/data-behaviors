@@ -1,6 +1,4 @@
 /* 
-    MAML node.js BUILD script
-    Marak Squires,  May 2010
     running this file in node.js will generate a new version of the MAML library 
 
 */
@@ -32,43 +30,9 @@ docs.com = '';
 docs.behave = '';
 docs.views = '';
 
-/************************ GENERATE COMPONENTS ***************************/
-  sys.puts('generating components.....');
-
-  docs.com += "<h1>components</h1>";
-
-
-  
-  docs.com += "<ul>";
-
-  // read com directory and get all components
-  var coms = paths('./com');
-
-  for(var com in coms){
-    if(coms[com].search('.js') > 0){ // if this is a file
-      var fileContents = fs.readFileSync(coms[com], encoding='utf8');
-      docs.com += "<li>"+docFilter(coms[com])+"</li>";
-
-      // read file contents and inject in the code 
-      code.com += 'MR' + '.' + fileFilter(coms[com]) + ' = function(options){' + fileContents + '};' + '\n\n';
-    }
-    else{
-      //docs.com += "<li>"+docFilter(coms[com])+"</li>";
-      code.com += 'MR' + '.' + fileFilter(coms[com]) + ' = {};' + '\n\n';
-    }
-  }
-
-
-  docs.com += "</ul>";
-
-
-
-  sys.puts('generated components successfully!');
-/************************ END GENERATE COMPONENTS ***********************/
 
 /************************ GENERATE BEHAVIORS ***************************/
   sys.puts('generating behaviors.....');
-  docs.behave += "<h1>behaviors</h1>";
   docs.behave += "<ul>";
 
   // read behave directory and grab all behaviors
@@ -90,34 +54,6 @@ docs.views = '';
   docs.behave += "</ul>";
   sys.puts('generated behaviors successfully!');
 /************************ END GENERATE BEHAVIORS ***************************/
-
-/************************ GENERATE VIEWS ***************************/
-  sys.puts('generating views.....');
-  // read through views directory and get all views
-  var views = paths('./views');
-
-  docs.views += "<h1>views</h1>";
-  docs.views += "<ul>";
-
-  for(var view in views){
-      docs.views += "<li>"+fileFilter(views[view])+"</li>";
-      code.views += 'MR' + '.' + fileFilter(views[view]) + ' = {};' + '\n\n';
-      if(views[view].search('.js') > 0){ // if this is a file
-        var fileContents = fs.readFileSync(views[view], encoding='utf8');
-        //docs.views += "<li>"+docFilter(views[view])+"</li>";
-
-        // read file contents and inject in the code 
-        code.views += 'MR' + '.' + fileFilter(views[view]) + ' = \'' + mamlFilter(fileContents) + '\';' + '\n\n';
-      }
-      else{
-        docs.views += "<li>"+fileFilter(views[view])+"</li>";
-        code.views += 'MR' + '.' + docFilter(views[view]) + ' = {};' + '\n\n';
-      }
-  }
-
-  docs.views += "</ul>";
-  sys.puts('generated views successfully!');
-/************************ END GENERATE VIEWS ***********************/
 
 /************************ BUNDLE GENERATED CODE ********************/
 

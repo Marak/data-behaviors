@@ -4,47 +4,6 @@ MR.version = "0.0.1";
 MR.views = {};
 MR.com = {};
 MR.behave = {}
-MR.views.explorer = {};
-
-MR.views.explorer = '<h3>hello i am a simple list</h3><ul data-resource = "users" data-action = "get"><ul>';
-
-MR.views.forms = {};
-
-MR.forms = {};
-
-MR.views.forms.login = {};
-
-MR.forms.login = {};
-
-MR.views.forms.login = {};
-
-MR.views.forms.login = '';
-
-MR.views.forms.resource = {};
-
-MR.forms.resource = {};
-
-MR.views.forms.resource = {};
-
-MR.views.forms.resource = '';
-
-MR.views.forms.search = {};
-
-MR.forms.search = {};
-
-MR.views.forms.search = {};
-
-MR.views.forms.search = '';
-
-MR.views.forms.signup = {};
-
-MR.forms.signup = {};
-
-MR.views.forms.signup = {};
-
-MR.views.forms.signup = '';
-
-
 MR.behave.autocomplete = {};
 
 MR.behave.autocomplete = function(options){$(options.selector).autocomplete({
