@@ -32,12 +32,18 @@ docs.views = '';
 
 
 /************************ GENERATE BEHAVIORS ***************************/
+  
+  // we should update the way the documentation is generated here. the current UL that gets generated is only one level deep.....
+  // would be great if we could use behave.list.simple, but im not sure of the best approach of calling the behavior server-side before the library is actually generated....
+  
   sys.puts('generating behaviors.....');
   docs.behave += "<ul>";
 
   // read behave directory and grab all behaviors
   var behaves = paths('./behave');
 
+  //sys.puts(JSON.stringify(behaves));
+  
   for(var behave in behaves){
 
     if(behaves[behave].search('.js') > 0){ // if this is a file
@@ -53,6 +59,7 @@ docs.views = '';
   }
   docs.behave += "</ul>";
   sys.puts('generated behaviors successfully!');
+  
 /************************ END GENERATE BEHAVIORS ***************************/
 
 /************************ BUNDLE GENERATED CODE ********************/

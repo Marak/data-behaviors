@@ -1219,7 +1219,8 @@ behave.ready = function(options){};
 
 behave.sortable = {};
 
-behave.sortable = function(options){};
+behave.sortable = function(options){$('ul', options.selector).sortable();
+/* $(options.selector).disableSelection(); */};
 
 behave.tokenize = {};
 
