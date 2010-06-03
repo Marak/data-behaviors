@@ -3,13 +3,22 @@
 
 
 /* list test data */
-// lets be slick and generate a list from the existing behaviors
-var list_data_1 = [];
-for(var b in behave){
-  if(typeof behave[b] == 'object'){
-    list_data_1.push(b);
+  // lets be slick and generate a list from the existing behaviors
+  var list_simple_data_1 = [];
+  for(var b in behave){
+    if(typeof behave[b] == 'object'){
+      list_simple_data_1.push(b);
+    }
   }
-}
+
+  // the behave library itself is a nested object
+  var list_nested_data_1 = behave;
+
+
+
+/* end list test data */
+
+
 
 var grid_data_1 = {};
 grid_data_1.columns = [
