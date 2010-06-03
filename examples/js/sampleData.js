@@ -1,94 +1,104 @@
+// lets define some test data
 
-	
-	  // lets define some test data
-    var grid_data_1 = {};
-    grid_data_1.columns = [
-    	{id:"title", name:"Title", field:"title"},
-    	{id:"duration", name:"Duration", field:"duration"},
-    	{id:"%", name:"% Complete", field:"percentComplete"},
-    	{id:"start", name:"Start", field:"start"},
-    	{id:"finish", name:"Finish", field:"finish"},
-    	{id:"effort-driven", name:"Effort Driven", field:"effortDriven"}
-    ];
 
-    grid_data_1.data = [];
-    for (var i = 0; i < 500; i++) {
-  		grid_data_1.data[i] = {
-                  title: "Task " + i,
-                  duration: "5 days",
-                  percentComplete: Math.round(Math.random() * 100),
-                  start: "01/01/2009",
-                  finish: "01/05/2009",
-                  effortDriven: (i % 5 == 0)
-              };
-  	}
 
-  
-    
+/* list test data */
+// lets be slick and generate a list from the existing behaviors
+var list_data_1 = [];
+for(var b in behave){
+  if(typeof behave[b] == 'object'){
+    list_data_1.push(b);
+  }
+}
 
-    var grid_data_2 = {};
-    grid_data_2.columns = [
-    	{id:"title", name:"Title", field:"title"},
-    	{id:"duration", name:"Duration", field:"duration"},
-    	{id:"%", name:"% Complete", field:"percentComplete"},
-    	{id:"start", name:"Start", field:"start"},
-    	{id:"finish", name:"Finish", field:"finish"},
-    	{id:"effort-driven", name:"Effort Driven", field:"effortDriven"}
-    ];
+var grid_data_1 = {};
+grid_data_1.columns = [
+	{id:"title", name:"Title", field:"title"},
+	{id:"duration", name:"Duration", field:"duration"},
+	{id:"%", name:"% Complete", field:"percentComplete"},
+	{id:"start", name:"Start", field:"start"},
+	{id:"finish", name:"Finish", field:"finish"},
+	{id:"effort-driven", name:"Effort Driven", field:"effortDriven"}
+];
 
-    grid_data_2.data = [];
-    for (var i = 0; i < 500; i++) {
-  		grid_data_2.data[i] = {
-                  title: "Mask " + i,
-                  duration: "3 minutes",
-                  percentComplete: Math.round(Math.random() * 100),
-                  start: "03/04/2010",
-                  finish: "02/09/2010",
-                  effortDriven: (i % 5 == 0)
-              };
-  	}
-	
-	  var chart_data_1 = {};
-	  
-	  chart_data_1.data = 
-	  [
-			['Firefox',   44.2],
-			['IE7',       26.6],
-			{
-				name: 'IE6',
-				y: 20,
-				sliced: true,
-				selected: true
-			},
-			['Chrome',    3.1],
-			['Safari',    2.7],
-			['Opera',     2.3],
-			['Mozilla',   0.4]
-		];
-	
-	  chart_data_1.title = "Browser market shares at a specific website, 2008";
-	
-	  var chart_data_2 = {};
-	  
-	  chart_data_2.title = "The Battle";
-	  
-	  chart_data_2.data =
-	  [
-			['Knowing',   50],
-			{
-				name: 'Red Lasers',
-				y: 25,
-				sliced: true,
-				selected: true
-			},
-			['Blue Lasers',    25]
-		];
-	
-	
-	var chart_bar_data_1 = {};
-	
-	chart_bar_data_1.series =
-	  [{
+grid_data_1.data = [];
+for (var i = 0; i < 500; i++) {
+	grid_data_1.data[i] = {
+              title: "Task " + i,
+              duration: "5 days",
+              percentComplete: Math.round(Math.random() * 100),
+              start: "01/01/2009",
+              finish: "01/05/2009",
+              effortDriven: (i % 5 == 0)
+          };
+}
+
+
+
+
+var grid_data_2 = {};
+grid_data_2.columns = [
+	{id:"title", name:"Title", field:"title"},
+	{id:"duration", name:"Duration", field:"duration"},
+	{id:"%", name:"% Complete", field:"percentComplete"},
+	{id:"start", name:"Start", field:"start"},
+	{id:"finish", name:"Finish", field:"finish"},
+	{id:"effort-driven", name:"Effort Driven", field:"effortDriven"}
+];
+
+grid_data_2.data = [];
+for (var i = 0; i < 500; i++) {
+	grid_data_2.data[i] = {
+              title: "Mask " + i,
+              duration: "3 minutes",
+              percentComplete: Math.round(Math.random() * 100),
+              start: "03/04/2010",
+              finish: "02/09/2010",
+              effortDriven: (i % 5 == 0)
+          };
+}
+
+var chart_data_1 = {};
+
+chart_data_1.data = 
+[
+	['Firefox',   44.2],
+	['IE7',       26.6],
+	{
+		name: 'IE6',
+		y: 20,
+		sliced: true,
+		selected: true
+	},
+	['Chrome',    3.1],
+	['Safari',    2.7],
+	['Opera',     2.3],
+	['Mozilla',   0.4]
+];
+
+chart_data_1.title = "Browser market shares at a specific website, 2008";
+
+var chart_data_2 = {};
+
+chart_data_2.title = "The Battle";
+
+chart_data_2.data =
+[
+	['Knowing',   50],
+	{
+		name: 'Red Lasers',
+		y: 25,
+		sliced: true,
+		selected: true
+	},
+	['Blue Lasers',    25]
+];
+
+
+var chart_bar_data_1 = {};
+
+chart_bar_data_1.series =
+[{
 name: 'Tokyo',
 data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
 

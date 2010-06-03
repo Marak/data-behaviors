@@ -1,39 +1,45 @@
 // this is just boilerplate code for generating the actual mustache-rides.js file, do not use this outside of node_builder.js
 var behave = {};
 behave.version = "0.0.1";
+// custom DEBUG setting for turning on / off robust behavior debugging. note: this is not going to disable the debugger completely, its just a way of setting custom debug levels
+behave.DEBUG = false; 
 behave = {};
+$.fn.behavior = function(settings) {
+  var config = {'foo': 'bar'};
+  if (settings) $.extend(config, settings);
+  this.each(function() {
+    // element-specific code here
+  });
+  return this;
+};
 behave.attach = function( selector ){
-  
-        
-        $(selector).each(function(i,e){
-          
-          var behaviors = $(e).attr('data-behaviors').split(' ');
-          for(var behavior in behaviors){
-            var b = behaviors[behavior];
-            // parse behavior name for sub-behaviors
-            // the labeling approach of behaviors on DOM elements is as follows
-            // fooBehavior-sub-sub2 turns into =>  behaviors.fooBehavior.sub.sub2()
-            b = b.replace(/\-/, '.');
-            debug.log(e);
-            
-             // evil eval is evil, but benign here
-            var d = eval($(e).attr('data-resource'));
-            
-            try{
-              // evil eval is evil, but benign here
-              eval('behave.'+b+'({"selector":e,"data":d})')
-            }
-            catch(err){
-       
-              debug.log('error occurred trying to render behavior: ', b, ' ', err);
-              $(selector).html('<span class = "error">error occurred trying to render behavior: ' + b + ' ' + err.message + '</span>');
-            }
-            
-          }
-          
-        });
-  
-  
+  debug.log('attempting to apply behaviors to the following elements ', selector)
+  $(selector).each(function(i,e){
+    if(behave.DEBUG){
+      debug.log('found element: ', e);
+    }
+    var behaviors = $(e).attr('data-behaviors').split(' ');
+    for(var behavior in behaviors){
+      var b = behaviors[behavior];
+      // parse behavior name for sub-behaviors
+      // the labeling approach of behaviors on DOM elements is as follows
+      // fooBehavior-sub-sub2 turns into =>  behaviors.fooBehavior.sub.sub2()
+      b = b.replace(/\-/, '.');
+      // evil eval is evil, but benign here
+      var d = eval($(e).attr('data-resource'));
+      try{
+        // evil eval is evil, but benign here
+        eval('behave.'+b+'({"selector":e,"data":d})')
+        if(behave.DEBUG){
+          debug.log(b , ' behavior successfully attached!');
+        }
+      }
+      catch(err){
+        debug.log('an error occurred trying to attach behavior: ', b, ' ', err);
+        $(selector).html('<span class = "error">error occurred trying to render behavior: ' + b + ' ' + err.message + '</span>');
+      }
+    }
+  });
   
 };
 behave.autocomplete = {};
@@ -1018,10 +1024,6 @@ behave.input.date = {};
 
 behave.input.date = function(options){ $(options.selector).datepicker();};
 
-behave.input.dropdown = {};
-
-behave.input.dropdown = function(options){};
-
 behave.input.range = {};
 
 behave.input.range = function(options){};
@@ -1029,6 +1031,10 @@ behave.input.range = function(options){};
 behave.input.rating = {};
 
 behave.input.rating = function(options){};
+
+behave.input.select = {};
+
+behave.input.select = function(options){};
 
 behave.input.slider = {};
 
@@ -1042,7 +1048,37 @@ behave.list = {};
 
 behave.list.simple = {};
 
-behave.list.simple = function(options){};
+behave.list.simple = function(options){debug.log(options);
+
+/* ugly ass raw JS nested list builder, we should make this Mustache or at least easier to read */
+this.render = function(values){
+ var str = '<ul>';
+ 
+ for(var key in values){
+   
+   if(typeof values[key]=='object' && values[key] != null){
+     str+='<li>'+key+this.render(values[key])+'</li>';
+   }
+   else{
+     if(values instanceof Array){
+       str+='<li>'+values[key];
+     }
+     else{
+       str+='<li>'+key;
+       if(values[key]!=''){
+         str+= ' : ' + values[key];
+       }
+     }
+    str+='</li>';
+   }
+  }
+ 
+ str+='</ul>';
+ return str;
+};
+
+$(options.selector).html(this.render(options.data));
+};
 
 behave.misc = {};
 

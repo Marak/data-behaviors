@@ -47,17 +47,6 @@
         // parse the dom looking for tags that have a date-behaviors attribute
         behave.attach($("[data-behaviors]"));
       });
-      
-    /* comment out jquery plugin for now, should bring it back for sugar syntax
-     $.fn.behavior = function(settings) {
-       var config = {'foo': 'bar'};
-       if (settings) $.extend(config, settings);
-       this.each(function() {
-         // element-specific code here
-       });
-       return this;
-     };
-    */  
     </script>
   </head>
   <body>
@@ -65,7 +54,7 @@
 
       <!-- HEADER -->
       <div class="header span-24">
-        <h1>data-behavior explorer</h1>
+        <h1>data-behaviors explorer</h1>
       </div>
       
       <!--BODY-->
@@ -76,20 +65,20 @@
             <label>checkbox</label>
           </dt>
           <dd>
-            <input class="checkbox" type = "checkbox" data-behavior = "input-checkbox dirty" />
+            <input class="checkbox" type = "checkbox" data-behaviors = "input-checkbox dirty" />
           </dd>
           
           <dt>
             <label>date</label>
           </dt>
           <dd>
-            <input class ="text date" id = "dd" type = "text" data-behavior = "input-date dirty" />
+            <input class ="text date" id = "dd" type = "text" data-behaviors = "input-date dirty" />
           </dd>
           <dt>
             <label>select</label>
           </dt>
           <dd>
-            <select data-behavior = "input-select dirty">
+            <select data-behaviors = "input-select dirty">
               <option>Example option</option>
               <option>Sample option</option>
               <option>Available option</option>
@@ -99,8 +88,8 @@
             <label>text</label>
           </dt>
           <dd>
-            <!-- input-rating - <input type = "text" data-behavior = "input-rating" /> <br/> -->
-            <input type = "text" class ="text" data-behavior = "input-text dirty" /> <br/>
+            <!-- input-rating - <input type = "text" data-behaviors = "input-rating" /> <br/> -->
+            <input type = "text" class ="text" data-behaviors = "input-text dirty autocomplete" /> <br/>
           </dd>
           <dt>
             <label>Textarea</label>
@@ -140,6 +129,12 @@
           <br/>
 
       -->
+      
+        <h2>lists</h2>
+        <h3>simple</h3>
+        <div data-behaviors = "list-simple" data-resource = "list_data_1"></div>
+
+      
         <h2>Grids</h2>
         <h3>
           <!-- <button>Edit data</button> -->
