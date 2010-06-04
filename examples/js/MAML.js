@@ -2,8 +2,7 @@
 var behave = {};
 behave.version = "0.0.1";
 // custom DEBUG setting for turning on / off robust behavior debugging. note: this is not going to disable the debugger completely, its just a way of setting custom debug levels
-behave.DEBUG = false; 
-behave = {};
+behave.DEBUG = true; 
 $.fn.behavior = function(settings) {
   var config = {'foo': 'bar'};
   if (settings) $.extend(config, settings);
@@ -1189,19 +1188,52 @@ $(options.selector).hide();
 
 /* $(options.selector).dialog(); */};
 
-behave.navigation = {};
+behave.nav = {};
 
-behave.navigation.accordion = {};
+behave.nav.accordion = {};
 
-behave.navigation.accordion = function(options){};
+behave.nav.accordion = function(options){};
 
-behave.navigation.carousel = {};
+behave.nav.carousel = {};
 
-behave.navigation.carousel = function(options){};
+behave.nav.carousel = function(options){};
 
-behave.navigation.tabs = {};
+behave.nav.menu = {};
 
-behave.navigation.tabs = function(options){};
+behave.nav.menu = function(options){
+/* ugly ass raw JS nested list builder, we should make this Mustache or at least easier to read */
+this.render = function(values){
+ var str = '<ul>';
+ 
+ for(var key in values){
+   
+   if(typeof values[key]=='object' && values[key] != null){
+     str+='<li>'+key+this.render(values[key])+'</li>';
+   }
+   else{
+     if(values instanceof Array){
+       str+='<li><a href = "#/'+values[key]+'">'+values[key]+'</a>';
+     }
+     else{
+       str+='<li>'+key;
+       if(values[key]!=''){
+         str+= ' : ' + values[key];
+       }
+     }
+    str+='</li>';
+   }
+  }
+ 
+ str+='</ul>';
+ return str;
+};
+
+$(options.selector).html(this.render(options.data));
+};
+
+behave.nav.tabs = {};
+
+behave.nav.tabs = function(options){$(options.selector).hide();};
 
 behave.notification = {};
 
