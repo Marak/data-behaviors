@@ -1,5 +1,5 @@
 /* 
-    running this file in node.js will generate a new version of the MAML library 
+    running this file in node.js will generate a new version of the behave library 
 
 */
 
@@ -68,12 +68,12 @@ docs.views = '';
   var mamlLibrary = mustache.Mustache.to_html(code.main, {"coms":code.com, "behaves":code.behave, "views":code.views});
   var documentation = docs.main + docs.behave + docs.com + docs.views;
 
-  fs.writeFile('../MAML.js', mamlLibrary, function() {
-    sys.puts("MAML.js generated successfully!");
+  fs.writeFile('../behave.js', mamlLibrary, function() {
+    sys.puts("behave.js generated successfully!");
   });
 
-  fs.writeFile('../examples/js/MAML.js', mamlLibrary, function() {
-    sys.puts("MAML.js generated successfully!");
+  fs.writeFile('../examples/js/behave.js', mamlLibrary, function() {
+    sys.puts("behave.js generated successfully!");
   });
 
   fs.writeFile('../ReadMe.md', documentation, function() {
