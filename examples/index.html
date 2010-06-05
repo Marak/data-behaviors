@@ -46,16 +46,26 @@
       $(document).ready(function(){
         debug.log('document ready');
         
+         var html = JUP.html(
+           ["div",
+               {"class": "container" },
+                ["div", 
+                 {"class":"header span-24"},
+                 
+                 ["h1", "data-behaviors explorer"]
+               ],
+               
+               ["div", 
+                 {"class":"body span-24"},
+                 ["h2", "navigation"],
+                 ["h3", "menu"],
+                 ["div", 
+                   {"data-behaviors":"nav-menu", "data-resource":"list_simple_data_1"}
+                 ]
+               ]
+           ]
+          );
         
-        var html = JUP.html(
-          ["div", { "class": "container" }
-           ,["div", {"class":"header span-24"}]
-             ,["h1", "data-behaviors explorer"]
-           ,["div", {"class":"body span-24"}]
-             ,["h2", "navigation"]
-             ,["h3", "menu"]
-             ,["div", {"data-behaviors":"nav-menu", "data-resource":"list_simple_data_1"}]
-         ]);
         // render views based on JUP templates
         debug.log(html);
         
