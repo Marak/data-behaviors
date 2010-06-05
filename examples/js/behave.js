@@ -1015,6 +1015,10 @@ $(options.selector).mouseover(function(e){
 
 behave.input = {};
 
+behave.input.button = {};
+
+behave.input.button = function(options){/* */};
+
 behave.input.checkbox = {};
 
 behave.input.checkbox = function(options){};
@@ -1253,6 +1257,13 @@ behave.sortable = {};
 
 behave.sortable = function(options){$('ul', options.selector).sortable();
 /* $(options.selector).disableSelection(); */};
+
+behave.stateful = {};
+
+behave.stateful = function(options){$(options.selector).data('state', {
+  "is_dirty":false,
+  "awesome":"hell ya!"
+});};
 
 behave.tokenize = {};
 
