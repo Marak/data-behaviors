@@ -1,6 +1,6 @@
 // presenter logic goes here
 
-console.log('presenter binded to view');
+debug.log('presenter binded to view');
 
 $('#navOutput').machine({
  'state':"/",

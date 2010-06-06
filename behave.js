@@ -1300,7 +1300,7 @@ views.explorer.charts = function(){return views.explorer.view();};
 
 views.explorer.charts.presenter = function(options){// presenter logic goes here
 
-console.log('presenter binded to view');
+debug.log('presenter binded to view');
 
 $('#navOutput').machine({
  'state':"/",
@@ -1341,7 +1341,7 @@ views.explorer.nav = function(){return views.explorer.view();};
 
 views.explorer.presenter = function(options){// presenter logic goes here
 
-console.log('presenter binded to view');
+debug.log('presenter binded to view');
 
 $('#navOutput').machine({
  'state':"/",

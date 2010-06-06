@@ -25,12 +25,12 @@ $.fn.machine = function(settings) {
 // create the machine itself
 var machine = {};
 machine.enter = function( state ){
-  console.log('entering state : ', state);
+  debug.log('entering state : ', state);
   // a new state has been entered, find all elements that are machines and check if they match
   $("[data-behaviors*='machine']").each(function(i,e){
     var stateMachine = $(e).data('machine');
     
-    console.log(stateMachine, $(e));
+    debug.log(stateMachine, $(e));
     stateMachine.entered( state );
     //$(e).data('machine');
   });
