@@ -39,7 +39,7 @@
     <script language="JavaScript" src="js/SlickGrid/slick.columnpicker.js"></script>  
     <script type="text/javascript" src="js/Highcharts/js/highcharts.js"></script>
     <script type="text/javascript" src="js/jup.js"></script>
-    <script type="text/javascript" src="../../jquery.machine.js/jquery.machine.js"></script>
+    <script type="text/javascript" src="../../machine.js/jquery.machine.js"></script>
 
 
     <!-- end slick grid requires -->
@@ -48,26 +48,8 @@
       $(document).ready(function(){
         debug.log('document ready');
         
-         var html = JUP.html(
-           ["div",
-               {"class": "container" },
-                ["div", 
-                 {"class":"header span-24"},
-                 
-                 ["h1", "data-behaviors explorer"]
-               ],
-               
-               ["div", 
-                 {"class":"body span-24"},
-                 ["h2", "navigation"],
-                 ["h3", "menu"],
-                 ["div", 
-                   {"data-behaviors":"nav-menu machine", "data-resource":"list_simple_data_1"}
-                 ],
-                 ["div", {"class":"navOutput"}, "this is the area to load stuff"]
-               ]
-           ]
-          );
+        var view = views.explorer.view();
+        var html = JUP.html(view);
         
         // render views based on JUP templates
         debug.log(html);

@@ -86,10 +86,6 @@ docs.views = '';
   sys.puts('generated views successfully!');
 /************************ END GENERATE VIEWS ***********************/
 
-
-
-
-
 /************************ BUNDLE GENERATED CODE ********************/
 
   // perform a mustache replace on main to insert in sub components
