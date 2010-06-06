@@ -27,15 +27,38 @@ behave.attach = function( selector ){
     //debug.log(behaviors);
     for(var behavior in behaviors){
       var b = behaviors[behavior];
-      // parse behavior name for sub-behaviors
-      // the labeling approach of behaviors on DOM elements is as follows
-      // fooBehavior-sub-sub2 turns into =>  behaviors.fooBehavior.sub.sub2()
-      b = b.replace(/\-/, '.');
-      // evil eval is evil, but benign here
-      var d = eval($(e).attr('data-resource'));
+      
+      // the labeling approach of behaviors on DOM elements is as follows, fooBehavior-sub-sub2 turns into =>  behave.fooBehavior.sub.sub2()
+      b = b.replace(/\-/, '.'); // parse behavior name for sub-behaviors
+      
+      debug.log('is it already behaving as? ', b);
+
+      var behaving = $(e).data('behaving') || []; // get the existing behaviors or an empty array
+      
+      var found = false;
+      for(var i = 0; i < behaving.length; i++){
+        if(behaving[i]==b){
+          debug.log('found a match');
+          found = true;
+        }
+      }
+      
+      debug.log(e, ' behaving as ', behaving);
+      
       try{
-        // evil eval is evil, but benign here
-        eval('behave.'+b+'({"selector":e,"data":d})')
+        var d = eval($(e).attr('data-resource')); //evil eval is evil, but somewhat benign here
+        
+        if(!found){
+          behaving.push(b);
+
+          // execute the behavior method which will attach the behavior to the element. 
+          eval('behave.'+b+'({"selector":e,"data":d})'); // evil eval is evil, but somewhat benign here
+
+          // assign behaving meta-data so we know how the element is behaving
+          $(e).data('behaving', behaving);
+        }
+        
+        
         if(behave.DEBUG){
           debug.log(b , ' behavior successfully attached!');
         }
