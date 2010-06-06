@@ -8,20 +8,20 @@ $('#navOutput').machine({
  entered:function(state){
 
   //  views.explorer.charts.view(); 
-  $('#navOutput').html('state.toString()');
+  $('#navOutput').html(state.toString());
   //alert(state);
   
   // render views based on JUP templates
-  var view = views.explorer.view();
+  var view = views.explorer();
   var html = JUP.html(view);
-  debug.log(html);
-  $('.container').html(html);
+  //debug.log(html);
+  //$('.container').html(html);
   
   // parse the dom looking for tags that have a date-behaviors attribute
-  behave.attach($("[data-behaviors]"));
+  //behave.attach($("[data-behaviors]"));
 
   // apply the presenter on the view
-  views.explorer.presenter();
+  //views.explorer.presenter();
   
  }
 });

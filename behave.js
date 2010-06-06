@@ -1274,9 +1274,9 @@ behave.tokenize = {};
 behave.tokenize = function(options){};
 
 
-views.explorer = {};
+views.explorer = function(){return views.explorer.view();};
 
-views.explorer.charts = {};
+views.explorer.charts = function(){return views.explorer.view();};
 
 views.explorer.charts.presenter = function(options){// presenter logic goes here
 
@@ -1311,11 +1311,11 @@ views.explorer.charts.view = function(options){return ["div",
        ]
    ];};
 
-views.explorer.cheatsheet = {};
+views.explorer.cheatsheet = function(){return views.explorer.view();};
 
-views.explorer.forms = {};
+views.explorer.forms = function(){return views.explorer.view();};
 
-views.explorer.nav = {};
+views.explorer.nav = function(){return views.explorer.view();};
 
 views.explorer.presenter = function(options){// presenter logic goes here
 
@@ -1327,20 +1327,20 @@ $('#navOutput').machine({
  entered:function(state){
 
   //  views.explorer.charts.view(); 
-  $('#navOutput').html('state.toString()');
+  $('#navOutput').html(state.toString());
   //alert(state);
   
   // render views based on JUP templates
-  var view = views.explorer.view();
+  var view = views.explorer();
   var html = JUP.html(view);
-  debug.log(html);
-  $('.container').html(html);
+  //debug.log(html);
+  //$('.container').html(html);
   
   // parse the dom looking for tags that have a date-behaviors attribute
-  behave.attach($("[data-behaviors]"));
+  //behave.attach($("[data-behaviors]"));
 
   // apply the presenter on the view
-  views.explorer.presenter();
+  //views.explorer.presenter();
   
  }
 });
@@ -1366,21 +1366,21 @@ views.explorer.view = function(options){return ["div",
        ]
    ];};
 
-views.forms = {};
+views.forms = function(){return views.explorer.view();};
 
-views.forms.login = {};
+views.forms.login = function(){return views.explorer.view();};
 
 views.forms.login = function(options){};
 
-views.forms.resource = {};
+views.forms.resource = function(){return views.explorer.view();};
 
 views.forms.resource = function(options){};
 
-views.forms.search = {};
+views.forms.search = function(){return views.explorer.view();};
 
 views.forms.search = function(options){};
 
-views.forms.signup = {};
+views.forms.signup = function(){return views.explorer.view();};
 
 views.forms.signup = function(options){};
 
