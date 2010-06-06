@@ -3,7 +3,7 @@ var behave = {};
 var views = {};
 behave.version = "0.0.1";
 // custom DEBUG setting for turning on / off robust behavior debugging. note: this is not going to disable the debugger completely, its just a way of setting custom debug levels
-behave.DEBUG = true; 
+behave.DEBUG = false; 
 $.fn.behavior = function(settings) {
   var config = {'foo': 'bar'};
   if (settings) $.extend(config, settings);
@@ -13,13 +13,13 @@ $.fn.behavior = function(settings) {
   return this;
 };
 behave.attach = function( selector ){
-  debug.log('attempting to apply behaviors to the following elements ', selector)
+  //debug.log('attempting to apply behaviors to the following elements ', selector)
   $(selector).each(function(i,e){
     if(behave.DEBUG){
       debug.log('found element: ', e);
     }
     var behaviors = $(e).attr('data-behaviors').split(' ');
-    debug.log(behaviors);
+    //debug.log(behaviors);
     for(var behavior in behaviors){
       var b = behaviors[behavior];
       // parse behavior name for sub-behaviors
@@ -1297,19 +1297,20 @@ views.explorer.charts.view = function(options){return ["div",
         ["div", 
          {"class":"header span-24"},
          
-         ["h1", "data-behaviors explorer"]
+         ["h1", "charts"]
        ],
        
        ["div", 
          {"class":"body span-24"},
-         ["h2", "navigation"],
-         ["h3", "menu"],
+         ["h2", "charts"],
+         ["h3", "pie"],
          ["div", 
-           {"data-behaviors":"nav-menu machine", "data-resource":"list_simple_data_1"}
-         ],
-         ["div", {"id":"navOutput", "data-behaviors":"machine"}, "this is the area to load stuff"]
-       ]
-   ];};
+           {"data-behaviors":"chart-pie", "data-resource":"chart_data_2"}
+         ]
+      ]
+   ];
+   
+};
 
 views.explorer.cheatsheet = function(){return views.explorer.view();};
 
@@ -1331,10 +1332,10 @@ $('#navOutput').machine({
   //alert(state);
   
   // render views based on JUP templates
-  var view = views.explorer();
+  var view = views.explorer.charts.view();
   var html = JUP.html(view);
-  //debug.log(html);
-  //$('.container').html(html);
+  debug.log(html);
+  $('#navOutput').html(html);
   
   // parse the dom looking for tags that have a date-behaviors attribute
   //behave.attach($("[data-behaviors]"));

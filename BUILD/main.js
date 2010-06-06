@@ -5,7 +5,7 @@ var views = {};
 behave.version = "0.0.1";
 
 // custom DEBUG setting for turning on / off robust behavior debugging. note: this is not going to disable the debugger completely, its just a way of setting custom debug levels
-behave.DEBUG = true; 
+behave.DEBUG = false; 
 
 
 $.fn.behavior = function(settings) {
@@ -18,13 +18,13 @@ $.fn.behavior = function(settings) {
 };
 
 behave.attach = function( selector ){
-  debug.log('attempting to apply behaviors to the following elements ', selector)
+  //debug.log('attempting to apply behaviors to the following elements ', selector)
   $(selector).each(function(i,e){
     if(behave.DEBUG){
       debug.log('found element: ', e);
     }
     var behaviors = $(e).attr('data-behaviors').split(' ');
-    debug.log(behaviors);
+    //debug.log(behaviors);
     for(var behavior in behaviors){
       var b = behaviors[behavior];
       // parse behavior name for sub-behaviors

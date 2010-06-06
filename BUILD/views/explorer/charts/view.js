@@ -3,16 +3,16 @@ return ["div",
         ["div", 
          {"class":"header span-24"},
          
-         ["h1", "data-behaviors explorer"]
+         ["h1", "charts"]
        ],
        
        ["div", 
          {"class":"body span-24"},
-         ["h2", "navigation"],
-         ["h3", "menu"],
+         ["h2", "charts"],
+         ["h3", "pie"],
          ["div", 
-           {"data-behaviors":"nav-menu machine", "data-resource":"list_simple_data_1"}
-         ],
-         ["div", {"id":"navOutput", "data-behaviors":"machine"}, "this is the area to load stuff"]
-       ]
+           {"data-behaviors":"chart-pie", "data-resource":"chart_data_2"}
+         ]
+      ]
    ];
+   

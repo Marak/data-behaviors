@@ -12,10 +12,10 @@ $('#navOutput').machine({
   //alert(state);
   
   // render views based on JUP templates
-  var view = views.explorer();
+  var view = views.explorer.charts.view();
   var html = JUP.html(view);
-  //debug.log(html);
-  //$('.container').html(html);
+  debug.log(html);
+  $('#navOutput').html(html);
   
   // parse the dom looking for tags that have a date-behaviors attribute
   //behave.attach($("[data-behaviors]"));

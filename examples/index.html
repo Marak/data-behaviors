@@ -39,7 +39,7 @@
     <script language="JavaScript" src="js/SlickGrid/slick.columnpicker.js"></script>  
     <script type="text/javascript" src="js/Highcharts/js/highcharts.js"></script>
     <script type="text/javascript" src="js/jup.js"></script>
-    <script type="text/javascript" src="../../machine.js/jquery.machine.js"></script>
+    <script type="text/javascript" src="../js/jquery.machine.js"></script>
 
 
     <!-- end slick grid requires -->
@@ -52,7 +52,7 @@
         // render views based on JUP templates
         var view = views.explorer();
         var html = JUP.html(view);
-        debug.log(html);
+        //debug.log(html);
         $('.container').html(html);
         
         // parse the dom looking for tags that have a date-behaviors attribute
