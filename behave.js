@@ -1210,30 +1210,14 @@ behave.nav.carousel = function(options){};
 
 behave.nav.menu = {};
 
-behave.nav.menu = function(options){
-/* ugly ass raw JS nested list builder, we should make this Mustache or at least easier to read */
+behave.nav.menu = function(options){/* ugly ass raw JS nested list builder, we should make this Mustache or at least easier to read */
+/* force menu to only do one level, TODO : make it work nested, possible share code with nested list behavior */
+
 this.render = function(values){
  var str = '<ul>';
- 
  for(var key in values){
-   
-   if(typeof values[key]=='object' && values[key] != null){
-     str+='<li>'+key+this.render(values[key])+'</li>';
-   }
-   else{
-     if(values instanceof Array){
-       str+='<li><a href = "#/'+values[key]+'">'+values[key]+'</a>';
-     }
-     else{
-       str+='<li>'+key;
-       if(values[key]!=''){
-         str+= ' : ' + values[key];
-       }
-     }
-    str+='</li>';
-   }
+   str+='<li><a href = "#/'+key+'">'+key+'</a></li>';
   }
- 
  str+='</ul>';
  return str;
 };
@@ -1246,6 +1230,9 @@ $('a', options.selector).click(function(e){
   
   var state = $(this).attr('href');
   machine.enter( state );
+  
+  // just for fun
+  location.hash = state.toString();
   
   // cancel event bubbling
   return false;
@@ -1289,7 +1276,9 @@ behave.tokenize = function(options){};
 
 views.explorer = {};
 
-views.explorer.presenter = function(options){// presenter logic goes here
+views.explorer.charts = {};
+
+views.explorer.charts.presenter = function(options){// presenter logic goes here
 
 console.log('presenter binded to view');
 
@@ -1298,6 +1287,61 @@ $('#navOutput').machine({
  
  entered:function(state){
   alert(state);
+ }
+});
+
+};
+
+views.explorer.charts.view = function(options){return ["div",
+       {"class": "container" },
+        ["div", 
+         {"class":"header span-24"},
+         
+         ["h1", "data-behaviors explorer"]
+       ],
+       
+       ["div", 
+         {"class":"body span-24"},
+         ["h2", "navigation"],
+         ["h3", "menu"],
+         ["div", 
+           {"data-behaviors":"nav-menu machine", "data-resource":"list_simple_data_1"}
+         ],
+         ["div", {"id":"navOutput", "data-behaviors":"machine"}, "this is the area to load stuff"]
+       ]
+   ];};
+
+views.explorer.cheatsheet = {};
+
+views.explorer.forms = {};
+
+views.explorer.nav = {};
+
+views.explorer.presenter = function(options){// presenter logic goes here
+
+console.log('presenter binded to view');
+
+$('#navOutput').machine({
+ 'state':"/",
+ 
+ entered:function(state){
+
+  //  views.explorer.charts.view(); 
+  $('#navOutput').html('state.toString()');
+  //alert(state);
+  
+  // render views based on JUP templates
+  var view = views.explorer.view();
+  var html = JUP.html(view);
+  debug.log(html);
+  $('.container').html(html);
+  
+  // parse the dom looking for tags that have a date-behaviors attribute
+  behave.attach($("[data-behaviors]"));
+
+  // apply the presenter on the view
+  views.explorer.presenter();
+  
  }
 });
 
@@ -1316,7 +1360,7 @@ views.explorer.view = function(options){return ["div",
          ["h2", "navigation"],
          ["h3", "menu"],
          ["div", 
-           {"data-behaviors":"nav-menu machine", "data-resource":"list_simple_data_1"}
+           {"data-behaviors":"nav-menu machine", "data-resource":"views.explorer"}
          ],
          ["div", {"id":"navOutput", "data-behaviors":"machine"}, "this is the area to load stuff"]
        ]

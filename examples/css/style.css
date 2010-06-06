@@ -18,6 +18,17 @@ input.date{
   width: 100px;
 }
 
+#navOutput  {
+border:medium solid;
+float:left;
+height:200px;
+left:255px;
+position:absolute;
+top:55px;
+width:545px;
+}
+
+
 .container{
   background-color: #fff;
   border: 1px solid #ccc;
