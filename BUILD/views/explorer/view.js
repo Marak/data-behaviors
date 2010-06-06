@@ -13,6 +13,6 @@ return ["div",
          ["div", 
            {"data-behaviors":"nav-menu machine", "data-resource":"list_simple_data_1"}
          ],
-         ["div", {"class":"navOutput"}, "this is the area to load stuff"]
+         ["div", {"id":"navOutput", "data-behaviors":"machine"}, "this is the area to load stuff"]
        ]
    ];

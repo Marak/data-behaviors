@@ -1289,7 +1289,19 @@ behave.tokenize = function(options){};
 
 views.explorer = {};
 
-views.explorer.presenter = function(options){console.log('presenter');};
+views.explorer.presenter = function(options){// presenter logic goes here
+
+console.log('presenter binded to view');
+
+$('#navOutput').machine({
+ 'state':"/",
+ 
+ entered:function(state){
+  alert(state);
+ }
+});
+
+};
 
 views.explorer.view = function(options){return ["div",
        {"class": "container" },
@@ -1306,7 +1318,7 @@ views.explorer.view = function(options){return ["div",
          ["div", 
            {"data-behaviors":"nav-menu machine", "data-resource":"list_simple_data_1"}
          ],
-         ["div", {"class":"navOutput"}, "this is the area to load stuff"]
+         ["div", {"id":"navOutput", "data-behaviors":"machine"}, "this is the area to load stuff"]
        ]
    ];};
 
