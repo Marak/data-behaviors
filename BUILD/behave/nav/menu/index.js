@@ -26,4 +26,15 @@ this.render = function(values){
  return str;
 };
 
+// render the list
 $(options.selector).html(this.render(options.data));
+
+// attach states to element
+$('a', options.selector).click(function(e){
+  
+  var state = $(this).attr('href');
+  machine.enter( state );
+  
+  // cancel event bubbling
+  return false;
+});

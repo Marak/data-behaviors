@@ -1,5 +1,6 @@
 // this is just boilerplate code for generating the actual mustache-rides.js file, do not use this outside of node_builder.js
 var behave = {};
+var views = {};
 behave.version = "0.0.1";
 // custom DEBUG setting for turning on / off robust behavior debugging. note: this is not going to disable the debugger completely, its just a way of setting custom debug levels
 behave.DEBUG = true; 
@@ -18,6 +19,7 @@ behave.attach = function( selector ){
       debug.log('found element: ', e);
     }
     var behaviors = $(e).attr('data-behaviors').split(' ');
+    debug.log(behaviors);
     for(var behavior in behaviors){
       var b = behaviors[behavior];
       // parse behavior name for sub-behaviors
@@ -1117,6 +1119,10 @@ this.render = function(values){
 $(options.selector).html(this.render(options.data));
 };
 
+behave.machine = {};
+
+behave.machine = function(options){$(options.selector).machine();};
+
 behave.misc = {};
 
 behave.misc.zoom = {};
@@ -1232,7 +1238,18 @@ this.render = function(values){
  return str;
 };
 
+// render the list
 $(options.selector).html(this.render(options.data));
+
+// attach states to element
+$('a', options.selector).click(function(e){
+  
+  var state = $(this).attr('href');
+  machine.enter( state );
+  
+  // cancel event bubbling
+  return false;
+});
 };
 
 behave.nav.tabs = {};
@@ -1268,4 +1285,29 @@ behave.stateful = function(options){$(options.selector).data('state', {
 behave.tokenize = {};
 
 behave.tokenize = function(options){};
+
+
+views.explorer = {};
+
+views.explorer.presenter = function(options){console.log('presenter');};
+
+views.explorer.view = function(options){console.log('view');};
+
+views.forms = {};
+
+views.forms.login = {};
+
+views.forms.login = function(options){};
+
+views.forms.resource = {};
+
+views.forms.resource = function(options){};
+
+views.forms.search = {};
+
+views.forms.search = function(options){};
+
+views.forms.signup = {};
+
+views.forms.signup = function(options){};
 

@@ -62,17 +62,45 @@ docs.views = '';
   
 /************************ END GENERATE BEHAVIORS ***************************/
 
+/************************ GENERATE VIEWS ***************************/
+  sys.puts('generating views.....');
+  // read through views directory and get all views
+  var views = paths('./views');
+
+  docs.views += "<h1>views</h1>";
+  docs.views += "<ul>";
+
+  for(var view in views){
+    if(views[view].search('.js') > 0){ // if this is a file
+      var fileContents = fs.readFileSync(views[view], encoding='utf8');
+      //docs.behave += "<li>"+docFilter(behaves[behave])+"</li>";
+      code.views += (fileFilter(views[view]) + ' = function(options){' + fileContents + '};' + '\n\n');
+    }
+    else{
+      docs.views += "<li>"+docFilter(views[view])+"</li>";
+      code.views += (fileFilter(views[view]) + ' = {};' + '\n\n');
+    }
+  }
+
+  docs.views += "</ul>";
+  sys.puts('generated views successfully!');
+/************************ END GENERATE VIEWS ***********************/
+
+
+
+
+
 /************************ BUNDLE GENERATED CODE ********************/
 
   // perform a mustache replace on main to insert in sub components
-  var mamlLibrary = mustache.Mustache.to_html(code.main, {"coms":code.com, "behaves":code.behave, "views":code.views});
+  var behaveLibrary = mustache.Mustache.to_html(code.main, {"coms":code.com, "behaves":code.behave, "views":code.views});
   var documentation = docs.main + docs.behave + docs.com + docs.views;
 
-  fs.writeFile('../behave.js', mamlLibrary, function() {
+  fs.writeFile('../behave.js', behaveLibrary, function() {
     sys.puts("behave.js generated successfully!");
   });
 
-  fs.writeFile('../examples/js/behave.js', mamlLibrary, function() {
+  fs.writeFile('../examples/js/behave.js', behaveLibrary, function() {
     sys.puts("behave.js generated successfully!");
   });
 

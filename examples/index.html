@@ -39,6 +39,8 @@
     <script language="JavaScript" src="js/SlickGrid/slick.columnpicker.js"></script>  
     <script type="text/javascript" src="js/Highcharts/js/highcharts.js"></script>
     <script type="text/javascript" src="js/jup.js"></script>
+    <script type="text/javascript" src="../../jquery.machine.js/jquery.machine.js"></script>
+
 
     <!-- end slick grid requires -->
 
@@ -60,8 +62,9 @@
                  ["h2", "navigation"],
                  ["h3", "menu"],
                  ["div", 
-                   {"data-behaviors":"nav-menu", "data-resource":"list_simple_data_1"}
-                 ]
+                   {"data-behaviors":"nav-menu machine", "data-resource":"list_simple_data_1"}
+                 ],
+                 ["div", {"class":"navOutput"}, "this is the area to load stuff"]
                ]
            ]
           );
@@ -74,6 +77,9 @@
         // parse the dom looking for tags that have a date-behaviors attribute
         behave.attach($("[data-behaviors]"));
       });
+      
+      
+      
     </script>
   </head>
   <body>
@@ -89,7 +95,7 @@
         
         <h2>Navigation</h2>
         <h3>menu</h3>
-        <div data-behaviors = "nav-menu" data-resource = "list_simple_data_1"></div>
+        <div data-behaviors = "nav-menu machine" data-resource = "list_simple_data_1"></div>
         
         <h2>form elements</h2>
         <dl>
