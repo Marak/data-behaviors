@@ -31,19 +31,18 @@ behave.attach = function( selector ){
       // the labeling approach of behaviors on DOM elements is as follows, fooBehavior-sub-sub2 turns into =>  behave.fooBehavior.sub.sub2()
       b = b.replace(/\-/, '.'); // parse behavior name for sub-behaviors
       
-      debug.log('is it already behaving as? ', b);
+      //debug.log('is it already behaving as? ', b);
 
       var behaving = $(e).data('behaving') || []; // get the existing behaviors or an empty array
       
       var found = false;
       for(var i = 0; i < behaving.length; i++){
         if(behaving[i]==b){
-          debug.log('found a match');
           found = true;
         }
       }
       
-      debug.log(e, ' behaving as ', behaving);
+      //debug.log(e, ' behaving as ', behaving);
       
       try{
         var d = eval($(e).attr('data-resource')); //evil eval is evil, but somewhat benign here

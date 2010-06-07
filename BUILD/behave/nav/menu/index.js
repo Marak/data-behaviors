@@ -17,7 +17,7 @@ $(options.selector).html(this.render(options.data));
 $('a', options.selector).click(function(e){
   
   var state = $(this).attr('href');
-  machine.enter( state );
+  machine.enter( state.replace('#/','') );
   
   // just for fun
   location.hash = state.toString();

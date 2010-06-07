@@ -6,7 +6,7 @@ debug.log('presenter binded to view');
 
 
 $('#navOutput').machine({
- 'state':"#/charts",
+ 'state':"#/forms",
  
  entered:function(state){
   alert(state);

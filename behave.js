@@ -26,18 +26,17 @@ behave.attach = function( selector ){
       // the labeling approach of behaviors on DOM elements is as follows, fooBehavior-sub-sub2 turns into =>  behave.fooBehavior.sub.sub2()
       b = b.replace(/\-/, '.'); // parse behavior name for sub-behaviors
       
-      debug.log('is it already behaving as? ', b);
+      //debug.log('is it already behaving as? ', b);
       var behaving = $(e).data('behaving') || []; // get the existing behaviors or an empty array
       
       var found = false;
       for(var i = 0; i < behaving.length; i++){
         if(behaving[i]==b){
-          debug.log('found a match');
           found = true;
         }
       }
       
-      debug.log(e, ' behaving as ', behaving);
+      //debug.log(e, ' behaving as ', behaving);
       
       try{
         var d = eval($(e).attr('data-resource')); //evil eval is evil, but somewhat benign here
@@ -1249,7 +1248,7 @@ $(options.selector).html(this.render(options.data));
 $('a', options.selector).click(function(e){
   
   var state = $(this).attr('href');
-  machine.enter( state );
+  machine.enter( state.replace('#/','') );
   
   // just for fun
   location.hash = state.toString();
@@ -1302,8 +1301,11 @@ views.explorer.charts.presenter = function(options){// presenter logic goes here
 
 debug.log('presenter binded to view');
 
+//debug.log(state);
+
+
 $('#navOutput').machine({
- 'state':"/",
+ 'state':"#/charts",
  
  entered:function(state){
   alert(state);
@@ -1333,16 +1335,87 @@ views.explorer.charts.view = function(options){return ["div",
    ];
 };
 
-views.explorer.cheatsheet = function(){return views.explorer.view();};
-
 views.explorer.forms = function(){return views.explorer.view();};
 
-views.explorer.nav = function(){return views.explorer.view();};
-
-views.explorer.presenter = function(options){// presenter logic goes here
+views.explorer.forms.presenter = function(options){// presenter logic goes here
 
 debug.log('presenter binded to view');
 
+//debug.log(state);
+
+
+$('#navOutput').machine({
+ 'state':"#/forms",
+ 
+ entered:function(state){
+  alert(state);
+ }
+});
+
+};
+
+views.explorer.forms.view = function(options){return ["div",
+         {"class": "container" },
+         ["div", 
+          {"class":"header span-24"},
+          ["h1", "forms"],
+          ["p", "forms will allow you to create pages that can submit data"]
+         ],
+       ["div", 
+         {"class":"body span-24"},
+         ["h2", "plain form post"],
+         ["p", "a plain form post. all fields are optional."],
+         ["div", 
+           {"data-behaviors":"input-date"}
+         ],
+         ["div", 
+           {"data-behaviors":"input-date"}
+         ]
+      ]
+   ];
+};
+
+views.explorer.nav = function(){return views.explorer.view();};
+
+views.explorer.nav.presenter = function(options){// presenter logic goes here
+
+debug.log('presenter binded to view');
+
+//debug.log(state);
+
+
+$('#navOutput').machine({
+ 'state':"#/forms",
+ 
+ entered:function(state){
+  alert(state);
+ }
+});
+
+};
+
+views.explorer.nav.view = function(options){return ["div",
+         {"class": "container" },
+         ["div", 
+          {"class":"header span-24"},
+          ["h1", "navigation"],
+          ["p", "navigation behaviors will allow you to create common navigation interfaces."]
+         ],
+       ["div", 
+         {"class":"body span-24"},
+         ["h2", "nav-menu"],
+         ["p", "a simple list with links"],
+         ["div", 
+           {"data-behaviors":"nav-menu", "data-resource":"views.explorer"}
+         ],
+         ["div", 
+           {"data-behaviors":"input-date"}
+         ]
+      ]
+   ];
+};
+
+views.explorer.presenter = function(options){// presenter logic goes here
 $('#navOutput').machine({
  'state':"/",
  
@@ -1350,19 +1423,19 @@ $('#navOutput').machine({
 
   //  views.explorer.charts.view(); 
   $('#navOutput').html(state.toString());
-  //alert(state);
   
-  // render views based on JUP templates
-  var view = views.explorer.charts.view();
-  var html = JUP.html(view);
-  debug.log(html);
-  $('#navOutput').html(html);
-  
-  // parse the dom looking for tags that have a date-behaviors attribute
-  behave.attach($("[data-behaviors]"));
+    // switch the view based on incoming state (route)
+    var view = views.explorer[state].view();
+    // render views based on JUP templates
+    var html = JUP.html(view);
+    //debug.log(html);
+    $('#navOutput').html(html);
 
-  // apply the presenter on the view
-  //views.explorer.presenter();
+    // parse the dom looking for tags that have a date-behaviors attribute
+    behave.attach($("[data-behaviors]"));
+
+    // apply the presenter on the view
+    //views.explorer.presenter();
   
  }
 });
