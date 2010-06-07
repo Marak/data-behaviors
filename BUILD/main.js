@@ -49,17 +49,21 @@ behave.attach = function( selector ){
         
         if(!found){
           behaving.push(b);
-
+          
           // execute the behavior method which will attach the behavior to the element. 
           eval('behave.'+b+'({"selector":e,"data":d})'); // evil eval is evil, but somewhat benign here
 
           // assign behaving meta-data so we know how the element is behaving
           $(e).data('behaving', behaving);
+          if(behave.DEBUG){
+            debug.log(b , ' behavior successfully attached!');
+          }
         }
-        
-        
-        if(behave.DEBUG){
-          debug.log(b , ' behavior successfully attached!');
+        else
+        {
+          if(behave.DEBUG){
+            debug.log('already behaving as, not attached ', b);
+          }
         }
       }
       catch(err){
