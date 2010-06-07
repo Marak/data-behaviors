@@ -50,7 +50,7 @@
         
         
         // render views based on JUP templates
-        var view = views.behaviors();
+        var view = views.view();
         var html = JUP.html(view);
         //debug.log(html);
         $('.container').html(html);
@@ -59,7 +59,7 @@
         behave.attach($("[data-behaviors]"));
 
         // apply the presenter on the view
-        views.behaviors.presenter();
+        views.presenter();
 
       });
       

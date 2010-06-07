@@ -1482,12 +1482,39 @@ views.getting_started.view = function(options){return ["div",
        ]
    ];};
 
+views.presenter = function(options){// presenter logic goes here
+$('#navOutput').machine({
+ 'state':"/",
+ 
+ entered:function(state){
+
+  //  views.behaviors.charts.view(); 
+  $('#navOutput').html(state.toString());
+  
+    // switch the view based on incoming state (route)
+    var view = views[state].view();
+    // render views based on JUP templates
+    var html = JUP.html(view);
+    //debug.log(html);
+    $('#navOutput').html(html);
+
+    // parse the dom looking for tags that have a date-behaviors attribute
+    behave.attach($("[data-behaviors]"));
+
+    // apply the presenter on the view
+    //views.behaviors.presenter();
+  
+ }
+});
+
+};
+
 views.view = function(options){return ["div",
        {"class": "container" },
         ["div", 
          {"class":"header span-24"},
          
-         ["h1", "data-behaviors explorer"]
+         ["h1", "data-behaviors"]
        ],
        
        ["div", 
@@ -1495,11 +1522,9 @@ views.view = function(options){return ["div",
          ["h2", "navigation"],
          ["h3", "menu"],
          ["div", 
-           {"data-behaviors":"nav-menu machine", "data-resource":"views.behaviors"}
+           {"data-behaviors":"nav-menu machine", "data-resource":"views"}
          ],
          ["div", {"id":"navOutput", "data-behaviors":"machine"}, "this is the area to load stuff"]
        ]
    ];};
-
-views.view_engine = function(){return views.behaviors.view();};
 
