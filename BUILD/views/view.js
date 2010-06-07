@@ -11,7 +11,7 @@ return ["div",
          ["h2", "navigation"],
          ["h3", "menu"],
          ["div", 
-           {"data-behaviors":"nav-menu machine", "data-resource":"views"}
+           {"data-behaviors":"nav-menu", "data-resource":"views"}
          ],
          ["div", {"id":"navOutput", "data-behaviors":"machine"}, "this is the area to load stuff"]
        ]
