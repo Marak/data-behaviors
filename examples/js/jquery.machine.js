@@ -2,7 +2,7 @@
 
 $.fn.machine = function(settings) {
   var config = {
-    state : "/",
+    state : "default",
     entering : function(){
       debug.log('entering state');
     },
@@ -17,7 +17,9 @@ $.fn.machine = function(settings) {
     }
   };
 
-  if (settings) $.extend(config, settings);
+  //if (settings) $.extend(config, settings);
+  var settings = settings || config;
+  
   debug.log('about to bind ', settings);
   $(this).data( 'machine' , settings );        
   return this;

@@ -78,6 +78,7 @@ docs.views = '';
     }
     else{
       docs.views += "<li>"+docFilter(views[view])+"</li>";
+      
       code.views += (fileFilter(views[view]) + ' = function(){return views.behaviors.view();};' + '\n\n');
     }
   }

@@ -3,7 +3,7 @@ return ["div",
         ["div", 
          {"class":"header span-24"},
          
-         ["h1", "data-behaviors explorer"]
+         ["h1", "behaviors explorer"]
        ],
        
        ["div", 
@@ -13,6 +13,6 @@ return ["div",
          ["div", 
            {"data-behaviors":"nav-menu machine", "data-resource":"views.behaviors"}
          ],
-         ["div", {"id":"navOutput", "data-behaviors":"machine"}, "this is the area to load stuff"]
+         ["div", {"id":"behaviors", "data-behaviors":"machine"}, "this is the area to load stuff"]
        ]
    ];

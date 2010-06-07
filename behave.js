@@ -1429,7 +1429,7 @@ $('#navOutput').machine({
     // render views based on JUP templates
     var html = JUP.html(view);
     //debug.log(html);
-    $('#navOutput').html(html);
+    $('#behaviors').html(html);
 
     // parse the dom looking for tags that have a date-behaviors attribute
     behave.attach($("[data-behaviors]"));
@@ -1447,7 +1447,7 @@ views.behaviors.view = function(options){return ["div",
         ["div", 
          {"class":"header span-24"},
          
-         ["h1", "data-behaviors explorer"]
+         ["h1", "behaviors explorer"]
        ],
        
        ["div", 
@@ -1457,7 +1457,7 @@ views.behaviors.view = function(options){return ["div",
          ["div", 
            {"data-behaviors":"nav-menu machine", "data-resource":"views.behaviors"}
          ],
-         ["div", {"id":"navOutput", "data-behaviors":"machine"}, "this is the area to load stuff"]
+         ["div", {"id":"behaviors", "data-behaviors":"machine"}, "this is the area to load stuff"]
        ]
    ];};
 
@@ -1527,4 +1527,6 @@ views.view = function(options){return ["div",
          ["div", {"id":"navOutput", "data-behaviors":"machine"}, "this is the area to load stuff"]
        ]
    ];};
+
+views.view_engine = function(){return views.behaviors.view();};
 
