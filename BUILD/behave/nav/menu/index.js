@@ -3,12 +3,22 @@
 
 this.render = function(values){
  var str = '<ul>';
- for(var key in values){
-   str+='<li><a href = "#/'+key+'">'+key+'</a></li>';
-  }
+
+ if(values instanceof Array){
+   for(var i = 0; i < values.length; i++){
+     str+='<li><a href = "#/'+values[i]+'">'+values[i]+'</a></li>';
+   }
+ }
+ else{
+   for(var key in values){
+     str+='<li><a href = "#/'+key+'">'+key+'</a></li>';
+   }
+ }
+
  str+='</ul>';
  return str;
 };
+
 
 // render the list
 $(options.selector).html(this.render(options.data));
