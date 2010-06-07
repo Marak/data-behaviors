@@ -19,13 +19,12 @@ input.date{
 }
 
 #navOutput  {
-border:medium solid;
-float:left;
-height:200px;
-left:255px;
-position:absolute;
-top:55px;
-width:545px;
+  float:left;
+  height:200px;
+  left:100px;
+  position:absolute;
+  top:45px;
+  width:545px;
 }
 
 
