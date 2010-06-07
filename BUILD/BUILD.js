@@ -55,7 +55,6 @@ docs.views = '';
       docs.behave += "<li>"+docFilter(behaves[behave])+"</li>";
       code.behave += (fileFilter(behaves[behave]) + ' = {};' + '\n\n');
     }
-
   }
   docs.behave += "</ul>";
   sys.puts('generated behaviors successfully!');
