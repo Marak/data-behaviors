@@ -7,6 +7,8 @@ $('#navOutput').machine({
   //  views.behaviors.charts.view(); 
   $('#navOutput').html(state.toString());
   
+    debug.log('')
+  
     // switch the view based on incoming state (route)
     var view = views.behaviors[state].view();
     // render views based on JUP templates

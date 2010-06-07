@@ -20,7 +20,8 @@ $.fn.machine = function(settings) {
   //if (settings) $.extend(config, settings);
   var settings = settings || config;
   
-  debug.log('about to bind ', settings);
+  debug.log('machine behavior being applied to ', $(this) , settings);
+  
   $(this).data( 'machine' , settings );        
   return this;
 };
