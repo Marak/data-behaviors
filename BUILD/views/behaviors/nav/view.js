@@ -10,7 +10,7 @@ return ["div",
          ["h2", "nav-menu"],
          ["p", "a simple list with links"],
          ["div", 
-           {"data-behaviors":"nav-menu", "data-resource":"views.explorer"}
+           {"data-behaviors":"nav-menu", "data-resource":"views.behaviors"}
          ],
          ["div", 
            {"data-behaviors":"input-date"}

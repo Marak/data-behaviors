@@ -39,7 +39,7 @@
     <script language="JavaScript" src="js/SlickGrid/slick.columnpicker.js"></script>  
     <script type="text/javascript" src="js/Highcharts/js/highcharts.js"></script>
     <script type="text/javascript" src="js/jup.js"></script>
-    <script type="text/javascript" src="../js/jquery.machine.js"></script>
+    <script type="text/javascript" src="js/jquery.machine.js"></script>
 
 
     <!-- end slick grid requires -->
@@ -50,7 +50,7 @@
         
         
         // render views based on JUP templates
-        var view = views.explorer();
+        var view = views.behaviors();
         var html = JUP.html(view);
         //debug.log(html);
         $('.container').html(html);
@@ -59,7 +59,7 @@
         behave.attach($("[data-behaviors]"));
 
         // apply the presenter on the view
-        views.explorer.presenter();
+        views.behaviors.presenter();
 
       });
       

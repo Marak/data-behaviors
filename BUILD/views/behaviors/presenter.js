@@ -4,11 +4,11 @@ $('#navOutput').machine({
  
  entered:function(state){
 
-  //  views.explorer.charts.view(); 
+  //  views.behaviors.charts.view(); 
   $('#navOutput').html(state.toString());
   
     // switch the view based on incoming state (route)
-    var view = views.explorer[state].view();
+    var view = views.behaviors[state].view();
     // render views based on JUP templates
     var html = JUP.html(view);
     //debug.log(html);
@@ -18,7 +18,7 @@ $('#navOutput').machine({
     behave.attach($("[data-behaviors]"));
 
     // apply the presenter on the view
-    //views.explorer.presenter();
+    //views.behaviors.presenter();
   
  }
 });

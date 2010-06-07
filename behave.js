@@ -1293,11 +1293,11 @@ behave.tokenize = {};
 behave.tokenize = function(options){};
 
 
-views.explorer = function(){return views.explorer.view();};
+views.behaviors = function(){return views.behaviors.view();};
 
-views.explorer.charts = function(){return views.explorer.view();};
+views.behaviors.charts = function(){return views.behaviors.view();};
 
-views.explorer.charts.presenter = function(options){// presenter logic goes here
+views.behaviors.charts.presenter = function(options){// presenter logic goes here
 
 debug.log('presenter binded to view');
 
@@ -1314,7 +1314,7 @@ $('#navOutput').machine({
 
 };
 
-views.explorer.charts.view = function(options){return ["div",
+views.behaviors.charts.view = function(options){return ["div",
          {"class": "container" },
          ["div", 
           {"class":"header span-24"},
@@ -1335,9 +1335,9 @@ views.explorer.charts.view = function(options){return ["div",
    ];
 };
 
-views.explorer.forms = function(){return views.explorer.view();};
+views.behaviors.forms = function(){return views.behaviors.view();};
 
-views.explorer.forms.presenter = function(options){// presenter logic goes here
+views.behaviors.forms.presenter = function(options){// presenter logic goes here
 
 debug.log('presenter binded to view');
 
@@ -1354,7 +1354,7 @@ $('#navOutput').machine({
 
 };
 
-views.explorer.forms.view = function(options){return ["div",
+views.behaviors.forms.view = function(options){return ["div",
          {"class": "container" },
          ["div", 
           {"class":"header span-24"},
@@ -1375,9 +1375,9 @@ views.explorer.forms.view = function(options){return ["div",
    ];
 };
 
-views.explorer.nav = function(){return views.explorer.view();};
+views.behaviors.nav = function(){return views.behaviors.view();};
 
-views.explorer.nav.presenter = function(options){// presenter logic goes here
+views.behaviors.nav.presenter = function(options){// presenter logic goes here
 
 debug.log('presenter binded to view');
 
@@ -1394,7 +1394,7 @@ $('#navOutput').machine({
 
 };
 
-views.explorer.nav.view = function(options){return ["div",
+views.behaviors.nav.view = function(options){return ["div",
          {"class": "container" },
          ["div", 
           {"class":"header span-24"},
@@ -1406,7 +1406,7 @@ views.explorer.nav.view = function(options){return ["div",
          ["h2", "nav-menu"],
          ["p", "a simple list with links"],
          ["div", 
-           {"data-behaviors":"nav-menu", "data-resource":"views.explorer"}
+           {"data-behaviors":"nav-menu", "data-resource":"views.behaviors"}
          ],
          ["div", 
            {"data-behaviors":"input-date"}
@@ -1415,17 +1415,17 @@ views.explorer.nav.view = function(options){return ["div",
    ];
 };
 
-views.explorer.presenter = function(options){// presenter logic goes here
+views.behaviors.presenter = function(options){// presenter logic goes here
 $('#navOutput').machine({
  'state':"/",
  
  entered:function(state){
 
-  //  views.explorer.charts.view(); 
+  //  views.behaviors.charts.view(); 
   $('#navOutput').html(state.toString());
   
     // switch the view based on incoming state (route)
-    var view = views.explorer[state].view();
+    var view = views.behaviors[state].view();
     // render views based on JUP templates
     var html = JUP.html(view);
     //debug.log(html);
@@ -1435,14 +1435,14 @@ $('#navOutput').machine({
     behave.attach($("[data-behaviors]"));
 
     // apply the presenter on the view
-    //views.explorer.presenter();
+    //views.behaviors.presenter();
   
  }
 });
 
 };
 
-views.explorer.view = function(options){return ["div",
+views.behaviors.view = function(options){return ["div",
        {"class": "container" },
         ["div", 
          {"class":"header span-24"},
@@ -1455,27 +1455,51 @@ views.explorer.view = function(options){return ["div",
          ["h2", "navigation"],
          ["h3", "menu"],
          ["div", 
-           {"data-behaviors":"nav-menu machine", "data-resource":"views.explorer"}
+           {"data-behaviors":"nav-menu machine", "data-resource":"views.behaviors"}
          ],
          ["div", {"id":"navOutput", "data-behaviors":"machine"}, "this is the area to load stuff"]
        ]
    ];};
 
-views.forms = function(){return views.explorer.view();};
+views.getting_started = function(){return views.behaviors.view();};
 
-views.forms.login = function(){return views.explorer.view();};
+views.getting_started.view = function(options){return ["div",
+       {"class": "container" },
+        ["div", 
+         {"class":"header span-24"},
+         
+         ["h1", "data-behaviors explorer"]
+       ],
+       
+       ["div", 
+         {"class":"body span-24"},
+         ["h2", "navigation"],
+         ["h3", "menu"],
+         ["div", 
+           {"data-behaviors":"nav-menu machine", "data-resource":"views.behaviors"}
+         ],
+         ["div", {"id":"navOutput", "data-behaviors":"machine"}, "this is the area to load stuff"]
+       ]
+   ];};
 
-views.forms.login = function(options){};
+views.view = function(options){return ["div",
+       {"class": "container" },
+        ["div", 
+         {"class":"header span-24"},
+         
+         ["h1", "data-behaviors explorer"]
+       ],
+       
+       ["div", 
+         {"class":"body span-24"},
+         ["h2", "navigation"],
+         ["h3", "menu"],
+         ["div", 
+           {"data-behaviors":"nav-menu machine", "data-resource":"views.behaviors"}
+         ],
+         ["div", {"id":"navOutput", "data-behaviors":"machine"}, "this is the area to load stuff"]
+       ]
+   ];};
 
-views.forms.resource = function(){return views.explorer.view();};
-
-views.forms.resource = function(options){};
-
-views.forms.search = function(){return views.explorer.view();};
-
-views.forms.search = function(options){};
-
-views.forms.signup = function(){return views.explorer.view();};
-
-views.forms.signup = function(options){};
+views.view_engine = function(){return views.behaviors.view();};
 
