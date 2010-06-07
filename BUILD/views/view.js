@@ -8,10 +8,8 @@ return ["div",
        
        ["div", 
          {"class":"body span-24"},
-         ["h2", "navigation"],
-         ["h3", "menu"],
          ["div", 
-           {"data-behaviors":"nav-menu machine", "data-resource":"views"}
+           {"data-behaviors":"nav-menu machine", "data-resource":"views", "class":"nav"}
          ],
          ["div", {"id":"navOutput", "data-behaviors":"machine"}, "this is the area to load stuff"]
        ]

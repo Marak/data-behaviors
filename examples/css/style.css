@@ -19,19 +19,17 @@ input.date{
 }
 
 #navOutput  {
-  float:left;
   height:200px;
   left:100px;
-  position:absolute;
   top:45px;
   width:545px;
 }
 
 
-.container{
+body>.container{
   background-color: #fff;
   border: 1px solid #ccc;
-  border-width: 0 1px; 
+  border-width: 0 1px 1px 1px; 
   padding: 15px;
 }
 .header h1{
@@ -98,4 +96,86 @@ input.date{
 .body .chart{
   width: 600px;
   height: 350px;
+}
+
+/*NAV STYLES*/
+
+.nav ul{
+  background-color: #E6E6E6;
+  background-image: url(../js/SlickGrid/css/custom-theme/images/ui-bg_glass_75_e6e6e6_1x400.png);
+  background-repeat: repeat-x;
+  background-position: 50% 50%;
+  border: 1px solid #ccc;
+  margin: 0 0 20px 0;
+  padding: 0;
+  position: relative;
+  height: 35px;
+}
+
+.nav ul li{
+  display:inline-block;
+  position: relative;
+  height: 35px;
+}
+
+.nav ul li a{
+  background-color: #E6E6E6;
+  background-image: url(../js/SlickGrid/css/custom-theme/images/ui-bg_glass_75_e6e6e6_1x400.png);
+  background-repeat: repeat-x;
+  background-position: 50% 50%;
+  border-right: 1px solid #ccc;
+  border-left: 1px solid #fff;
+  color: #333;
+  display:inline-block;
+  font-size: 14px;
+  font-weight: bold;
+  margin: 0;
+  padding: 7px 10px;
+  position: relative;
+  text-decoration: none;
+  text-shadow: 1px 1px 1px #fff;
+}
+
+.nav ul li a:hover{
+  background-color: #FFF;
+  background-image: none;
+}
+
+.menu ul{
+  -moz-border-radius-topleft:         3px;
+  -webkit-border-top-left-radius:     3px;
+  -moz-border-radius-topright:        3px;
+  -webkit-border-top-right-radius:    3px;
+  -moz-border-radius-bottomright:     3px;
+  -webkit-border-bottom-right-radius: 3px;
+  -moz-border-radius-bottomleft:      3px;
+  -webkit-border-bottom-left-radius:  3px;
+  border: 1px solid #ccc;
+  border-top: 1px solid #ccc;
+  list-style-type: none;
+  margin:0;
+  padding:10px;
+  width: 200px;
+}
+
+.menu ul li{
+  height: 20px;  
+}
+
+.menu ul li a{
+  color: #333;
+  text-decoration: none;
+  display:block;
+  padding-left: 5px;
+  height: 20px;
+  width: 195px;
+}
+
+.menu ul li a:hover, .menu ul li a.visited{
+  background-color: #E6E6E6;
+  background-image: url(../js/SlickGrid/css/custom-theme/images/ui-bg_glass_75_e6e6e6_1x400.png);
+  background-repeat: repeat-x;
+  background-position: 50% 50%;
+  text-shadow: 1px 1px 1px #FFF;
+  font-weight: bold;
 }
