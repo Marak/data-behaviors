@@ -7,104 +7,102 @@ var fs = require('fs');
 var sys = require('sys');
 var mustache = require('./lib/mustache');
 
-sys.puts('starting BUILD script');
+exports.build = function(){
 
-// initialize variables that will store our generated code
-var docs = {};
-var code = {};
+  // initialize variables that will store our generated code
+  var docs = {};
+  var code = {};
 
-// read in the the main.js file as our main boilerplate code 
-code.main = fs.readFileSync('./main.js', encoding='utf8');
+  // read in the the main.js file as our main boilerplate code 
+  code.main = fs.readFileSync('./BUILD/main.js', encoding='utf8');
 
-// read in the the docs.js file as our main documentation boilerplate code 
-docs.main = fs.readFileSync('./docs.js', encoding='utf8');
-
-
-// setup the code object 
-code.com = '';
-code.behave = '';
-code.views = '';
-
-// setup the docs object
-docs.com = '';
-docs.behave = '';
-docs.views = '';
+  // read in the the docs.js file as our main documentation boilerplate code 
+  docs.main = fs.readFileSync('./BUILD/docs.js', encoding='utf8');
 
 
-/************************ GENERATE BEHAVIORS ***************************/
-  
-  // we should update the way the documentation is generated here. the current UL that gets generated is only one level deep.....
-  // would be great if we could use behave.list.simple, but im not sure of the best approach of calling the behavior server-side before the library is actually generated....
-  
-  sys.puts('generating behaviors.....');
-  docs.behave += "<ul>";
+  // setup the code object 
+  code.com = '';
+  code.behave = '';
+  code.views = '';
 
-  // read behave directory and grab all behaviors
-  var behaves = paths('./behave');
+  // setup the docs object
+  docs.com = '';
+  docs.behave = '';
+  docs.views = '';
 
-  //sys.puts(JSON.stringify(behaves));
-  
-  for(var behave in behaves){
 
-    if(behaves[behave].search('.js') > 0){ // if this is a file
-      var fileContents = fs.readFileSync(behaves[behave], encoding='utf8');
-      //docs.behave += "<li>"+docFilter(behaves[behave])+"</li>";
-      code.behave += (fileFilter(behaves[behave]) + ' = function(options){' + fileContents + '};' + '\n\n');
+  /************************ GENERATE BEHAVIORS ***************************/
+
+    // we should update the way the documentation is generated here. the current UL that gets generated is only one level deep.....
+    // would be great if we could use behave.list.simple, but im not sure of the best approach of calling the behavior server-side before the library is actually generated....
+
+    sys.puts('generating behaviors.....');
+    docs.behave += "<ul>";
+
+    // read behave directory and grab all behaviors
+    var behaves = paths('./behave');
+
+    //sys.puts(JSON.stringify(behaves));
+
+    for(var behave in behaves){
+
+      if(behaves[behave].search('.js') > 0){ // if this is a file
+        var fileContents = fs.readFileSync(behaves[behave], encoding='utf8');
+        //docs.behave += "<li>"+docFilter(behaves[behave])+"</li>";
+        code.behave += (fileFilter(behaves[behave]) + ' = function(options){' + fileContents + '};' + '\n\n');
+      }
+      else{
+        docs.behave += "<li>"+docFilter(behaves[behave])+"</li>";
+        code.behave += (fileFilter(behaves[behave]) + ' = {};' + '\n\n');
+      }
     }
-    else{
-      docs.behave += "<li>"+docFilter(behaves[behave])+"</li>";
-      code.behave += (fileFilter(behaves[behave]) + ' = {};' + '\n\n');
+    docs.behave += "</ul>";
+    sys.puts('generated behaviors successfully!');
+
+  /************************ END GENERATE BEHAVIORS ***************************/
+
+  /************************ GENERATE VIEWS ***************************/
+    sys.puts('generating views.....');
+    // read through views directory and get all views
+    var views = paths('./views');
+
+    docs.views += "<h1>views</h1>";
+    docs.views += "<ul>";
+
+    for(var view in views){
+      if(views[view].search('.js') > 0){ // if this is a file
+        var fileContents = fs.readFileSync(views[view], encoding='utf8');
+        //docs.behave += "<li>"+docFilter(behaves[behave])+"</li>";
+        code.views += (fileFilter(views[view]) + ' = function(options){' + fileContents + '};' + '\n\n');
+      }
+      else{
+        docs.views += "<li>"+docFilter(views[view])+"</li>";
+
+        code.views += (fileFilter(views[view]) + ' = function(){return views.behaviors.view();};' + '\n\n');
+      }
     }
-  }
-  docs.behave += "</ul>";
-  sys.puts('generated behaviors successfully!');
-  
-/************************ END GENERATE BEHAVIORS ***************************/
 
-/************************ GENERATE VIEWS ***************************/
-  sys.puts('generating views.....');
-  // read through views directory and get all views
-  var views = paths('./views');
+    docs.views += "</ul>";
+    sys.puts('generated views successfully!');
+  /************************ END GENERATE VIEWS ***********************/
 
-  docs.views += "<h1>views</h1>";
-  docs.views += "<ul>";
+  /************************ BUNDLE GENERATED CODE ********************/
 
-  for(var view in views){
-    if(views[view].search('.js') > 0){ // if this is a file
-      var fileContents = fs.readFileSync(views[view], encoding='utf8');
-      //docs.behave += "<li>"+docFilter(behaves[behave])+"</li>";
-      code.views += (fileFilter(views[view]) + ' = function(options){' + fileContents + '};' + '\n\n');
-    }
-    else{
-      docs.views += "<li>"+docFilter(views[view])+"</li>";
-      
-      code.views += (fileFilter(views[view]) + ' = function(){return views.behaviors.view();};' + '\n\n');
-    }
-  }
+    // perform a mustache replace on main to insert in sub components
+    var behaveLibrary = mustache.Mustache.to_html(code.main, {"coms":code.com, "behaves":code.behave, "views":code.views});
+    var documentation = docs.main + docs.behave + docs.com + docs.views;
 
-  docs.views += "</ul>";
-  sys.puts('generated views successfully!');
-/************************ END GENERATE VIEWS ***********************/
+    fs.writeFileSync('./behave.js', behaveLibrary);
+    sys.puts('/BUILD/behave.js written!');
+    fs.writeFileSync('./examples/js/behave.js', behaveLibrary);
+    sys.puts('/BUILD/examples/js/behave.js written!');
+    fs.writeFileSync('./ReadMe.md', documentation);
+    sys.puts('/BUILD/ReadMe.md written!');
 
-/************************ BUNDLE GENERATED CODE ********************/
+  /*********************** END BUNDLING OF GENERATED CODE ************/
 
-  // perform a mustache replace on main to insert in sub components
-  var behaveLibrary = mustache.Mustache.to_html(code.main, {"coms":code.com, "behaves":code.behave, "views":code.views});
-  var documentation = docs.main + docs.behave + docs.com + docs.views;
+};
 
-  fs.writeFile('../behave.js', behaveLibrary, function() {
-    sys.puts("behave.js generated successfully!");
-  });
-
-  fs.writeFile('../examples/js/behave.js', behaveLibrary, function() {
-    sys.puts("behave.js generated successfully!");
-  });
-
-  fs.writeFile('../ReadMe.md', documentation, function() {
-    sys.puts("documentation generated successfully!");
-  });
-
-/*********************** END BUNDLING OF GENERATED CODE ************/
 
 /*********************** BUILD HELPER METHODS *********************/
 
