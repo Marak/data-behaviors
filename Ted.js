@@ -50,7 +50,11 @@ function fileChange(file){
   // run the build process
   build.build();
   sys.puts('Build complete!');
-  // now that build process is complete, we can rewatch the BUILD directory
+  
+  // rebuild the project files / directories array (since we might have new files now)
+  var project = paths('./BUILD'); 
+  
+  // rewatch the BUILD directory
   watchDir(project);
 }
 

@@ -1,5 +1,4 @@
 options.series = eval($(options.selector).attr('data-resource')).series;
-
 chart = new Highcharts.Chart({
 				chart: {
 					renderTo: options.selector,

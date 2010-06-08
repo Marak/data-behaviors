@@ -40,7 +40,7 @@ exports.build = function(){
     docs.behave += "<ul>";
 
     // read behave directory and grab all behaviors
-    var behaves = paths('./behave');
+    var behaves = paths('./BUILD/behave');
 
     //sys.puts(JSON.stringify(behaves));
 
@@ -64,7 +64,7 @@ exports.build = function(){
   /************************ GENERATE VIEWS ***************************/
     sys.puts('generating views.....');
     // read through views directory and get all views
-    var views = paths('./views');
+    var views = paths('./BUILD/views');
 
     docs.views += "<h1>views</h1>";
     docs.views += "<ul>";
@@ -155,6 +155,8 @@ exports.build = function(){
     txt = txt.replace(/\//g, '.');
     txt = txt.replace(/\.js/, '');
     txt = txt.replace(/\.index/, '');
+    txt = txt.replace(/BUILD./, '');
+    
     return txt;
   }
 
