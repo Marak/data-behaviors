@@ -22,7 +22,12 @@ function watchDir(dir){
     var theFile = dir[file];
     (function(theFile){
       fs.watchFile(theFile, function (curr,prev) {
-        fileChange(theFile);
+        if(new(Date)(curr.mtime).valueOf() === new(Date)(prev.mtime).valueOf()) { 
+          return; 
+        }
+        else{
+          fileChange(theFile);
+        }
       });
     })(theFile);
   }
@@ -32,7 +37,6 @@ function watchDir(dir){
 function unwatchDir(dir){
   for(var file in dir){
     var theFile = dir[file];
-    sys.puts('no longer watching ', theFile);
     fs.unwatchFile(theFile);
   }
 }
