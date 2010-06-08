@@ -5,19 +5,21 @@
 var fs = require('fs');
 var sys = require('sys');
 var eyes = require('./BUILD/lib/eyes');
+var colors = require('./BUILD/lib/colors');
 var build = require('./BUILD/BUILD');
 
 // the paths method will return an array of files and directories (children) of whatever path is sent as an argument
 var project = paths('./BUILD');
 
-eyes.inspect('Ted is up and running. he\'s watching over '+ project.length +' files and directories in the BUILD directory');
-eyes.inspect('If you make any modifications to the BUILD directory, Ted will get mad and rebuild.');
-
-// watch the directory for changes, in the handler for directory watching we will perform our build process
+sys.puts('Ted is up and running. he\'s watching over '.green + project.length.toString().yellow +' files and directories in the BUILD directory'.green);
+sys.puts('Ted say\'s'.green + ', since you turned me on I\'m going to run a BUILD now'.white)
+build.build();
+// watch the directory for changes. in the handler for directory watching we will perform our build process
 watchDir(project);
 
 // watches an array of files and directories and fires the "fileChange" handler
 function watchDir(dir){
+  sys.puts( 'Ted say\'s'.green + ', if you make any modifications to the /BUILD directory, I\'ll get mad and run another' + ' BUILD'.yellow);
   for(var file in dir){
     var theFile = dir[file];
     (function(theFile){
@@ -45,11 +47,12 @@ function unwatchDir(dir){
 function fileChange(file){
   // unwatch all files or else we can end up in an infinite loop
   unwatchDir(project);
-  eyes.inspect(file, 'Change detected');
-  eyes.inspect('Triggering build!');
+  
+  sys.puts('Change detected in '.cyan + file.toString().grey);
+  sys.puts('Ted say\'s, '.green + 'triggering BUILD!'.red);
   // run the build process
   build.build();
-  sys.puts('Build complete!');
+  sys.puts('Ted say\'s, '.green + 'BUILD complete!');
   
   // rebuild the project files / directories array (since we might have new files now)
   var project = paths('./BUILD'); 

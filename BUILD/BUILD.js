@@ -6,6 +6,8 @@
 var fs = require('fs');
 var sys = require('sys');
 var mustache = require('./lib/mustache');
+var eyes = require ('./lib/eyes');
+var colors = require('./lib/colors');
 
 exports.build = function(){
 
@@ -35,8 +37,8 @@ exports.build = function(){
 
     // we should update the way the documentation is generated here. the current UL that gets generated is only one level deep.....
     // would be great if we could use behave.list.simple, but im not sure of the best approach of calling the behavior server-side before the library is actually generated....
-
-    sys.puts('generating behaviors.....');
+   
+    sys.puts("BUILD ".yellow + 'generating behaviors...');
     docs.behave += "<ul>";
 
     // read behave directory and grab all behaviors
@@ -57,12 +59,12 @@ exports.build = function(){
       }
     }
     docs.behave += "</ul>";
-    sys.puts('generated behaviors successfully!');
+    sys.puts("BUILD ".yellow +'generated behaviors successfully!');
 
   /************************ END GENERATE BEHAVIORS ***************************/
 
   /************************ GENERATE VIEWS ***************************/
-    sys.puts('generating views.....');
+    sys.puts("BUILD ".yellow + 'generating views.....');
     // read through views directory and get all views
     var views = paths('./BUILD/views');
 
@@ -83,7 +85,7 @@ exports.build = function(){
     }
 
     docs.views += "</ul>";
-    sys.puts('generated views successfully!');
+    sys.puts("BUILD ".yellow + 'generated views successfully!');
   /************************ END GENERATE VIEWS ***********************/
 
   /************************ BUNDLE GENERATED CODE ********************/
@@ -93,11 +95,13 @@ exports.build = function(){
     var documentation = docs.main + docs.behave + docs.com + docs.views;
 
     fs.writeFileSync('./behave.js', behaveLibrary);
-    sys.puts('/BUILD/behave.js written!');
+    sys.puts("BUILD ".yellow + 'behave.js written!');
+    
     fs.writeFileSync('./examples/js/behave.js', behaveLibrary);
-    sys.puts('/BUILD/examples/js/behave.js written!');
+    sys.puts("BUILD ".yellow + '/examples/js/behave.js written!');
+    
     fs.writeFileSync('./ReadMe.md', documentation);
-    sys.puts('/BUILD/ReadMe.md written!');
+    sys.puts("BUILD ".yellow + 'ReadMe.md written!');
 
   /*********************** END BUNDLING OF GENERATED CODE ************/
 
