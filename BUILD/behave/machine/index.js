@@ -36,8 +36,6 @@ $(options.selector).machine({
     var view = views[state].view();
   }
   
-  
-  
   // render views based on JUP templates
   var html = JUP.html(view);
   
