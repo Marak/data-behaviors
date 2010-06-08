@@ -1,4 +1,2 @@
-return   [["div", {"data-behaviors":"nav-menu", "data-resource":"views.behaviors", "class":"menu"}], 
-         ["div", {"id":"subOutput"}, "asdasd"]]
-       
-       ;
+return   [["div", {"data-behaviors":"nav-menu", "data-resource":"['charts', 'forms', 'navigation']", "class":"menu"}], 
+         ["div", {"id":"subOutput"}, "asdasd"]];

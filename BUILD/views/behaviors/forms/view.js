@@ -9,11 +9,8 @@ return ["div",
          {"class":"body span-24"},
          ["h2", "plain form post"],
          ["p", "a plain form post. all fields are optional."],
-         ["div", 
-           {"data-behaviors":"input-date"}
-         ],
-         ["div", 
-           {"data-behaviors":"input-date"}
+         ["input", 
+           {"type":"text","data-behaviors":"input-date"}
          ]
       ]
    ];

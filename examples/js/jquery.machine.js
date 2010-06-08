@@ -56,7 +56,7 @@ machine.enter = function( state , context ){
       debug.log(stateMachine, $(e));
       //debug.log('the state is ', state);
       debug.log('about to execute ', stateMachine.entered.toString());
-      stateMachine.entered( state );
+      stateMachine.entered.apply( this, [state] );
       //$(e).data('machine');
     }
     
