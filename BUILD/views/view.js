@@ -10,6 +10,6 @@ return ["div",
          ["div", 
            {"data-behaviors":"nav-menu", "data-resource":"['Intro','Behaviors','Views']", "class":"nav"}
          ],
-         ["div", {"id":"navOutput"}, "this is the area to load stuff"]
+         ["div", {"id":"navOutput", "data-behaviors":"machine"}, "this is the area to load stuff"]
        ]
    ];
