@@ -8,25 +8,21 @@ $(options.selector).machine({
  entered:function(state){
 
   debug.log($(options.selector), 'entered state: ', state);
-  debug.log(this);
-
-  // views.behaviors.charts.view(); 
-  $(this).html(state.toString());
   
+  // get the context of this machine as an array
   var context = machine.getContext($(this));
 
-  var state = $(context).data('state');
-
-  debug.log('the closest machine state is ', context, 'it has a state of ', state); 
+  debug.log('the context of this machine is ', context); 
 
   if(context.length>1){
     var lultext = 'views';
     for(var i = 0; i < context.length; i ++){
       lultext += ('.' + $(context[i]).data('state'));
     }
-    lultext += ('.view();');
-    debug.log(lultext);
-    var view = eval(lultext);
+    var v1 = lultext + ('.view();');
+    var p1 = lultext + ('.presenter();');
+    debug.log(v1);
+    var view = eval(v1);
   }
   else{
     // switch the view based on incoming state (route)
@@ -45,7 +41,8 @@ $(options.selector).machine({
   behave.attach($("[data-behaviors]"));
 
   // apply the presenter on the view
-  views[state].presenter();
+  eval(p1);
+  //views[state].presenter();
   
  }
 });
