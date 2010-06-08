@@ -26,10 +26,17 @@ $(options.selector).html(this.render(options.data));
 // attach states to element
 $('a', options.selector).click(function(e){
   
+  // lets hardcode a parent context here, this should be part of the default view engine
+  var context = $(this).closest("[data-behaviors*='machine']");
+  if(!context.length){
+    context = document;
+  }
+  
+  debug.log('our context is ', context);
   $(this).addClass('visited');
   
   var state = $(this).attr('href');
-  machine.enter( state.replace('#/','') );
+  machine.enter( state.replace('#/',''), context );
   
   // just for fun
   location.hash = state.toString();

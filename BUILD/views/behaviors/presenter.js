@@ -1,14 +1,13 @@
 // presenter logic goes here
-$('#navOutput').machine({
+$('#subOutput').machine({
  'state':"/",
  
  entered:function(state){
 
   //  views.behaviors.charts.view(); 
-  $('#navOutput').html(state.toString());
+  $('#subOutput').html(state.toString());
   
-    debug.log('')
-  
+    debug.log('subOutput entered state');  
     // switch the view based on incoming state (route)
     var view = views.behaviors[state].view();
     // render views based on JUP templates

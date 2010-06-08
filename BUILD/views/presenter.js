@@ -19,7 +19,7 @@ $('#navOutput').machine({
     behave.attach($("[data-behaviors]"));
 
     // apply the presenter on the view
-    //views.behaviors.presenter();
+    views[state].presenter();
   
  }
 });

@@ -5,7 +5,7 @@ var views = {};
 behave.version = "0.0.1";
 
 // custom DEBUG setting for turning on / off robust behavior debugging. note: this is not going to disable the debugger completely, its just a way of setting custom debug levels
-behave.DEBUG = true; 
+behave.DEBUG = false; 
 
 
 $.fn.behavior = function(settings) {
