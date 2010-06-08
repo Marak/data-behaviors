@@ -22,7 +22,14 @@ $(options.selector).machine({
     var v1 = lultext + ('.view();');
     var p1 = lultext + ('.presenter();');
     debug.log(v1);
-    var view = eval(v1);
+    try{
+      var view = eval(v1);
+    }
+    catch(err){
+      // TODO: find the closest context and put in a nice error message
+      debug.log(err);
+      return false;
+    }
   }
   else{
     // switch the view based on incoming state (route)
