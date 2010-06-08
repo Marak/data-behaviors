@@ -63,5 +63,19 @@ machine.enter = function( state , context ){
     
   });
   
-  
 };
+
+
+machine.getContext = function(machine,context){
+  debug.log('getting context', machine, context);
+  
+  // determine the context of the view we are in
+  var context = $(machine).parents().find("[data-behaviors*='machine']");
+  context = context.toArray().reverse();
+  
+  if(!context.length){
+    context = machine;
+  }
+  
+  return context;
+};  

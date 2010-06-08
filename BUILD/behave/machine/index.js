@@ -13,13 +13,27 @@ $(options.selector).machine({
   // views.behaviors.charts.view(); 
   $(this).html(state.toString());
   
-  // determine the context of the view we are in
-  var parentState = $(this).parents().closest("[data-behaviors*='machine']").data('state');
+  var context = machine.getContext($(this));
+
+  var state = $(context).data('state');
+
+  debug.log('the closest machine state is ', context, 'it has a state of ', state); 
+
+  if(context.length>1){
+    var lultext = 'views';
+    for(var i = 0; i < context.length; i ++){
+      lultext += ('.' + $(context[i]).data('state'));
+    }
+    lultext += ('.view();');
+    debug.log(lultext);
+    var view = eval(lultext);
+  }
+  else{
+    // switch the view based on incoming state (route)
+    var view = views[state].view();
+  }
   
-  debug.log('the closest machine state is ', parentState); 
   
-  // switch the view based on incoming state (route)
-  var view = views[state].view();
   
   // render views based on JUP templates
   var html = JUP.html(view);
