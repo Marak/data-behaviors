@@ -1,4 +1,4 @@
-return ["div",
+["div",
          {"class": "container" },
          ["div", 
           {"class":"header span-24"},
@@ -13,4 +13,4 @@ return ["div",
            {"type":"text","data-behaviors":"input-date"}
          ]
       ]
-   ];
+   ]

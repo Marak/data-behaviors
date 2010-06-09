@@ -1,6 +1,5 @@
 /* 
     running this file in node.js will generate a new version of the behave library 
-
 */
 
 var fs = require('fs');
@@ -8,6 +7,34 @@ var sys = require('sys');
 var mustache = require('./lib/mustache');
 var eyes = require ('./lib/eyes');
 var colors = require('./lib/colors');
+
+var dom = require('./lib/jsdom/lib/level1/core').dom.level1.core,
+    haml = require('./lib/haml-js/lib/haml');
+
+var window = require("./lib/jsdom/lib/browser").windowAugmentation(dom);
+var document = window.document;
+var location = window.location;
+var navigator = window.navigator = { userAgent: "node-js" };
+global.window = window;
+
+var jquery =  fs.readFileSync('./BUILD/lib/jquery.js', encoding='utf8');
+var JUP =  fs.readFileSync('./BUILD/lib/JUP.js', encoding='utf8');
+var template = fs.readFileSync('./BUILD/test.haml');
+
+global.window.document.compareDocumentPosition = function() {};
+dom.Node.prototype.addEventListener = window.addEventListener = window.document.addEventListener = function() {};
+
+try {
+  eval(jquery.toString());
+} catch (e) {
+  sys.puts(sys.inspect(e.stack, true));
+}
+
+try {
+  eval(JUP.toString());
+} catch (e) {
+  sys.puts(sys.inspect(e.stack, true));
+}
 
 exports.build = function(){
 
@@ -31,7 +58,6 @@ exports.build = function(){
   docs.com = '';
   docs.behave = '';
   docs.views = '';
-
 
   /************************ GENERATE BEHAVIORS ***************************/
 
@@ -73,13 +99,66 @@ exports.build = function(){
 
     for(var view in views){
       if(views[view].search('.js') > 0){ // if this is a file
-        var fileContents = fs.readFileSync(views[view], encoding='utf8');
+        
+        // before we can load the JUP view we have to check if there are other templates that take precedence
+        
+        // check if there is a HAML template available
+        var hamlPath = views[view].replace('.js', '.haml');
+        
+        var found = false;
+        // fs.statSync can't fail gracefully, hence the try / catch
+        // we could also try to use the paths map for a lookup instead of statSync
+        try{
+          var hamlTemplate = fs.statSync(hamlPath);
+          hamlTemplate = fs.readFileSync(hamlPath, encoding='utf8');
+          found = true;
+        }
+        catch(err){
+          // the googles do nothing
+          //sys.puts(err);
+        }
+        
+        if(found){
+          sys.puts('found a haml template:'.green + hamlPath.grey + ' converting template to JUP...'.yellow);
+          
+          // parse haml template into html
+          var htmlTemplate = haml.render(hamlTemplate);
+          //sys.puts(htmlTemplate);
+          // write some stuff to the body
+          window.jQuery(document.body).append(htmlTemplate.toString());
+          
+          // get that stuff back from the body
+          //sys.puts(window.jQuery(document.body).html());
+          // pass the nodes into JUP for parsing
+          var jupArray = window.JUP.parseDOM(window.jQuery(document.body).children());
+
+          //sys.puts(JSON.stringify(jupArray));
+          
+          // assign the JUP array as the file contents (we have now bypassed the view.js file)
+          var fileContents = JSON.stringify(jupArray);
+          
+          
+          // overwrite and update view.js for consistancy 
+          fs.writeFileSync(views[view], fileContents);
+          
+          // generate a html partial for fun (and debuggings). don't use this partial please :-(
+          fs.writeFileSync(views[view].replace('.js','.html'), htmlTemplate);
+          
+        }
+        else{
+          var fileContents = fs.readFileSync(views[view], encoding='utf8');
+        }
+        //hamlTemplate = fs.statSync(hamlTemplate);
+        //sys.puts(hamlTemplate);
+        
+        
         //docs.behave += "<li>"+docFilter(behaves[behave])+"</li>";
-        code.views += (fileFilter(views[view]) + ' = function(options){' + fileContents + '};' + '\n\n');
+        code.views += (fileFilter(views[view]) + ' = function(options){return ' + fileContents + '};' + '\n\n');
       }
       else{
         docs.views += "<li>"+docFilter(views[view])+"</li>";
-
+        
+        // this looks broken, investigate this line
         code.views += (fileFilter(views[view]) + ' = function(){return views.behaviors.view();};' + '\n\n');
       }
     }
@@ -170,4 +249,3 @@ exports.build = function(){
   }
 
 /*********************** END BUILD HELPER METHODS ****************/
-

@@ -1,4 +1,4 @@
-return ["div",
+["div",
          {"class": "container" },
          ["div", 
           {"class":"header span-24"},
@@ -16,4 +16,4 @@ return ["div",
            {"data-behaviors":"chart-bar", "data-resource":"chart_bar_data_1"}
          ]
       ]
-   ];
+   ]
