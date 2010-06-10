@@ -7,9 +7,10 @@ var sys = require('sys');
 var mustache = require('./lib/mustache');
 var eyes = require ('./lib/eyes');
 var colors = require('./lib/colors');
-
+var     haml = require('./lib/haml-js/lib/haml');
+/* JSDOM STUFF
 var dom = require('./lib/jsdom/lib/level1/core').dom.level1.core,
-    haml = require('./lib/haml-js/lib/haml');
+
 
 var window = require("./lib/jsdom/lib/browser").windowAugmentation(dom);
 var document = window.document;
@@ -23,6 +24,8 @@ var JUP =  fs.readFileSync('./BUILD/lib/JUP.js', encoding='utf8');
 
 global.window.document.compareDocumentPosition = function() {};
 dom.Node.prototype.addEventListener = window.addEventListener = window.document.addEventListener = function() {};
+
+*/
 
 try {
   eval(jquery.toString());
