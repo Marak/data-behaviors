@@ -18,19 +18,12 @@ input.date{
   width: 100px;
 }
 
-#navOutput  {
-  height:200px;
-  left:100px;
-  top:45px;
-  width:545px;
-}
-
-
-body>.container{
-  background-color: #fff;
+.container{
+  background-color: #fff; 
   border: 1px solid #ccc;
   border-width: 0 1px 1px 1px; 
   padding: 15px;
+  margin-bottom: 40px;
 }
 .header h1{
   color: #333;
@@ -106,7 +99,6 @@ body>.container{
   background-repeat: repeat-x;
   background-position: 50% 50%;
   border: 1px solid #ccc;
-  margin: 0 0 20px 0;
   padding: 0;
   position: relative;
   height: 35px;
@@ -153,7 +145,7 @@ body>.container{
   border: 1px solid #ccc;
   border-top: 1px solid #ccc;
   list-style-type: none;
-  margin:0;
+  margin: 20px 0 0 0;
   padding:10px;
   width: 200px;
 }
@@ -178,4 +170,35 @@ body>.container{
   background-position: 50% 50%;
   text-shadow: 1px 1px 1px #FFF;
   font-weight: bold;
+}
+
+#page{
+  margin: 20px;
+}
+
+#page h1{
+  text-shadow: none;
+  font-size: 22px;
+  margin :30px 0 20px 0;
+}
+
+#page h2{
+  font-size: 16px;
+  font-weight: bold;
+  margin : 24px 0 14px 0;
+}
+
+#page pre{
+  background-color: #ffe;
+  border: 1px solid #FFF0cc;
+  font-size: 110%;
+  padding: 20px;
+}
+
+#page ul{
+  
+}
+
+#page ul li{
+  margin: 5px 0;
 }
