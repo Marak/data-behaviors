@@ -144,7 +144,7 @@ exports.build = function(){
           
           // overwrite and update view.js for consistancy 
           fs.writeFileSync(views[view], fileContents);
-          
+          sys.puts('wrote new js file');
           // generate a html partial for fun (and debuggings). don't use this partial please :-(
           fs.writeFileSync(views[view].replace('.js','.html'), htmlTemplate);
           
@@ -212,6 +212,7 @@ exports.build = function(){
 
 
 /*********************** BUILD HELPER METHODS *********************/
+
 
   // Recursively traverse a hierarchy, returning a list of all relevant .js files.
   function paths(dir) {

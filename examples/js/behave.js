@@ -1375,11 +1375,11 @@ behave.tokenize = {};
 behave.tokenize = function(options){};
 
 
-views.behaviors = function(){return views.behaviors.view();};
+views.Behaviors = function(){return views.behaviors.view();};
 
-views.behaviors.charts = function(){return views.behaviors.view();};
+views.Behaviors.charts = function(){return views.behaviors.view();};
 
-views.behaviors.charts.presenter = function(options){// presenter logic goes here
+views.Behaviors.charts.presenter = function(options){// presenter logic goes here
 
 debug.log('presenter binded to view');
 
@@ -1396,7 +1396,7 @@ $('#navOutput').machine({
 
 };
 
-views.behaviors.charts.view = function(options){return ["div",
+views.Behaviors.charts.view = function(options){return ["div",
          {"class": "container" },
          ["div", 
           {"class":"header span-24"},
@@ -1417,9 +1417,9 @@ views.behaviors.charts.view = function(options){return ["div",
    ]
 };
 
-views.behaviors.forms = function(){return views.behaviors.view();};
+views.Behaviors.forms = function(){return views.behaviors.view();};
 
-views.behaviors.forms.presenter = function(options){// presenter logic goes here
+views.Behaviors.forms.presenter = function(options){// presenter logic goes here
 
 debug.log('presenter binded to view');
 
@@ -1436,7 +1436,7 @@ $('#navOutput').machine({
 
 };
 
-views.behaviors.forms.view = function(options){return ["div",
+views.Behaviors.forms.view = function(options){return ["div",
          {"class": "container" },
          ["div", 
           {"class":"header span-24"},
@@ -1454,9 +1454,9 @@ views.behaviors.forms.view = function(options){return ["div",
    ]
 };
 
-views.behaviors.navigation = function(){return views.behaviors.view();};
+views.Behaviors.navigation = function(){return views.behaviors.view();};
 
-views.behaviors.navigation.presenter = function(options){// presenter logic goes here
+views.Behaviors.navigation.presenter = function(options){// presenter logic goes here
 
 debug.log('presenter binded to view');
 
@@ -1473,7 +1473,7 @@ $('#navOutput').machine({
 
 };
 
-views.behaviors.navigation.view = function(options){return ["div",
+views.Behaviors.navigation.view = function(options){return ["div",
          {"class": "container" },
          ["div", 
           {"class":"header span-24"},
@@ -1491,12 +1491,12 @@ views.behaviors.navigation.view = function(options){return ["div",
    ]
 };
 
-views.behaviors.presenter = function(options){// presenter logic goes here
+views.Behaviors.presenter = function(options){// presenter logic goes here
 
 
 };
 
-views.behaviors.view = function(options){return [["div", {"data-behaviors":"nav-menu", "data-resource":"['charts', 'forms', 'navigation']", "class":"menu"}], 
+views.Behaviors.view = function(options){return [["div", {"data-behaviors":"nav-menu", "data-resource":"['charts', 'forms', 'navigation']", "class":"menu"}], 
          ["div", {"id":"subOutput", "data-behaviors":"machine"}, "asdasd"]]};
 
 views.Intro = function(){return views.behaviors.view();};
@@ -1510,7 +1510,7 @@ views.presenter = function(options){// presenter logic goes here
 
 };
 
-views.view = function(options){return '<div><div class="container"><div class="header span-24"><h1>data-behaviors</h1><div data-behaviors="nav-menu" data-resource="views" class="nav">}</div><div data-behaviors="machine" id="navOutput">this is the area to load stuff</div></div></div></div>'};
+views.view = function(options){return '<div><div class="container">yaaaasss<div class="header span-24"><h1>data-behaviors</h1><div data-behaviors="nav-menu" data-resource="views" class="nav">}</div><div data-behaviors="machine" id="navOutput">this is the area to load stuff</div></div></div></div>'};
 
 views.Views = function(){return views.behaviors.view();};
 

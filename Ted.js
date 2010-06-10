@@ -11,6 +11,8 @@ var build = require('./BUILD/BUILD');
 // the paths method will return an array of files and directories (children) of whatever path is sent as an argument
 var project = paths('./BUILD');
 
+sys.puts(JSON.stringify(project));
+
 sys.puts('Ted is up and running. he\'s watching over '.green + project.length.toString().yellow +' files and directories in the BUILD directory'.green);
 sys.puts('Ted say\'s'.green + ', since you turned me on I\'m going to run a BUILD now'.white)
 build.build();
@@ -55,11 +57,17 @@ function fileChange(file){
   build.build();
   sys.puts('Ted say\'s, '.green + 'BUILD complete!');
   
-  // rebuild the project files / directories array (since we might have new files now)
-  var project = paths('./BUILD'); 
-  
-  // rewatch the BUILD directory
-  watchDir(project);
+  // strange OS latency on mac os
+  setTimeout(function(){
+    
+    // rebuild the project files / directories array (since we might have new files now)
+    var project = paths('./BUILD'); 
+
+    // rewatch the BUILD directory
+    watchDir(project);
+    
+  },200)
+
 }
 
 // Recursively traverse a hierarchy, returning a list of all relevant .js files.
@@ -74,7 +82,7 @@ function paths(dir) {
                 stat = fs.statSync(path);
             if (file[0] == '.' || file === 'vendor') {
                 return;
-            } else if (stat.isFile() && /\.js$/.test(file)) {
+            } else if (stat.isFile()) {
                 paths.push(path);
             } else if (stat.isDirectory()) {
                 paths.push(path);
@@ -85,3 +93,4 @@ function paths(dir) {
     })(dir || '.', []);
     return paths;
 }
+
