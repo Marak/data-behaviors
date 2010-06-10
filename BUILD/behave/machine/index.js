@@ -27,7 +27,7 @@ $(options.selector).machine({
     }
     catch(err){
       // TODO: find the closest context and put in a nice error message
-      debug.log(err);
+      debug.log('view failed to render ', err);
       return false;
     }
   }
@@ -36,7 +36,7 @@ $(options.selector).machine({
     var view = views[state].view();
   }
   
-  // render views based on JUP templates
+  // render views based on JUP templates 
         
   if(typeof view == 'object'){
     var html = JUP.html(view);
@@ -46,14 +46,22 @@ $(options.selector).machine({
   }
 
   
-  //debug.log(html);
+  // inject the view into the DOM
   $(this).html(html);
 
   // parse the dom looking for tags that have a date-behaviors attribute
   behave.attach($("[data-behaviors]"));
 
   // apply the presenter on the view
-  eval(p1);
+  try{
+    eval(p1);
+  }
+  catch(err){
+    // TODO: find the closest context and put in a nice error message
+    debug.log('presenter failed to present view ', err);
+    return false;
+  }
+  
   //views[state].presenter();
   
  }

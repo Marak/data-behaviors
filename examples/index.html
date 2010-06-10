@@ -59,15 +59,20 @@
           var html = view;
         }
         
+        // apply the presenter on the view
+        var context = views.presenter();
+        debug.log('context ', context);
+
+        // lets do some variable replacement and databinding via Mustache (this is a bit of MVVM, but for the most part our databinding is done via)
+        // the data-resource tag and the behaviors library. if you are going to be building something with a lot of complex databinding, it should be
+        // abstracted into a behavior and not a view.
+        html = Mustache.to_html(html, context);
+
         //debug.log(html);
         $('body').html(html);
-        
-        // apply the presenter on the view
-        views.presenter();
 
         // parse the dom looking for tags that have a date-behaviors attribute
         behave.attach($("[data-behaviors]"));
-
 
       });
       

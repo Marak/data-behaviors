@@ -1,2 +1,2 @@
-[["div", {"data-behaviors":"nav-menu", "data-resource":"['charts', 'forms', 'navigation']", "class":"menu"}], 
+[["div", {"data-behaviors":"nav-menu", "data-resource":"views.Behaviors", "class":"menu"}], 
          ["div", {"id":"subOutput", "data-behaviors":"machine"}, "asdasd"]]
