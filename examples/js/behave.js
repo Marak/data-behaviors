@@ -1503,12 +1503,15 @@ views.Intro = function(){return views.behaviors.view();};
 
 views.Intro.presenter = function(options){};
 
-views.Intro.view = function(options){return [["div", {"data-behaviors":"nav-menu", "data-resource":"['charts', 'forms', 'navigation']", "class":"menu"}], 
-         ["div", {"data-behaviors":"machine"}, "luzl"]];};
+views.Intro.view = function(options){return '<div>sup dog this is a haml view</div>'};
 
 views.presenter = function(options){// presenter logic goes here
 
 };
+
+views.test = function(){return views.behaviors.view();};
+
+views.test = function(options){return '<div></div>'};
 
 views.view = function(options){return '<div><div class="container">yaaaasss<div class="header span-24"><h1>data-behaviors</h1><div data-behaviors="nav-menu" data-resource="views" class="nav">}</div><div data-behaviors="machine" id="navOutput">this is the area to load stuff</div></div></div></div>'};
 
