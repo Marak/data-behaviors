@@ -11,7 +11,6 @@ var build = require('./BUILD/BUILD');
 // the paths method will return an array of files and directories (children) of whatever path is sent as an argument
 var project = paths('./BUILD');
 
-sys.puts(JSON.stringify(project));
 
 sys.puts('Ted is up and running. he\'s watching over '.green + project.length.toString().yellow +' files and directories in the BUILD directory'.green);
 sys.puts('Ted says'.green + ', since you turned me on I\'m going to run a BUILD now'.white)
@@ -66,7 +65,7 @@ function fileChange(file){
     // rewatch the BUILD directory
     watchDir(project);
     
-  },200)
+  },2000)
 
 }
 
