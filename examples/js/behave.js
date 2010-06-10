@@ -1182,7 +1182,14 @@ $(options.selector).machine({
   }
   
   // render views based on JUP templates
-  var html = JUP.html(view);
+        
+  if(typeof view == 'object'){
+    var html = JUP.html(view);
+  }
+  else{
+    var html = view;
+  }
+
   
   //debug.log(html);
   $(this).html(html);
@@ -1372,7 +1379,7 @@ views.Behaviors = function(){return views.behaviors.view();};
 
 views.Behaviors.charts = function(){return views.behaviors.view();};
 
-views.Behaviors.charts.presenter = function(options){return // presenter logic goes here
+views.Behaviors.charts.presenter = function(options){// presenter logic goes here
 
 debug.log('presenter binded to view');
 
@@ -1412,7 +1419,7 @@ views.Behaviors.charts.view = function(options){return ["div",
 
 views.Behaviors.forms = function(){return views.behaviors.view();};
 
-views.Behaviors.forms.presenter = function(options){return // presenter logic goes here
+views.Behaviors.forms.presenter = function(options){// presenter logic goes here
 
 debug.log('presenter binded to view');
 
@@ -1449,7 +1456,7 @@ views.Behaviors.forms.view = function(options){return ["div",
 
 views.Behaviors.navigation = function(){return views.behaviors.view();};
 
-views.Behaviors.navigation.presenter = function(options){return // presenter logic goes here
+views.Behaviors.navigation.presenter = function(options){// presenter logic goes here
 
 debug.log('presenter binded to view');
 
@@ -1484,7 +1491,7 @@ views.Behaviors.navigation.view = function(options){return ["div",
    ]
 };
 
-views.Behaviors.presenter = function(options){return // presenter logic goes here
+views.Behaviors.presenter = function(options){// presenter logic goes here
 
 
 };
@@ -1494,20 +1501,20 @@ views.Behaviors.view = function(options){return [["div", {"data-behaviors":"nav-
 
 views.Intro = function(){return views.behaviors.view();};
 
-views.Intro.presenter = function(options){return };
+views.Intro.presenter = function(options){};
 
 views.Intro.view = function(options){return [["div", {"data-behaviors":"nav-menu", "data-resource":"['charts', 'forms', 'navigation']", "class":"menu"}], 
          ["div", {"data-behaviors":"machine"}, "luzl"]];};
 
-views.presenter = function(options){return // presenter logic goes here
+views.presenter = function(options){// presenter logic goes here
 
 };
 
-views.view = function(options){return [["DIV",{"id":"date"},"print_date()"],["DIV",{"id":"address"},"a"],["DIV",{"id":"email"},"current_user.email"]]};
+views.view = function(options){return '<div><div class="container"><div class="header span-24"><h1>data-behaviors</h1><div data-behaviors="nav-menu" data-resource="views" class="nav">}</div><div data-behaviors="machine" id="navOutput">this is the area to load stuff</div></div></div></div>'};
 
 views.Views = function(){return views.behaviors.view();};
 
-views.Views.presenter = function(options){return };
+views.Views.presenter = function(options){};
 
 views.Views.view = function(options){return [["div", {"data-behaviors":"nav-menu", "data-resource":"['charts', 'forms', 'navigation']", "class":"menu"}], 
          ["div", {"data-behaviors":"machine"}, "foobar"]];};

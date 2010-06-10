@@ -37,7 +37,14 @@ $(options.selector).machine({
   }
   
   // render views based on JUP templates
-  var html = JUP.html(view);
+        
+  if(typeof view == 'object'){
+    var html = JUP.html(view);
+  }
+  else{
+    var html = view;
+  }
+
   
   //debug.log(html);
   $(this).html(html);

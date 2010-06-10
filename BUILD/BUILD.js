@@ -19,7 +19,7 @@ global.window = window;
 
 var jquery =  fs.readFileSync('./BUILD/lib/jquery.js', encoding='utf8');
 var JUP =  fs.readFileSync('./BUILD/lib/JUP.js', encoding='utf8');
-var template = fs.readFileSync('./BUILD/test.haml');
+
 
 global.window.document.compareDocumentPosition = function() {};
 dom.Node.prototype.addEventListener = window.addEventListener = window.document.addEventListener = function() {};
@@ -125,18 +125,17 @@ exports.build = function(){
           var htmlTemplate = haml.render(hamlTemplate);
           //sys.puts(htmlTemplate);
           // write some stuff to the body
-          window.jQuery(document.body).append(htmlTemplate.toString());
+          //window.jQuery(document.body).append(htmlTemplate.toString());
           
           // get that stuff back from the body
           //sys.puts(window.jQuery(document.body).html());
           // pass the nodes into JUP for parsing
-          var jupArray = window.JUP.parseDOM(window.jQuery(document.body).children());
-
+          //var jupArray = window.JUP.parse(window.jQuery(document.body).html().toString());
           //sys.puts(JSON.stringify(jupArray));
           
           // assign the JUP array as the file contents (we have now bypassed the view.js file)
-          var fileContents = JSON.stringify(jupArray);
-          
+          //var fileContents = JSON.stringify(jupArray);
+          var fileContents = htmlTemplate;
           
           // overwrite and update view.js for consistancy 
           fs.writeFileSync(views[view], fileContents);
@@ -153,7 +152,27 @@ exports.build = function(){
         
         
         //docs.behave += "<li>"+docFilter(behaves[behave])+"</li>";
-        code.views += (fileFilter(views[view]) + ' = function(options){return ' + fileContents + '};' + '\n\n');
+        
+        
+        //sys.puts(views[view].search('presenter'));
+        
+        if(views[view].search('presenter') != -1){
+
+          var str = ' = function(options){' + fileContents + '};'
+          
+        }
+        else{
+          if(fileContents[0]=='<'){
+            var str = ' = function(options){return \'' + fileContents + '\'};'
+          }
+          else{
+            var str = ' = function(options){return ' + fileContents + '};'
+          }
+
+          
+        }
+        
+        code.views += (fileFilter(views[view]) + str + '\n\n');
       }
       else{
         docs.views += "<li>"+docFilter(views[view])+"</li>";

@@ -51,7 +51,14 @@
         
         // render views based on JUP templates
         var view = views.view();
-        var html = JUP.html(view);
+        
+        if(typeof view == 'object'){
+          var html = JUP.html(view);
+        }
+        else{
+          var html = view;
+        }
+        
         //debug.log(html);
         $('body').html(html);
         

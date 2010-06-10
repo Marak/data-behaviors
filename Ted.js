@@ -16,7 +16,7 @@ sys.puts('Ted say\'s'.green + ', since you turned me on I\'m going to run a BUIL
 build.build();
 // watch the directory for changes. in the handler for directory watching we will perform our build process
 
-//watchDir(project);
+watchDir(project);
 
 // watches an array of files and directories and fires the "fileChange" handler
 function watchDir(dir){
