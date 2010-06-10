@@ -25,8 +25,6 @@ var JUP =  fs.readFileSync('./BUILD/lib/JUP.js', encoding='utf8');
 global.window.document.compareDocumentPosition = function() {};
 dom.Node.prototype.addEventListener = window.addEventListener = window.document.addEventListener = function() {};
 
-*/
-
 try {
   eval(jquery.toString());
 } catch (e) {
@@ -38,6 +36,10 @@ try {
 } catch (e) {
   sys.puts(sys.inspect(e.stack, true));
 }
+
+
+*/
+
 
 exports.build = function(){
 
