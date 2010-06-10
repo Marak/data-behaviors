@@ -14,7 +14,7 @@ var project = paths('./BUILD');
 sys.puts(JSON.stringify(project));
 
 sys.puts('Ted is up and running. he\'s watching over '.green + project.length.toString().yellow +' files and directories in the BUILD directory'.green);
-sys.puts('Ted say\'s'.green + ', since you turned me on I\'m going to run a BUILD now'.white)
+sys.puts('Ted says'.green + ', since you turned me on I\'m going to run a BUILD now'.white)
 build.build();
 // watch the directory for changes. in the handler for directory watching we will perform our build process
 
@@ -22,7 +22,7 @@ watchDir(project);
 
 // watches an array of files and directories and fires the "fileChange" handler
 function watchDir(dir){
-  sys.puts( 'Ted say\'s'.green + ', if you make any modifications to the /BUILD directory, I\'ll get mad and run another' + ' BUILD'.yellow);
+  sys.puts( 'Ted says'.green + ', if you make any modifications to the /BUILD directory, I\'ll get mad and run another' + ' BUILD'.yellow);
   for(var file in dir){
     var theFile = dir[file];
     (function(theFile){
@@ -52,10 +52,10 @@ function fileChange(file){
   unwatchDir(project);
   
   sys.puts('Change detected in '.cyan + file.toString().grey);
-  sys.puts('Ted say\'s, '.green + 'triggering BUILD!'.red);
+  sys.puts('Ted says, '.green + 'triggering BUILD!'.red);
   // run the build process
   build.build();
-  sys.puts('Ted say\'s, '.green + 'BUILD complete!');
+  sys.puts('Ted says, '.green + 'BUILD complete!');
   
   // strange OS latency on mac os
   setTimeout(function(){
