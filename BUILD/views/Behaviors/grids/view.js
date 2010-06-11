@@ -1,1 +1,1 @@
-<h1></h1>
+<div data-behaviors="grid-simple" data-resource="grid_data_1"></div>

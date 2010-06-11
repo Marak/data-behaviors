@@ -47,31 +47,26 @@
     <script>
       $(document).ready(function(){
         debug.log('document ready');
-        
-        
         // render views based on JUP templates
         var view = views.view();
-        
+        var html;
         if(typeof view == 'object'){
-          var html = JUP.html(view);
+          html = JUP.html(view);
         }
         else{
-          var html = view;
+          html = view;
         }
-        
+        //var model = views.model();
         // apply the presenter on the view
-        var context = views.presenter();
-        debug.log('context ', context);
-
+        debug.log('context ', {});
+        // parse the dom looking for tags that have a date-behaviors attribute
         // lets do some variable replacement and databinding via Mustache (this is a bit of MVVM, but for the most part our databinding is done via)
         // the data-resource tag and the behaviors library. if you are going to be building something with a lot of complex databinding, it should be
         // abstracted into a behavior and not a view.
-        html = Mustache.to_html(html, context);
-
+        html = Mustache.to_html(html, {});
         //debug.log(html);
         $('body').html(html);
-
-        // parse the dom looking for tags that have a date-behaviors attribute
+        views.presenter();
         behave.attach($("[data-behaviors]"));
 
       });

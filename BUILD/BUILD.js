@@ -122,7 +122,7 @@ exports.build = function(){
           // the googles do nothing
           //sys.puts(err);
         }
-        
+         
         if(found){
           sys.puts('found a haml template:'.green + hamlPath.grey + ' converting template to JUP...'.yellow);
           
@@ -144,9 +144,11 @@ exports.build = function(){
           
           // overwrite and update view.js for consistancy 
           fs.writeFileSync(views[view], fileContents);
-          sys.puts('wrote new js file');
-          // generate a html partial for fun (and debuggings). don't use this partial please :-(
-          fs.writeFileSync(views[view].replace('.js','.html'), htmlTemplate);
+          
+          /*
+            // generate a html partial for fun (and debuggings). don't use this partial please :-(
+            fs.writeFileSync(views[view].replace('.js','.html'), htmlTemplate);
+          */
           
         }
         else{

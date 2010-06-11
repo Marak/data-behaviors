@@ -7,10 +7,15 @@ var sys = require('sys');
 var eyes = require('./BUILD/lib/eyes');
 var colors = require('./BUILD/lib/colors');
 var build = require('./BUILD/BUILD');
+var say = require('./BUILD/lib/say');
 
 // the paths method will return an array of files and directories (children) of whatever path is sent as an argument
 var project = paths('./BUILD');
 
+var Ted = {};
+Ted.says = say.speak;
+
+Ted.says('ohh smithers, you really know how to turn me on.');
 
 sys.puts('Ted is up and running. he\'s watching over '.green + project.length.toString().yellow +' files and directories in the BUILD directory'.green);
 sys.puts('Ted says'.green + ', since you turned me on I\'m going to run a BUILD now'.white)
