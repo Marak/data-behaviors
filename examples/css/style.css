@@ -4,6 +4,14 @@ body{
   font-family: 'helvetica neue', helvetica, arial, sans-serif !important;
 }
 
+.right{
+  float:right;
+}
+
+.left{
+  float:left;
+}
+
 input{
   vertical-align: middle;
   height: 25px;
@@ -100,6 +108,7 @@ input.date{
   background-position: 50% 50%;
   border: 1px solid #ccc;
   padding: 0;
+  margin:0;
   position: relative;
   height: 35px;
 }
@@ -132,6 +141,42 @@ input.date{
   background-color: #FFF;
   background-image: none;
 }
+
+.ui-dialog-titlebar{
+  background-color: #E6E6E6;
+  background-image: url(../js/SlickGrid/css/custom-theme/images/ui-bg_glass_75_e6e6e6_1x400.png);
+  background-repeat: repeat-x;
+  background-position: 50% 50%;
+  border: 1px solid #ddd;
+  border-bottom: 1px solid #aaa;
+  border-right: 1px solid #bfbfbf;
+  font-family: helvetica, arial, sans-serif;
+  text-shadow: 1px 1px 1px #fff;
+}
+
+.footer h5{
+  background-color: #E6E6E6;
+  background-image: url(../js/SlickGrid/css/custom-theme/images/ui-bg_glass_75_e6e6e6_1x400.png);
+  background-repeat: repeat-x;
+  background-position: 50% 50%;
+  border: 1px solid #ddd;
+  border-bottom: 1px solid #aaa;
+  border-right: 1px solid #bfbfbf;
+  color: #333;
+  margin-top: 20px;
+  padding: 7px 6px;
+  text-shadow: 1px 1px 1px #FFF;
+}
+
+.footer h5  span{
+  color: #555;
+  float:right;
+  font-size: 10px;
+  font-weight: bold;
+  margin: 2px 0 0 20px;
+  text-transform: uppercase;
+}
+
 
 .menu ul{
   -moz-border-radius-topleft:         3px;

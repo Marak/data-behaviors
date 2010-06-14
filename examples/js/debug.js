@@ -179,7 +179,6 @@ window.debug = (function(){
         
         // emit a global debugging event, this is from the behaviors library debug behavior
         $(document).trigger('-debug', [log_arr]);
-        //console.log('fuck', log_arr);
         
         
         if ( !con || !is_level( idx ) ) { return; }
