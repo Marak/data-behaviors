@@ -82,7 +82,7 @@ exports.build = function(){
       if(behaves[behave].search('.js') > 0){ // if this is a file
         var fileContents = fs.readFileSync(behaves[behave], encoding='utf8');
         //docs.behave += "<li>"+docFilter(behaves[behave])+"</li>";
-        code.behave += (fileFilter(behaves[behave]) + ' = function(options){' + fileContents + '};' + '\n\n');
+        code.behave += (fileFilter(behaves[behave]) + ' = function(options){' + fileContents  + '\n\n};');
       }
       else{
         docs.behave += "<li>"+docFilter(behaves[behave])+"</li>";
@@ -165,15 +165,15 @@ exports.build = function(){
         
         if(views[view].search('presenter') != -1){
 
-          var str = ' = function(options){' + fileContents + '};'
+          var str = ' = function(options){' + fileContents + '\n\n};'
           
         }
         else{
           if(fileContents[0]=='<'){
-            var str = ' = function(options){return \'' + fileContents + '\'};'
+            var str = ' = function(options){return \'' + fileContents + '\'\n\n};'
           }
           else{
-            var str = ' = function(options){return ' + fileContents + '};'
+            var str = ' = function(options){return ' + fileContents + '\n\n};'
           }
 
           
@@ -195,6 +195,14 @@ exports.build = function(){
 
   /************************ BUNDLE GENERATED CODE ********************/
 
+    // lets determine if the code bundle we have generated has not failed
+    try{
+      var x = eval(behaveLibrary);
+    }
+    catch(err){
+      sys.puts('error, build failing');
+    }
+ 
     // perform a mustache replace on main to insert in sub components
     var behaveLibrary = mustache.Mustache.to_html(code.main, {"coms":code.com, "behaves":code.behave, "views":code.views});
     var documentation = docs.main + docs.behave + docs.com + docs.views;

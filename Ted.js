@@ -14,8 +14,9 @@ var project = paths('./BUILD');
 
 var Ted = {};
 Ted.says = say.speak;
-
-Ted.says('ohh smithers, you really know how to turn me on.');
+Ted.voice = say.voice;
+Ted.voice('Alex');
+Ted.says('Ted has started!');
 
 sys.puts('Ted is up and running. he\'s watching over '.green + project.length.toString().yellow +' files and directories in the BUILD directory'.green);
 sys.puts('Ted says'.green + ', since you turned me on I\'m going to run a BUILD now'.white)
@@ -55,8 +56,13 @@ function fileChange(file){
   // unwatch all files or else we can end up in an infinite loop
   unwatchDir(project);
   
+  //Ted.voice('Zarvox');
+  Ted.says('changed detected ' + file.toString());
+  
   sys.puts('Change detected in '.cyan + file.toString().grey);
   sys.puts('Ted says, '.green + 'triggering BUILD!'.red);
+
+  
   // run the build process
   build.build();
   sys.puts('Ted says, '.green + 'BUILD complete!');
