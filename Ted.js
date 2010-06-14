@@ -21,10 +21,7 @@ Ted.play = play.sound;
 
 // set default voice
 Ted.voice('Alex');
-
 Ted.says('Ted has started!');
-
-
 
 sys.puts('Ted is up and running. he\'s watching over '.green + project.length.toString().yellow +' files and directories in the BUILD directory'.green);
 sys.puts('Ted says'.green + ', since you turned me on I\'m going to run a BUILD now'.white)
