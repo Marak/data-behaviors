@@ -8,15 +8,23 @@ var eyes = require('./BUILD/lib/eyes');
 var colors = require('./BUILD/lib/colors');
 var build = require('./BUILD/BUILD');
 var say = require('./BUILD/lib/say');
-
+var play = require('./BUILD/lib/play');
 // the paths method will return an array of files and directories (children) of whatever path is sent as an argument
 var project = paths('./BUILD');
 
 var Ted = {};
+
+// map some methods to Ted
 Ted.says = say.speak;
 Ted.voice = say.voice;
+Ted.play = play.sound;
+
+// set default voice
 Ted.voice('Alex');
+
 Ted.says('Ted has started!');
+
+
 
 sys.puts('Ted is up and running. he\'s watching over '.green + project.length.toString().yellow +' files and directories in the BUILD directory'.green);
 sys.puts('Ted says'.green + ', since you turned me on I\'m going to run a BUILD now'.white)
@@ -66,7 +74,7 @@ function fileChange(file){
   // run the build process
   build.build();
   sys.puts('Ted says, '.green + 'BUILD complete!');
-  
+  Ted.play('./BUILD/lib/wavs/ding.wav');
   // strange OS latency on mac os
   setTimeout(function(){
     

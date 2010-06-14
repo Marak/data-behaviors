@@ -1,18 +1,18 @@
 // machine turns elements into state machines
 // the default state machine configuration will do nested layouts with partials
 
-
 $(options.selector).machine({
  'state':"/",
  
+ // through defining this default entered state we are implying a convention of nested layouts
  entered:function(state){
 
-  debug.log('entered state: ', state);
+  debug.log('state entered: ', state);
   
   // get the context of this machine as an array
   var context = machine.getContext($(this));
 
-  //debug.log('the context of this machine is ', context); 
+  debug.log('the context of this machine is ', context); 
 
   if(context.length>1){
     var lultext = 'views';
