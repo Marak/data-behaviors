@@ -177,8 +177,8 @@ window.debug = (function(){
         exec_callback( log_arr );
         
         
-        // emit a global debugging event
-        $(document).trigger('/debug', [log_arr]);
+        // emit a global debugging event, this is from the behaviors library debug behavior
+        $(document).trigger('-debug', [log_arr]);
         //console.log('fuck', log_arr);
         
         

@@ -1,4 +1,4 @@
-debug.log(options);
+//debug.log(options);
 
 /* ugly ass raw JS nested list builder, we should make this Mustache or at least easier to read */
 this.render = function(values){

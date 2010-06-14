@@ -21,14 +21,14 @@ $.fn.machine = function(settings) {
   var settings = settings || config;
   
   
-  debug.log($(this).data('machine') || {});
+  //debug.log($(this).data('machine') || {});
   // check if there is already a machine behavior defined, this code is not optimal (see: wrong) and should be replaced with better settings / config
   if($(this).data('machine') != null){
    debug.log('is already a machine! not going to reapply machine settings');
    return false;  
   }
   
-  debug.log('machine behavior being applied to ', $(this) , settings);
+  //debug.log('machine behavior being applied to ', $(this) , settings);
   
   // attach the machine metadata to DOM selector
   $(this).data( 'machine' , settings );  
@@ -42,7 +42,7 @@ $.fn.machine = function(settings) {
 // create the machine itself
 var machine = {};
 machine.enter = function( state , context ){
-  debug.log('entering state : ', state);
+  debug.log('entering state : ' + state);
   
   if(typeof context == 'undefined'){
     var context = document;
@@ -53,9 +53,9 @@ machine.enter = function( state , context ){
   $("[data-behaviors*='machine']", $(context)).each(function(i,e){
     var stateMachine = $(e).data('machine') || false;
     if(stateMachine){
-      debug.log(stateMachine, $(e));
+      //debug.log(stateMachine, $(e));
       //debug.log('the state is ', state);
-      debug.log('about to execute ', stateMachine.entered.toString());
+      //debug.log('about to execute ', stateMachine.entered.toString());
       $(e).data( 'state' , state );  
       stateMachine.entered.apply( this, [state] );
       //$(e).data('machine');
@@ -67,7 +67,7 @@ machine.enter = function( state , context ){
 
 
 machine.getContext = function(machine,context){
-  debug.log('getting context', machine, context);
+  //debug.log('getting context', machine, context);
   
   // determine the context of the view we are in
   var context = $(machine).parents().find("[data-behaviors*='machine']");

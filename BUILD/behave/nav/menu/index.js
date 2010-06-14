@@ -32,7 +32,7 @@ $('a', options.selector).click(function(e){
     context = document;
   }
   
-  debug.log('our context is ', context);
+  //debug.log('our context is ', context);
   $(this).addClass('visited');
   
   var state = $(this).attr('href');

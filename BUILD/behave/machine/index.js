@@ -7,12 +7,12 @@ $(options.selector).machine({
  
  entered:function(state){
 
-  debug.log($(options.selector), 'entered state: ', state);
+  debug.log('entered state: ', state);
   
   // get the context of this machine as an array
   var context = machine.getContext($(this));
 
-  debug.log('the context of this machine is ', context); 
+  //debug.log('the context of this machine is ', context); 
 
   if(context.length>1){
     var lultext = 'views';
@@ -21,7 +21,7 @@ $(options.selector).machine({
     }
     var v1 = lultext + ('.view();');
     var p1 = lultext + ('.presenter();');
-    debug.log(v1);
+    //debug.log(v1);
     try{
       var view = eval(v1);
     }
