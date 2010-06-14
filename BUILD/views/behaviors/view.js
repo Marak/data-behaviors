@@ -1,1 +1,1 @@
-<div data-behaviors="nav-menu" data-resource="[&quot;charts&quot;, &quot;forms&quot;, &quot;navigation&quot;]" class="menu"><div data-behaviors="machine" id="subOutput"></div></div>
+<div data-behaviors="nav-menu" data-resource="[&quot;charts&quot;, &quot;forms&quot;, &quot;navigation&quot;]" class="menu"></div><div data-behaviors="machine" id="subOutput"></div>
