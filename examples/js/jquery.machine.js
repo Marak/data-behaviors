@@ -41,16 +41,17 @@ $.fn.machine = function(settings) {
 
 // create the machine itself
 var machine = {};
-machine.enter = function( state , context ){
-  debug.log('entering state : ' + state);
+machine.enter = function( state , machine){
   
-  if(typeof context == 'undefined'){
-    var context = document;
+  // 'machine' attribute is optional and is only if we want our state change to occur in one element
+  debug.log('entering state : ' + state);
+  if(typeof machine == 'undefined'){
+    var machine = document;
   }
   
   //debug.log($(context));  
   // a new state has been entered, find all elements that are machines and check if they match
-  $("[data-behaviors*='machine']", $(context)).each(function(i,e){
+  $("[data-behaviors*='machine']", $(machine)).each(function(i,e){
     var stateMachine = $(e).data('machine') || false;
     if(stateMachine){
       //debug.log(stateMachine, $(e));
@@ -65,17 +66,19 @@ machine.enter = function( state , context ){
   
 };
 
+machine.getContext = function(element){
 
-machine.getContext = function(machine,context){
-  //debug.log('getting context', machine, context);
-  
+  debug.log('attempting to find the logical context of the following element ', element);
   // determine the context of the view we are in
-  var context = $(machine).parents().find("[data-behaviors*='machine']");
-  context = context.toArray().reverse();
+  var context = $(element).closest("[data-behaviors*='machine']:first");  
   
+  context = context.toArray().reverse(); 
+    
   if(!context.length){
-    context = machine;
+    context = document;
   }
+
+  debug.log('the closest machine context for ', element, 'is ' ,context);
   
   return context;
 };  

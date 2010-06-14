@@ -7,15 +7,16 @@ $(options.selector).machine({
  // through defining this default entered state we are implying a convention of nested layouts
  entered:function(state){
 
-  debug.log('state entered: ', state);
+  debug.log('state entered: ', state, $(this));
   
   // get the context of this machine as an array
   var context = machine.getContext($(this));
 
-  debug.log('the context of this machine is ', context); 
+  debug.log($(this), 'the context of this machine is ', context); 
 
-  if(context.length>1){
-    var lultext = 'views';
+  var lultext = 'views';
+  
+  if(context.length){
     for(var i = 0; i < context.length; i ++){
       lultext += ('.' + $(context[i]).data('state'));
     }
@@ -30,11 +31,13 @@ $(options.selector).machine({
       debug.log('view failed to render ', err);
       return false;
     }
+    
   }
   else{
-    // switch the view based on incoming state (route)
+    debug.log('no context length');
     var view = views[state].view();
   }
+  
   
   // render views based on JUP templates 
         
