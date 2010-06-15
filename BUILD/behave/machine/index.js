@@ -21,7 +21,8 @@ $(options.selector).machine({
     }
     var v1 = lultext + ('.view();');
     var p1 = lultext + ('.presenter();');
-    var m1 = lultext + ('.model();');    
+    var m1 = lultext + ('.model();');
+        
     //debug.log(v1);
     try{
       var view = eval(v1);
@@ -34,11 +35,10 @@ $(options.selector).machine({
     
     
     try{
-      debug.log(m1);
       var model = eval(m1);
     }
     catch(err){
-
+      var model = {};
     }
     
     
@@ -51,12 +51,13 @@ $(options.selector).machine({
     }
     catch(err){
       debug.log('no model for this view');
+      model = {};
     }
     
   }
   
   // render views based on JUP templates 
-        
+     
   if(typeof view == 'object'){
     var html = JUP.html(view);
   }
