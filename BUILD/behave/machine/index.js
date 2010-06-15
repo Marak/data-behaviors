@@ -21,6 +21,7 @@ $(options.selector).machine({
     }
     var v1 = lultext + ('.view();');
     var p1 = lultext + ('.presenter();');
+    var m1 = lultext + ('.model();');    
     //debug.log(v1);
     try{
       var view = eval(v1);
@@ -30,10 +31,28 @@ $(options.selector).machine({
       debug.log('view failed to render ', err);
       return false;
     }
+    
+    
+    try{
+      debug.log(m1);
+      var model = eval(m1);
+    }
+    catch(err){
+
+    }
+    
+    
   }
   else{
     // switch the view based on incoming state (route)
     var view = views[state].view();
+    try{
+      var model = views[state].model();
+    }
+    catch(err){
+      debug.log('no model for this view');
+    }
+    
   }
   
   // render views based on JUP templates 
@@ -45,6 +64,9 @@ $(options.selector).machine({
     var html = view;
   }
 
+  debug.log('model is', model);
+  // attempt to mustache up the model
+  html = Mustache.to_html(view, model);
   
   // inject the view into the DOM
   $(this).html(html);

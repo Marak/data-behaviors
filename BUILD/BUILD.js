@@ -163,7 +163,7 @@ exports.build = function(){
         
         //sys.puts(views[view].search('presenter'));
         
-        if(views[view].search('presenter') != -1){
+        if(views[view].search('presenter') != -1 || views[view].search('model') != -1){
 
           var str = ' = function(options){' + fileContents + '\n\n};'
           

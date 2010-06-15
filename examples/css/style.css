@@ -247,3 +247,13 @@ input.date{
 #page ul li{
   margin: 5px 0;
 }
+
+
+#behaveFrame{
+  -moz-border-radius:3px 3px 3px 3px;
+  border:1px solid #CCCCCC;
+  list-style-type:none;
+  margin:20px 0 0;
+  padding:10px;
+  width:200px;
+}
