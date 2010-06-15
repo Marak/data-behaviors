@@ -71,7 +71,7 @@ function fileChange(file){
   // run the build process
   build.build();
   sys.puts('Ted says, '.green + 'BUILD complete!');
-  Ted.play('./BUILD/lib/wavs/ding.wav');
+  //Ted.play('./BUILD/lib/wavs/ding.wav');
   // strange OS latency on mac os
   setTimeout(function(){
     

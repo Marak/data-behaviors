@@ -37,7 +37,7 @@ $.fn.machine = function(settings) {
   $(this).attr('data-behaviors', 'machine');
         
   return this;
-};
+}; 
 
 // create the machine itself
 var machine = {};

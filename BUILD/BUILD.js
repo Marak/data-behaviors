@@ -274,6 +274,7 @@ exports.build = function(){
     txt = txt.replace(/\.js/, '');
     txt = txt.replace(/\.index/, '');
     txt = txt.replace(/BUILD./, '');
+    txt = txt.replace(/behave/, 'behave.behaviors');
     
     return txt;
   }
