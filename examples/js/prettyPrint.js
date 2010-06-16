@@ -1,11 +1,12 @@
+
+
 /*
  AUTHOR James Padolsey (http://james.padolsey.com)
  VERSION 1.01
  UPDATED 06-06-2009
 */
 
-// be very wary of this unscoped variable, this is done to force global include outside of the behavior library, could be done better
-prettyPrint = (function(){
+var prettyPrint = (function(){
     
     /* These "util" functions are not part of the core
        functionality but are  all necessary - mostly DOM helpers */

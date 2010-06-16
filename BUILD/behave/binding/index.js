@@ -1,6 +1,6 @@
-//debug.log('dirty binded');
+/* this behavior can be ignored for now, this is the basics of databinding for form inputs 
+   explicit databinding isnt really going to be contained in the first version, just behavior based binding */
 
-//debug.log(options.selector);
 
 $(options.selector).behavior('dirty').bind('got_dirty', function(){
   //debug.log('is dirty!', $(options.selector));
