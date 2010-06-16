@@ -45,15 +45,14 @@ $(options.selector).machine({
   }
   else{
     // switch the view based on incoming state (route)
+    var model = {};
     var view = views[state].view();
     try{
-      var model = views[state].model();
+      model = views[state].model();
     }
     catch(err){
       debug.log('no model for this view');
-      model = {};
     }
-    
   }
   
   // render views based on JUP templates 
