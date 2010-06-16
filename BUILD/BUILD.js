@@ -76,8 +76,9 @@ exports.build = function(){
     var behaves = paths('./BUILD/behave');
     behaves.sort();
 
-    //sys.puts(JSON.stringify(behaves));
-
+    // the follow FOR IN loops can be refactored to reduce size and complexity
+    // im leaving the old logic in here for creating the "behave" bundle object in case i need to revert back, or make a modfication
+    // lets try to purge this code sometime before release
     for(var behave in behaves){
 
       if(behaves[behave].search('.js') > 0){ // if this is a file
@@ -99,7 +100,8 @@ exports.build = function(){
           code.behave += (fileFilter(behaves[behave]) + ' = function(options){'+fileContents+'};' + '\n\n'); // add check for root level index file
         }
         catch(err){
-          code.behave += (fileFilter(behaves[behave]) + ' = function(options){return "this is the container for the '+fileFilter(behaves[behave])+' behavior, inspecting this object will reveal the child behaviors and their respective controllers.";};' + '\n\n'); // add check for root level index file
+          code.behave += (fileFilter(behaves[behave]) + ' = function(options){return "this is the container for the '+ fileFilter(behaves[behave])+' behavior, inspecting this object will reveal the child behaviors and their respective controllers.";};' + '\n\n'); 
+          // add check for root level index file
         }
       }
     }
@@ -232,70 +234,72 @@ exports.build = function(){
 
   /*********************** END BUNDLING OF GENERATED CODE ************/
 
+  /*********************** BUILD HELPER METHODS *********************/
+
+
+    // Recursively traverse a hierarchy, returning a list of all relevant .js files.
+    function paths(dir) {
+        var paths = [];
+
+        try { fs.statSync(dir) }
+        catch (e) { return [] }
+
+        (function traverse(dir, stack) {
+            stack.push(dir);
+            fs.readdirSync(stack.join('/')).forEach(function (file) {
+                var path = stack.concat([file]).join('/'),
+                    stat = fs.statSync(path);
+
+                if (file[0] == '.' || file === 'vendor') {
+                    return;
+                } else if (stat.isFile() && /\.js$/.test(file)) {
+                    paths.push(path);
+                } else if (stat.isDirectory()) {
+                    paths.push(path);
+                    traverse(file, stack);
+                }
+            });
+            stack.pop();
+        })(dir || '.', []);
+
+        return paths;
+    }
+
+    function docFilter(txt){
+      txt = txt.replace(/\.\//g, '');
+      txt = txt.replace(/\//g, '.');
+      txt = txt.replace(/\.js/, '');
+      txt = txt.replace(/\.index/, '');
+      txt = txt.replace(/com\./, '');
+      txt = txt.replace(/behave\./, '');  
+      txt = txt.replace(/views\./, '');
+
+      // make link
+      //txt = '<a href = "coms/' + txt + '">' + txt + '</a>';
+
+      return txt;
+    }
+
+
+    function fileFilter(txt){
+      txt = txt.replace(/\.\//g, '');
+      txt = txt.replace(/\//g, '.');
+      txt = txt.replace(/\.js/, '');
+      txt = txt.replace(/\.index/, '');
+      txt = txt.replace(/BUILD./, '');
+      txt = txt.replace(/behave/, 'behave.behaviors');
+
+      return txt;
+    }
+
+    function mamlFilter(maml){
+      maml = maml.replace(/\n/, '');
+      return maml;
+    }
+
+  /*********************** END BUILD HELPER METHODS ****************/
+
+
 };
 
 
-/*********************** BUILD HELPER METHODS *********************/
-
-
-  // Recursively traverse a hierarchy, returning a list of all relevant .js files.
-  function paths(dir) {
-      var paths = [];
-
-      try { fs.statSync(dir) }
-      catch (e) { return [] }
-
-      (function traverse(dir, stack) {
-          stack.push(dir);
-          fs.readdirSync(stack.join('/')).forEach(function (file) {
-              var path = stack.concat([file]).join('/'),
-                  stat = fs.statSync(path);
-
-              if (file[0] == '.' || file === 'vendor') {
-                  return;
-              } else if (stat.isFile() && /\.js$/.test(file)) {
-                  paths.push(path);
-              } else if (stat.isDirectory()) {
-                  paths.push(path);
-                  traverse(file, stack);
-              }
-          });
-          stack.pop();
-      })(dir || '.', []);
-
-      return paths;
-  }
-
-  function docFilter(txt){
-    txt = txt.replace(/\.\//g, '');
-    txt = txt.replace(/\//g, '.');
-    txt = txt.replace(/\.js/, '');
-    txt = txt.replace(/\.index/, '');
-    txt = txt.replace(/com\./, '');
-    txt = txt.replace(/behave\./, '');  
-    txt = txt.replace(/views\./, '');
-    
-    // make link
-    //txt = '<a href = "coms/' + txt + '">' + txt + '</a>';
-      
-    return txt;
-  }
-
-
-  function fileFilter(txt){
-    txt = txt.replace(/\.\//g, '');
-    txt = txt.replace(/\//g, '.');
-    txt = txt.replace(/\.js/, '');
-    txt = txt.replace(/\.index/, '');
-    txt = txt.replace(/BUILD./, '');
-    txt = txt.replace(/behave/, 'behave.behaviors');
-    
-    return txt;
-  }
-
-  function mamlFilter(maml){
-    maml = maml.replace(/\n/, '');
-    return maml;
-  }
-
-/*********************** END BUILD HELPER METHODS ****************/
