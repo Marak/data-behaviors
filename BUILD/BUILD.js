@@ -74,6 +74,7 @@ exports.build = function(){
 
     // read behave directory and grab all behaviors
     var behaves = paths('./BUILD/behave');
+    behaves.sort();
 
     //sys.puts(JSON.stringify(behaves));
 
@@ -82,11 +83,24 @@ exports.build = function(){
       if(behaves[behave].search('.js') > 0){ // if this is a file
         var fileContents = fs.readFileSync(behaves[behave], encoding='utf8');
         //docs.behave += "<li>"+docFilter(behaves[behave])+"</li>";
-        code.behave += (fileFilter(behaves[behave]) + ' = function(options){' + fileContents  + '\n\n};');
+        //code.behave += (fileFilter(behaves[behave]) + ' = function(options){' + fileContents  + '\n\n};\n\n');
       }
       else{
         docs.behave += "<li>"+docFilter(behaves[behave])+"</li>";
-        code.behave += (fileFilter(behaves[behave]) + ' = {};' + '\n\n');
+        
+        // we are going to check if there a root level index.js file in this folder, if so we want to use that logic as the base for this behavior
+        // if not, we are going to stub out the method to do nothing, it is assumed if there is no index.js in the folder, 
+        // that the folder has subfolders that will eventually contain an index.js file
+        try{
+          var stat = fs.statSync(behaves[behave] + '/index.js');
+          if(stat.isFile()){
+            var fileContents = fs.readFileSync((behaves[behave] + '/index.js'), encoding='utf8');
+          }
+          code.behave += (fileFilter(behaves[behave]) + ' = function(options){'+fileContents+'};' + '\n\n'); // add check for root level index file
+        }
+        catch(err){
+          code.behave += (fileFilter(behaves[behave]) + ' = function(options){return "this is the container for the '+fileFilter(behaves[behave])+' behavior, inspecting this object will reveal the child behaviors and their respective controllers.";};' + '\n\n'); // add check for root level index file
+        }
       }
     }
     docs.behave += "</ul>";
