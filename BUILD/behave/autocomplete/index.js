@@ -1,3 +1,5 @@
+debug.log(options);
+
 $(options.selector).autocomplete({
-  source: ["c++", "java", "php", "coldfusion", "javascript", "asp", "ruby"]
+  source: options.data
 });
