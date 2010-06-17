@@ -1,0 +1,56 @@
+<html>
+  <head>
+    <script src = "/js/jquery.js"></script>
+    <script src = "/js/debug.js"></script>
+    <script src = "/js/mustache.js"></script>
+    <script src = "/js/behave.js"></script>
+    <script src = "/js/sampleData.js"></script>    
+
+    <script src="/js/jquery.ui.js"></script>
+    <script src="/js/SlickGrid/lib/jquery.rule-1.0.1.1-min.js"></script>
+    <script src="/js/SlickGrid/lib/jquery.event.drag.custom.js"></script>
+
+    <!-- ad ie conditional for excanvas -->
+    
+    <!--[if IE]>
+      <script type="text/javascript" src="js/Highcharts/js/excanvas.compiled.js"></script>
+    <![endif]-->
+    
+
+    <!-- slick grid requires -->
+		<link rel="stylesheet" href="/js/SlickGrid/slick.grid.css" type="text/css" media="screen" charset="utf-8" />
+		<link rel="stylesheet" href="/js/SlickGrid/slick.pager.css" type="text/css" media="screen" charset="utf-8" />
+		<link rel="stylesheet" href="/js/SlickGrid/css/custom-theme/jquery-ui-1.7.2.custom.css" type="text/css" media="screen" charset="utf-8" />
+		<link rel="stylesheet" href="/js/SlickGrid/examples.css" type="text/css" media="screen" charset="utf-8" />
+		<link rel="stylesheet" href="/js/SlickGrid/slick.columnpicker.css" type="text/css" media="screen" charset="utf-8" />
+		
+		<link rel="stylesheet" href="/css/blueprint/screen.css" type="text/css" media="screen, projection">
+    <link rel="stylesheet" href="/css/blueprint/print.css" type="text/css" media="print"> 
+    <link rel="stylesheet" href="/css/style.css" type="text/css" media="screen, projection"> 
+    <!--[if lt IE 8]>
+      <link rel="stylesheet" href="css/blueprint/ie.css" type="text/css" media="screen, projection">
+    <![endif]-->
+
+    <script type="text/javascript" src="/js/Highcharts/js/highcharts.js"></script>
+    <script type="text/javascript" src="/js/jup.js"></script>
+    <script type="text/javascript" src="/js/jquery.machine.js"></script>
+    <script type="text/javascript" src="/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="/js/prettyPrint.js"></script>
+
+ 
+    <script>
+      $(document).ready(function(){
+
+        behave.attach($("[data-behaviors]"));
+
+      });
+      
+    </script>
+  </head>
+  <body>
+
+    &lt;div class = "chart" data-behaviors="chart-bar" data-resource = "chart_bar_data_1"&gt; <br/>
+    <div class = "chart" data-behaviors="chart-bar" data-resource = "chart_bar_data_1"></div>
+    <hr/>
+  </body>
+</html>

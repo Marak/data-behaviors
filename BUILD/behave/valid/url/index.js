@@ -11,6 +11,3 @@ if(typeof options.value != 'undefined'){
   
 }
 return false;
-
-
-

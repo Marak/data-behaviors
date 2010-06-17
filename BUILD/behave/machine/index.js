@@ -41,7 +41,6 @@ $(options.selector).machine({
       var model = {};
     }
     
-    
   }
   else{
     // switch the view based on incoming state (route)

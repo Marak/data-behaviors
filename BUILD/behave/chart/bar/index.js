@@ -1,4 +1,15 @@
-options.series = eval($(options.selector).attr('data-resource')).series;
+/**************** open-behaviors - chart-bar ****************
+
+    the chart-bar behavior will turn an empty element into a HighCharts bar chart
+    
+    arguments : 
+      options.selector 
+        css selector or DOM node that we are going to apply the behavior to
+      options.data
+        data that we are going to bind to the chart
+    
+*/
+
 chart = new Highcharts.Chart({
 				chart: {
 					renderTo: options.selector,
@@ -53,5 +64,5 @@ chart = new Highcharts.Chart({
 						borderWidth: 0
 					}
 				},
-			        series: options.series
+			        series: options.data.series
 			});
