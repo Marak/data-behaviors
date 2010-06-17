@@ -1,0 +1,69 @@
+jQuery MultiSelect Changelog
+
+Version 0.2 - 02/02/2010
+==============================================
+- Modified: the initial call to updateSelected() does not need to be in an each() loop.
+- Modified: refactored $select bindings to use one bind() call, passing an object literal.
+- Fixed: removed an unnecessary, commented-out line.
+- Added: the selectedText can now take two pound-sign placeholders.  The second is replaced with the total number of checkboxes.
+
+Version 0.3 - 02/04/2010
+==============================================
+- Added: ability to toggle optgroup check state by clicking on the header.
+- Added: onCheckAll, onUncheckAll, and onOptgroupToggle callbacks.
+- Added: the selectedList now takes a number denoting the maximum number of items to display as a list until deferring to selectedText.
+- Added: the widget's default width now inherits the width of the original select element.
+- Added: mixWidth parameter to force a minimum width.
+- Added: link to documentation in comments.
+- Fixed: global variable "width".
+- Modified: standardized using single quotes.
+- Modified: refactored removeAttr("checked") to attr("checked", "").
+
+Version 0.4 - 02/15/2010
+==============================================
+- Added: the down arrow & space toggles open/close, and up arrow closes when focused on the input.
+- Added: support for disabled="disabled" options.
+- Added: the checkbox inputs now have the "title" attribute.
+- Fixed: traversing the menu now skips over disabled options & optgroup headers.
+- Fixed: removed the call to focus() when traversing the menu if there isn't a next/prev li.
+- Fixed: setting the showHeader option to false no longer breaks the scrollbar or keyboard traversal scrollTop setting.
+- Fixed: added relative positioning & z-index to .ui-multiselect-options (thanks David).
+- Fixed: the main input's value is no longer cleared when a form's reset button is clicked.
+- Fixed: the "title" attribute of the main input updates correctly when the last checkbox is unchecked.
+- Modified: added a custom "toggleChecked" event to $options.
+- Modified: the minWidth parameter is now 200 by default (from "auto").
+- Modified: exposed default options by moving them to $.fn.multiSelect.defaults.
+
+Version 0.4.1 - 02/15/2010
+==============================================
+- Fixed: graceful handling of form resets with pre-selected options, cross browser.
+
+Version 0.5 - 03/13/2010
+==============================================
+- Added: support for disabled selects (entire widget).
+- Added: the widget now inherits the original ID of the select box.
+- Added: "state" parameter added to configure the default open or closed state.
+- Modified: selectedText can now take a function with 3 args: number of inputs checked, number of inputs total, an array of the checked inputs.
+- Modified: slight refactoring (moved updateSelected et al.).
+- Modified: noneSelected parameter renamed to noneSelectedText.
+- Modified: positioning now determined by offset() instead of position().
+- Modified: switched to "this" from "$(this)" where possible.
+- Fixed: No need to pass the "px" unit to width().
+- Fixed: The icons in the "check all" and "uncheck all" header links were not toggling correctly.
+- Fixed: removed some unused vars.
+- Fixed: better positioning of the header links.
+- Fixed: border issue on the text input when inside a div.ui-widget-content.
+- Fixed: options menu now has the ui-corner-all class.  Previously all corners except top left were rounded... for some reason.
+- Fixed: use position() instead of offset() when inside a .ui-widget-content class.  offset() won't position the dropdown correctly.
+
+Version 0.6 - 05/04/2010
+==============================================
+- Added: "multiple" option (thx rooki).
+- Added: began unit & visual tests.
+- Fixed: the "title" attribute of the widget now inherits from the original select menu.
+- Fixed: reverted back to position() from offset() - offset introduced too many regressions.
+- Modified: unique IDs are now generated for each label/checkbox combo, and added to the "for"
+  attribute of the label.  Doing so triggers native label click functionality in IE6, allowing me to
+  refactor and speed up a lot of the click events.
+
+
