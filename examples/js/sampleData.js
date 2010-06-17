@@ -87,11 +87,11 @@ chart_data_1.data =
 
 chart_data_1.title = "Browser market shares at a specific website, 2008";
 
-var chart_data_2 = {};
+var chart_data = {};
 
-chart_data_2.title = "The Battle";
+chart_data.title = "The Battle";
 
-chart_data_2.data =
+chart_data.series =
 [
 	['Knowing',   50],
 	{

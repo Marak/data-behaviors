@@ -10,6 +10,9 @@
     
 */
 
+
+/* we should update the stubs here to use the configuration object we are going to mixin to options */
+
 chart = new Highcharts.Chart({
 				chart: {
 					renderTo: options.selector,

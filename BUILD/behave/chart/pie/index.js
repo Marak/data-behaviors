@@ -1,8 +1,18 @@
- options.data = eval($(options.selector).attr('data-resource')).data;
- options.title = eval($(options.selector).attr('data-resource')).title;
- 
+/**************** open-behaviors - chart-pie ****************
 
- 
+    the chart-pie behavior will turn an empty element into a HighCharts pie chart
+    
+    arguments : 
+      options.selector 
+        css selector or DOM node that we are going to apply the behavior to
+      options.data.series
+        data series for chart
+      options.data.title
+        chart title  
+*/
+
+/* we should update the stubs here to use the configuration object we are going to mixin to options with*/
+
  
    var chart;
 			chart = new Highcharts.Chart({
@@ -11,7 +21,7 @@
 					margin: [50, 200, 60, 170]
 				},
 				title: {
-					text: options.title
+					text: options.data.title
 				},
 				plotArea: {
 					shadow: null,
@@ -50,7 +60,7 @@
 			  series: [{
 					type: 'pie',
 					name: 'Browser share',
-					data: options.data
+					data: options.data.series
 					//data: [3.40, 1.05, 2.90, 1.65, 1.35, 2.59, 1.39, 3.07, 2.82]
 				}]
 			});
