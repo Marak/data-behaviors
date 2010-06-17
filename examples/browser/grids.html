@@ -1,0 +1,77 @@
+<html>
+  <head>
+    <script src = "/js/jquery.js"></script>
+    <script src = "/js/debug.js"></script>
+    <script src = "/js/mustache.js"></script>
+    <script src = "/js/behave.js"></script>
+    <script src = "/js/sampleData.js"></script>    
+
+    <script src="/js/jquery.ui.js"></script>
+    <script src="/js/SlickGrid/lib/jquery.rule-1.0.1.1-min.js"></script>
+    <script src="/js/SlickGrid/lib/jquery.event.drag.custom.js"></script>
+
+    <!-- ad ie conditional for excanvas -->
+    
+    <!--[if IE]>
+      <script type="text/javascript" src="js/Highcharts/js/excanvas.compiled.js"></script>
+    <![endif]-->
+    
+
+    <!-- slick grid requires -->
+		<link rel="stylesheet" href="/js/SlickGrid/slick.grid.css" type="text/css" media="screen" charset="utf-8" />
+		<link rel="stylesheet" href="/js/SlickGrid/slick.pager.css" type="text/css" media="screen" charset="utf-8" />
+		<link rel="stylesheet" href="/js/SlickGrid/css/custom-theme/jquery-ui-1.7.2.custom.css" type="text/css" media="screen" charset="utf-8" />
+		<link rel="stylesheet" href="/js/SlickGrid/examples.css" type="text/css" media="screen" charset="utf-8" />
+		<link rel="stylesheet" href="/js/SlickGrid/slick.columnpicker.css" type="text/css" media="screen" charset="utf-8" />
+		
+		<link rel="stylesheet" href="/css/blueprint/screen.css" type="text/css" media="screen, projection">
+    <link rel="stylesheet" href="/css/blueprint/print.css" type="text/css" media="print"> 
+    <link rel="stylesheet" href="/css/style.css" type="text/css" media="screen, projection"> 
+    <!--[if lt IE 8]>
+      <link rel="stylesheet" href="css/blueprint/ie.css" type="text/css" media="screen, projection">
+    <![endif]-->
+
+    <script src="/js/SlickGrid/slick.grid.js"></script>
+    <script language="JavaScript" src="/js/SlickGrid/slick.editors.js"></script>
+    <script language="JavaScript" src="/js/SlickGrid/slick.grid.js"></script>
+    <script language="JavaScript" src="/js/SlickGrid/slick.model.js"></script>
+    <script language="JavaScript" src="/js/SlickGrid/slick.pager.js"></script>
+    <script language="JavaScript" src="/js/SlickGrid/slick.columnpicker.js"></script>
+
+    <script>
+      $(document).ready(function(){
+
+        behave.attach($("[data-behaviors]"));
+
+      });
+      
+    </script>
+  </head>
+  <body>
+    
+    <h3>
+       <!-- <button>Edit data</button> -->
+       Simple
+     </h3>
+     <div style = "height:500px;width:500px;" class="grid" data-behaviors = "grid-simple" data-resource = "grid_data_1"></div>
+    
+    
+           <!-- <h3>Custom</h3> -->
+
+            <!-- TODO: move this boilerplate code to behavior controller for custom grid -->
+            <!--
+    <table class="grid" data-behaviors = "grid-custom" data-resource = "grid_custom_data_1">
+    <th></th>
+    <tbody></tbody>
+    </table>
+    -->
+
+            <!--
+    <div data-behaviors = "grid-simple" style="width:400px;height:200px;"></div>
+    <div data-behaviors = "grid-simple" style="width:400px;height:200px;"></div>
+    <div data-behaviors = "grid-simple" style="width:400px;height:200px;"></div>
+    -->
+    
+   
+  </body>
+</html>

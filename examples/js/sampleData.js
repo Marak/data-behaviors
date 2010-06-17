@@ -30,9 +30,9 @@ grid_data_1.columns = [
 	{id:"effort-driven", name:"Effort Driven", field:"effortDriven"}
 ];
 
-grid_data_1.data = [];
+grid_data_1.rows = [];
 for (var i = 0; i < 500; i++) {
-	grid_data_1.data[i] = {
+	grid_data_1.rows[i] = {
               title: "Task " + i,
               duration: "5 days",
               percentComplete: Math.round(Math.random() * 100),
@@ -156,4 +156,4 @@ var grid_custom_data_1 = [
  {"6": [{"1":"a"}, {"2":"b"}, {"3":"c"}, {"4":"d"}] },
 ];
 
-v
+
