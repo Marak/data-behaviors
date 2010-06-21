@@ -1,6 +1,5 @@
 // this is just boilerplate code for generating the actual mustache-rides.js file, do not use this outside of node_builder.js
 var behave = {};
-var views = {};
 
 behave.version = "0.0.1";
 
@@ -77,5 +76,3 @@ behave.attach = function( selector ){
 };
 
 {{{behaves}}}
-
-{{{views}}}

@@ -57,12 +57,10 @@ exports.build = function(){
   // setup the code object 
   code.com = '';
   code.behave = '';
-  code.views = '';
 
   // setup the docs object
   docs.com = '';
   docs.behave = '';
-  docs.views = '';
 
   /************************ GENERATE BEHAVIORS ***************************/
 
@@ -110,105 +108,6 @@ exports.build = function(){
 
   /************************ END GENERATE BEHAVIORS ***************************/
 
-  /************************ GENERATE VIEWS ***************************/
-    sys.puts("BUILD ".yellow + 'generating views.....');
-    // read through views directory and get all views
-    var views = paths('./BUILD/views');
-
-    docs.views += "<h1>views</h1>";
-    docs.views += "<ul>";
-
-    for(var view in views){
-      if(views[view].search('.js') > 0){ // if this is a file
-        
-        // before we can load the JUP view we have to check if there are other templates that take precedence
-        
-        // check if there is a HAML template available
-        var hamlPath = views[view].replace('.js', '.haml');
-        
-        var found = false;
-        // fs.statSync can't fail gracefully, hence the try / catch
-        // we could also try to use the paths map for a lookup instead of statSync
-        try{
-          var hamlTemplate = fs.statSync(hamlPath);
-          hamlTemplate = fs.readFileSync(hamlPath, encoding='utf8');
-          found = true;
-        }
-        catch(err){
-          // the googles do nothing
-          //sys.puts(err);
-        }
-         
-        if(found){
-          sys.puts('found a haml template:'.green + hamlPath.grey + ' converting template to JUP...'.yellow);
-          
-          // parse haml template into html
-          var htmlTemplate = haml.render(hamlTemplate);
-          //sys.puts(htmlTemplate);
-          // write some stuff to the body
-          //window.jQuery(document.body).append(htmlTemplate.toString());
-          
-          // get that stuff back from the body
-          //sys.puts(window.jQuery(document.body).html());
-          // pass the nodes into JUP for parsing
-          //var jupArray = window.JUP.parse(window.jQuery(document.body).html().toString());
-          //sys.puts(JSON.stringify(jupArray));
-          
-          // assign the JUP array as the file contents (we have now bypassed the view.js file)
-          //var fileContents = JSON.stringify(jupArray);
-          var fileContents = htmlTemplate;
-          
-          // overwrite and update view.js for consistancy 
-          fs.writeFileSync(views[view], fileContents);
-          
-          /*
-            // generate a html partial for fun (and debuggings). don't use this partial please :-(
-            fs.writeFileSync(views[view].replace('.js','.html'), htmlTemplate);
-          */
-          
-        }
-        else{
-          var fileContents = fs.readFileSync(views[view], encoding='utf8');
-        }
-        //hamlTemplate = fs.statSync(hamlTemplate);
-        //sys.puts(hamlTemplate);
-        
-        
-        //docs.behave += "<li>"+docFilter(behaves[behave])+"</li>";
-        
-        
-        //sys.puts(views[view].search('presenter'));
-        
-        if(views[view].search('presenter') != -1 || views[view].search('model') != -1){
-
-          var str = ' = function(options){' + fileContents + '\n\n};'
-          
-        }
-        else{
-          if(fileContents[0]=='<'){
-            var str = ' = function(options){return \'' + fileContents + '\'\n\n};'
-          }
-          else{
-            var str = ' = function(options){return ' + fileContents + '\n\n};'
-          }
-
-          
-        }
-        
-        code.views += (fileFilter(views[view]) + str + '\n\n');
-      }
-      else{
-        docs.views += "<li>"+docFilter(views[view])+"</li>";
-        
-        // this looks broken, investigate this line
-        code.views += (fileFilter(views[view]) + ' = function(){return views.behaviors.view();};' + '\n\n');
-      }
-    }
-
-    docs.views += "</ul>";
-    sys.puts("BUILD ".yellow + 'generated views successfully!');
-  /************************ END GENERATE VIEWS ***********************/
-
   /************************ BUNDLE GENERATED CODE ********************/
 
     // lets determine if the code bundle we have generated has not failed
@@ -220,8 +119,8 @@ exports.build = function(){
     }
  
     // perform a mustache replace on main to insert in sub components
-    var behaveLibrary = mustache.Mustache.to_html(code.main, {"coms":code.com, "behaves":code.behave, "views":code.views});
-    var documentation = docs.main + docs.behave + docs.com + docs.views;
+    var behaveLibrary = mustache.Mustache.to_html(code.main, {"coms":code.com, "behaves":code.behave});
+    var documentation = docs.main + docs.behave + docs.com;
 
     fs.writeFileSync('./behave.js', behaveLibrary);
     sys.puts("BUILD ".yellow + 'behave.js written!');
