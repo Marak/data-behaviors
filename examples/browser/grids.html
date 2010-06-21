@@ -40,11 +40,8 @@
 
     <script>
       $(document).ready(function(){
-
-        behave.attach($("[data-behaviors]"));
-
+        $(document).behave();
       });
-      
     </script>
   </head>
   <body>
@@ -54,7 +51,6 @@
        Simple
      </h3>
      <div style = "height:500px;width:500px;" class="grid" data-behaviors = "grid" data-resource = "grid_data_1"></div>
-    
     
            <!-- <h3>Custom</h3> -->
 

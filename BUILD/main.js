@@ -11,9 +11,11 @@ behave.behaviors = {};
 
 // behave.attach will take in a selector and check that selector for elements that have the data-behaviors attribute
 // we should just migrate this code into the behaviors jQuery plugin
-behave.attach = function( selector ){
 
-  $(selector).each(function(i,e){
+
+/* behavior jQuery plugin shortcut for developers */
+$.fn.behave = function(settings) {
+  $('[data-behaviors]',this).each(function(i,e){
 
     if(behave.DEBUG){ // if we have enabled application level debugging, show extra data
       debug.log('found element: ', e);
@@ -21,29 +23,29 @@ behave.attach = function( selector ){
 
     // get all behaviors based on the data-behaviors attribute of element : "e" and split into an array based on " "
     var behaviors = $(e).attr('data-behaviors').split(' ');
-    
+
     // for each behavior we found on that element
     for(var behavior in behaviors){
-      
+
       // create an alias for the behavior (syntax sugar)
       var b = behaviors[behavior];
-      
+
       /*  replace the behavior name with its actual method call in the behave object
           the labeling approach of data-behaviors on DOM elements is as follows:
-              
+
               dashes become period
               the last word after the last period is the method name we are going to call
-              
+
               EXAMPLE:
               fooBehavior-sub-sub2 turns into =>  behave.fooBehavior.sub.sub2()
               grid-custom turns into => grid.custom()
       */
-            
+
       b = b.replace(/\-/, '.'); // parse behavior name for sub-behaviors
-      
+
       // we store metadata about how an element is already behaving on the "behaving" property on the elements jQuery.data()
       var behaving = $(e).data('behaving') || []; // if there is no state information, assign an empty array
-      
+
       // we are currently in a loop attempting to apply behaviors in elements.
       // we are going to create a boolean for the current "b" and then loop through 
       // our elements existing behaviors, checking if we have found a match
@@ -56,9 +58,9 @@ behave.attach = function( selector ){
           found = true;
         }
       }
-      
+
       if(!found){
-        
+
         try{
             // push the current behavior "b", to the behaving array (which contains the current behaviors from our element)
             behaving.push(b);
@@ -80,8 +82,7 @@ behave.attach = function( selector ){
           debug.log('could NOT apply behavior ' + b + ' to element: ', e);
         }
       }  
-      else{
-        // we aren't going to apply this behavior, as the element is already behaving this way
+      else{ // we aren't going to apply this behavior, as the element is already behaving this way
         if(behave.DEBUG){ // show debug output if application level debugging is enabled
           debug.log('already behaving as, not attached ', b);
         }
@@ -89,16 +90,5 @@ behave.attach = function( selector ){
     }  
   });
 };
-
-/* behavior jQuery plugin shortcut for developers */
-$.fn.behavior = function(settings) {
-  var config = {'foo': 'bar'};
-  if (settings) $.extend(config, settings);
-  this.each(function() {
-    // element-specific code here
-  });
-  return this;
-};
-
 
 {{{behaves}}}
