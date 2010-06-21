@@ -1,1 +1,0 @@
-$(options.selector).html('foobar');
