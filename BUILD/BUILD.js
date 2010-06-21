@@ -7,39 +7,6 @@ var sys = require('sys');
 var mustache = require('./lib/mustache');
 var eyes = require ('./lib/eyes');
 var colors = require('./lib/colors');
-var     haml = require('./lib/haml-js/lib/haml');
-/* JSDOM STUFF
-var dom = require('./lib/jsdom/lib/level1/core').dom.level1.core,
-
-
-var window = require("./lib/jsdom/lib/browser").windowAugmentation(dom);
-var document = window.document;
-var location = window.location;
-var navigator = window.navigator = { userAgent: "node-js" };
-global.window = window;
-
-var jquery =  fs.readFileSync('./BUILD/lib/jquery.js', encoding='utf8');
-var JUP =  fs.readFileSync('./BUILD/lib/JUP.js', encoding='utf8');
-
-
-global.window.document.compareDocumentPosition = function() {};
-dom.Node.prototype.addEventListener = window.addEventListener = window.document.addEventListener = function() {};
-
-try {
-  eval(jquery.toString());
-} catch (e) {
-  sys.puts(sys.inspect(e.stack, true));
-}
-
-try {
-  eval(JUP.toString());
-} catch (e) {
-  sys.puts(sys.inspect(e.stack, true));
-}
-
-
-*/
-
 
 exports.build = function(){
 
