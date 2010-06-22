@@ -45,13 +45,11 @@ $.fn.behave = function(settings) {
 
       // we store metadata about how an element is already behaving on the "behaving" property on the elements jQuery.data()
       var behaving = $(e).data('behaving') || []; // if there is no state information, assign an empty array
-
-      // we are currently in a loop attempting to apply behaviors in elements.
-      // we are going to create a boolean for the current "b" and then loop through 
-      // our elements existing behaviors, checking if we have found a match
-      // we perform this check as we don't want to rebind a behavior if its already applied
-      // we might want to change this logic in the future to allow reapply behaviors to reset 
-      // the behavior of the element back to its original state 
+      
+      /* we are currently inside a loop, applying attempting to apply a behavior to an element
+         before we can apply the behavior, we have to determine if the element is already behaving as that behavior
+      */
+      
       var found = false;
       for(var i = 0; i < behaving.length; i++){
         if(behaving[i]==b){
@@ -59,8 +57,11 @@ $.fn.behave = function(settings) {
         }
       }
 
-      if(!found){
+      /* we perform this check as we don't want to rebind a behavior if its already applied
+         we might want to change this logic in the future to allow for behavior resets / reconfigs
+      */
 
+      if(!found){
         try{
             // push the current behavior "b", to the behaving array (which contains the current behaviors from our element)
             behaving.push(b);
@@ -68,7 +69,7 @@ $.fn.behave = function(settings) {
             // pull the data from the data-source tag, this block of code might make more sense being a seperate library
             var d = eval($(e).attr('data-resource')); //evil eval is evil, but somewhat benign here
 
-            // execute the behavior method which will attach the behavior to the element.
+            // execute the behave.behaviors method that will attach the behavior to the element.
             // perhaps this code could be written a bit cleaner and without eval() 
             eval('behave.behaviors.'+b+'({"selector":e,"data":d})'); // evil eval is evil, but somewhat benign here
 
