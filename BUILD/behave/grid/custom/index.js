@@ -10,10 +10,6 @@
   $($('#currentActions th')[2]).data('sorter', {"field":"formatted_electricity_savings","order":"DESC","type":"numeric"});
   $($('#currentActions th')[3]).data('sorter', {"field":"estimated_points","order":"DESC","type":"numeric"});
 
-
-  
-
-
     
   if ($("#currentActions").size() == 1) {
     $.ajax({

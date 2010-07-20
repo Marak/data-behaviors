@@ -73,7 +73,7 @@ $.fn.behave = function(settings) {
             // perhaps this code could be written a bit cleaner and without eval() 
             eval('behave.behaviors.'+b+'({"selector":e,"data":d})'); // evil eval is evil, but somewhat benign here
 
-            // assign behaving meta-data back to elementso we know how the element is behaving
+            // assign behaving meta-data back to element so we know how the element is behaving
             $(e).data('behaving', behaving);
             if(behave.DEBUG){  // show debug output if application level debugging is enabled
               debug.log(b , ' behavior successfully attached!');
@@ -91,5 +91,6 @@ $.fn.behave = function(settings) {
     }  
   });
 };
+
 
 {{{behaves}}}

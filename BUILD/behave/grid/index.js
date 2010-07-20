@@ -19,5 +19,8 @@ var opts = {
   enableColumnReorder: false
 };
 
+
+// behavior library requirements
+
 // create new grid instance
 new Slick.Grid($(options.selector), options.data.rows, options.data.columns, opts);
